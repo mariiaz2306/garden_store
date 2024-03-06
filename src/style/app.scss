@@ -1,0 +1,88 @@
+@import 'variables';
+
+// RESET
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+// Form
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+// Common
+
+html,
+body {
+  font-family: $main-font;
+  font-weight: 500;
+  font-size: 18px;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: $txt-black;
+
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// MAIN
+
+.container {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+

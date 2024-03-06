@@ -1,0 +1,16 @@
+@import "../../style/variables";
+
+.footer {
+  margin-bottom: 5rem;
+
+  &__title {
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 110%;
+    margin-bottom: 0.3125rem;
+  }
+
+  &__map iframe {
+    border-radius: 0.75rem;
+  }
+}
