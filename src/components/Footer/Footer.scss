@@ -67,34 +67,34 @@
 // MEDIA Query
 @media (max-width: 1000px) {
   .footer {
-    margin-bottom: 60px;
+    margin-bottom: 3.75rem;
 
     &__title {
-      margin-bottom: 32px;
+      margin-bottom: 2rem;
     }
 
     &__contacts {
-      gap: 20px;
+      gap: 1.25rem;
     }
 
     &__block {
-      gap: 20px;
+      gap: 1.25rem;
     }
 
     &__item {
-      width: 470px;
+      width: 29.375rem;
     }
 
     &__item-right {
-      width: 470px;
+      width: 29.375rem;
     }
 
     &__socials{
-        gap: 16px;
+        gap: 1rem;
     }
 
     &__map iframe {
-      height: 250px;
+      height: 15.625rem;
     }
   }
 }
@@ -102,43 +102,43 @@
 @media (max-width: 768px) {
   .footer {
     &__title {
-      font-size: 56px;
+      font-size: 3.5rem;
     }
 
     &__item {
-      width: 479px;
+      width: 29.9375rem;
     }
 
     &__item-right {
-      width: 229px;
+      width: 14.3125rem;
     }
   }
 }
 
 @media (max-width: 480px) {
   .footer {
-    margin-bottom: 56px;
+    margin-bottom: 3.5rem;
 
     &__title {
-      font-size: 48px;
-      margin-bottom: 24px;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
     }
 
     &__contacts {
-      gap: 12px;
+      gap: 0.75rem;
     }
 
     &__block {
       flex-direction: column;
-      gap: 12px;
+      gap: 0.75rem;
       &:first-child .footer__item-right {
         display: flex;
-        gap: 20px;
+        gap: 1.25rem;
       }
     }
 
     &__item {
-      padding: 24px;
+      padding: 1.5rem;
       width: 100%;
     }
 
@@ -147,16 +147,16 @@
     }
 
     &__heading {
-      font-size: 18px;
-      margin-bottom: 12px;
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
     }
 
     &__socials{
-        gap: 12px;
+        gap: 0.75rem;
     }
 
     &__text {
-      font-size: 28px;
+      font-size: 1.75rem;
     }
   }
 }
@@ -164,7 +164,7 @@
 @media (max-width: 360px) {
   .footer {
     &__title {
-        font-size: 40px;
+        font-size: 2.5rem;
     }
   }
 }
