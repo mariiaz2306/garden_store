@@ -1,2 +1,2 @@
-export const LINK = 'http://localhost:3333';
+export const BASE_URL = "//localhost:3333";
 
