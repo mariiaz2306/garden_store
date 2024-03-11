@@ -5,9 +5,9 @@ import MainPage from './pages/mainPage/MainPage';
 function App() {
   return (
    <>
-
+  <MainPage/>
 <Footer/>
-   <MainPage/>
+ 
    </>
   );
 }
