@@ -84,3 +84,17 @@ a {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+//THEME
+
+.dark {
+  background-color: $black;
+  color: $txt-white;
+}
+
+.light {
+  background-color: $white ;
+  color: $txt-black;
+}
+
+
