@@ -1,0 +1,29 @@
+.categories_container {
+    width: 95%;
+    margin: auto;
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+
+@media (max-width: 1000px) {
+    .categories_container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .categories_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 360px) {
+    .categories_container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

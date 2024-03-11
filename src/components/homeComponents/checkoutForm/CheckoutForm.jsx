@@ -1,16 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm } from "react-hook-form";
-import s from "../checkoutForm/CheckoutForm.scss";
+import s from "../checkoutForm/CheckoutForm.module.css";
+import { toast } from 'react-toastify';
 
-export default function CheckoutForm({setSendingOrder, handleDiscountSubmit, classInput, classBtn, txtBtn}){
-    const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({mode: "onBlur"});
 
-    const onSubmit = (formData)=>{
-reset()
-setSendingOrder && setSendingOrder(true)
-handleDiscountSubmit && handleDiscountSubmit()
-}
+export default function CheckoutForm({
+  setSendingOrder,
+  handleDiscountSubmit,
+  classInput,
+  classBtn,
+  txtBtn,
+}) {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onBlur" });
 
+  const onSubmit = (formData) => {
+ 
+    console.log(formData);
+    setSendingOrder && setSendingOrder(true);
+    handleDiscountSubmit && handleDiscountSubmit();
+    reset();
+  };
 
 return(
     <form className={s.form_container} onSubmit={handleSubmit(onSubmit)}>
@@ -24,7 +38,7 @@ return(
                required: "Name is required",
             
              })}
-             className={`${s.input} ${classInput}`}
+             className={`${classInput} ${s.input}`}
              />
              {errors?.name && <p className={s.error_message}>{errors?.name?.message || "Error"}
              </p>
@@ -34,6 +48,7 @@ return(
              <input
              type="tel"
              placeholder="Phone number"
+             className={`${classInput} ${s.input}`}
              {...register("phone", {
                required: "Phone number is required",
                minLength: {
@@ -58,7 +73,7 @@ return(
              {/* Email Input */}
              <input type="email"
              placeholder="Email"
-             className={`${s.input} ${classInput}`}
+             className={`${classInput} ${s.input}`}
              {...register("email", {
                  
                required: "Email is required",
@@ -73,8 +88,8 @@ return(
              }    
         </label>
         {/* Button Send Message */}
-        <button className={`${s.btn} ${classBtn}`} type="submit" disabled={!isValid}>
-          {txtBtn}
+        <button className={`${classBtn} ${s.btn}`} disabled={!isValid} >
+          {txtBtn }
         </button>
         </form>
 )

@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { categoriesReducer, categoryReducer } from "./reducers/categoryReducer";
+import { categoriesReducer, categoryReducer} from "./reducers/categoryReducer";
+import { productsReducer } from "./reducers/productsReducer";
 import themeReducer from "./themeSlice";
 import {
   FLUSH,
@@ -18,6 +19,10 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   nameOfCategory: categoryReducer,
   theme: themeReducer,
+  allProducts: productsReducer,
+  productsWithDiscount: productsReducer,
+
+
 });
 
 // Настройка конфигурации персистенции
