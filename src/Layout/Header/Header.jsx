@@ -38,7 +38,7 @@ const Header = () => {
   }; // функциия для активной вкладки
 
   return (
-    <header className={`header ${theme}`}>
+    <header className={`header ${theme} container`}>
       <div className="header__logo-section">
         <NavLink to="/">
           <img className="header__logo-section-logo" src={logo} alt="Logo" />
