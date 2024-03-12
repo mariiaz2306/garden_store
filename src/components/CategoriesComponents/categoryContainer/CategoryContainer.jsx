@@ -1,4 +1,4 @@
-import s from "./CategoryContainer.scss"
+import s from "./CategoryContainer.module.css"
 import CategoryItem from "../categoryItem/CategoryItem"
 
 export default function CategoryContainer({ categories }) {
