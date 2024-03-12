@@ -21,8 +21,8 @@ export default function MainPage() {
   return (
     <div className={`main_page ${theme}`}>
       <Banner />
-      <CategoryContainer categories={categories} />
-      <DiscountForm />
+        <CategoryContainer categories={categories} />
+        <DiscountForm />
     </div>
   );
 }
