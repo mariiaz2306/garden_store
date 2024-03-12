@@ -56,12 +56,11 @@
       }
     }
     &__checkOutBtn {
-      padding: 16px 56px;
+    padding: 16px 56px;
       background: $green;
       color: $txt-white;
       font-family: Montserrat;
-      max-width: 20%;
-      
+      max-width: fit-content;
       font-size: 20px;
       line-height: 130%;
       font-weight: 600;
