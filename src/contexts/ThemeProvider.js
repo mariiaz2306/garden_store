@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../store/themeSlice";
+import { toggleTheme } from "../store/slices/themeSlice";
 
 export const ThemeContext = createContext();
 
@@ -16,7 +16,7 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const handleThemeToggle = () => {
-     console.log("Toggling theme...");
+    console.log("Toggling theme...");
     dispatch(toggleTheme());
   };
 

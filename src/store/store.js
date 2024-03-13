@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { categoriesReducer, categoryReducer} from "./reducers/categoryReducer";
-import { productsReducer } from "./reducers/productsReducer";
-import themeReducer from "./themeSlice";
+import themeReducer from "./slices/themeSlice";
+import { apiSlice } from "./slices/apiSlice"; 
 import {
   FLUSH,
   PAUSE,
@@ -14,18 +13,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// Объединение всех редьюсеров
+// Используем apiSlice.reducerPath в качестве ключа для редьюсера apiSlice
 const rootReducer = combineReducers({
-  categories: categoriesReducer,
-  nameOfCategory: categoryReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
   theme: themeReducer,
-  allProducts: productsReducer,
-  productsWithDiscount: productsReducer,
-
-
 });
 
-// Настройка конфигурации персистенции
 const persistConfig = {
   key: "root",
   storage,
@@ -33,7 +26,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Создание стора с использованием configureStore
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -41,7 +33,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware), // Добавляем middleware от apiSlice
 });
 
 export const persistor = persistStore(store);

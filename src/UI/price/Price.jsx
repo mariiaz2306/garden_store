@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Price.module.css"
 
 export default function Price({el, realPriceClass, oldPriceClass, saleValueClass}){
-    const discount = Math.round((1 - el.discount_price / el.price) * 100);
+    const discount = Math.round((1 - el.discont_price / el.price) * 100);
     return (
         <div className={s.price_container}>
           {el.discont_price ? (
