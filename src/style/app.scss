@@ -90,11 +90,29 @@ a {
 .dark {
   background-color: $black;
   color: $txt-white;
+
+  .footer__item {
+    background-color: $bg-gray;
+
+    a {
+      color: $txt-white;
+    }
+  }
+
+  .header__menu::before,
+  .header__menu::after,
+  .header__menu span {
+    background-color: $white;
+  }
 }
 
 .light {
-  background-color: $white ;
+  background-color: $white;
   color: $txt-black;
+
+  .header__menu::before,
+  .header__menu::after,
+  .header__menu span {
+    background-color: $black;
+  }
 }
-
-
