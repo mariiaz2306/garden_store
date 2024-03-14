@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "../btnCard/BtnCart.module.css";
+import s from "./BtnCart.module.css";
 import classNames from "classnames";
 
 
