@@ -12,6 +12,7 @@ import CategoriesPage from './pages/CategoriesPage';
 import ProductsPage from './pages/ProductsPage';
 import SalesPage from './pages/SalesPage';
 import ErrorPage from './pages/ErrorPage';
+import SingleCategoryPage from './pages/SingleCategoryPage';
 
 
 const router = createBrowserRouter([
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/categories/:id",
-        // element: <SingleCategoriePage />,
+        element: <SingleCategoryPage />,
       },
       {
         path: "/products",

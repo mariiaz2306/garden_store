@@ -91,11 +91,24 @@ a {
   background-color: $black;
   color: $txt-white;
 
+  .wrapper {
+    border-bottom: 1px solid $grey;
+  }
+
   .footer__item {
     background-color: $bg-gray;
 
     a {
       color: $txt-white;
+    }
+  }
+
+  .breadcrumbs__item {
+    a {
+      color: $grey;
+      &.active {
+        color: $txt-white;
+      }
     }
   }
 
@@ -114,5 +127,69 @@ a {
   .header__menu::after,
   .header__menu span {
     background-color: $black;
+  }
+}
+
+// GRID WRAPPER
+.grid {
+  margin-bottom: 80px;
+
+  &__title {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 110%;
+    margin-bottom: 40px;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    &__title {
+      margin-bottom: 32px;
+    }
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    &__title {
+      font-size: 56px;
+    }
+    &__wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    &__title {
+      font-size: 48px;
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .grid {
+    &__title {
+      font-size: 40px;
+    }
+    &__wrapper {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }

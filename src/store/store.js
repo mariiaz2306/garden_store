@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./slices/themeSlice";
+import filterReducer from './slices/filterSlice'
 import { apiSlice } from "./slices/apiSlice"; 
 import {
   FLUSH,
@@ -17,6 +18,7 @@ import storage from "redux-persist/lib/storage";
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   theme: themeReducer,
+  filter: filterReducer,
 });
 
 const persistConfig = {
