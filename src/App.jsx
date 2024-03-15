@@ -6,13 +6,16 @@ import { store } from "./store/store";
 import { ThemeProvider } from "./contexts/ThemeProvider";
 import Header from "./Layout/Header/Header";
 import { Toaster } from 'react-hot-toast';
+import { ScrollRestoration } from "react-router-dom";
+
 
 function App() {
   return (
-
+    
     <Provider store={store}>
    
       <ThemeProvider>
+      <ScrollRestoration/>
         <div className="App">
         <Toaster />
           <Header />
