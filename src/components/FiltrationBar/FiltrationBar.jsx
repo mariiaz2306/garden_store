@@ -8,7 +8,7 @@ import {
 } from "../../store/slices/filterSlice";
 import "./FiltrationBar.scss";
 
-const FiltrationBar = () => {
+const FiltrationBar = ({ showDiscountOption }) => {
   
   const dispatch = useDispatch();
 
@@ -32,6 +32,7 @@ const FiltrationBar = () => {
         />
       </label>
 
+      {!showDiscountOption && (
       <label htmlFor="discount" className="discount">
         Discounted items
         <input
@@ -41,7 +42,7 @@ const FiltrationBar = () => {
           onChange={(event) => dispatch(discountChange(event.target.checked))}
         ></input>
         <span className="custom-checkbox"></span>
-      </label>
+      </label>)}
 
       <label htmlFor="sort">
         Sorted

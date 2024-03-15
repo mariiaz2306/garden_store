@@ -13,6 +13,7 @@ import ProductsPage from './pages/ProductsPage';
 import SalesPage from './pages/SalesPage';
 import ErrorPage from './pages/ErrorPage';
 import SingleCategoryPage from './pages/SingleCategoryPage';
+import SingleProductPage from './pages/SingleProductPage';
 
 
 const router = createBrowserRouter([
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products/:id",
-        // element: <SingleProductPage />,
+        element: <SingleProductPage />,
       },
       {
         path: "/sales",

@@ -21,7 +21,7 @@ export default function ProductItem({el}) {
 
   return (
     <div className={s.products_wrapper}>
-      <Link to={`/product/${el.id}`} className={s.products_link}>
+      <Link to={`/products/${el.id}`} className={s.products_link}>
         <div className={s.image_container}>
           <img
             src={`${BASE_URL}${el.image}`}
