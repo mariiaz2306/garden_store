@@ -1,5 +1,5 @@
 import React from 'react'
-import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
+import BreadCrumbs from './../components/BreadCrumbs/BreadCrumbs'
 
 export default function ProductsPage() {
   return (
