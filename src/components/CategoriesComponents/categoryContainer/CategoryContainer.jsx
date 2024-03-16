@@ -2,9 +2,13 @@ import React from "react";
 import s from "./CategoryContainer.module.css";
 import CategoryItem from "../categoryItem/CategoryItem";
 import { useFetchCategoriesQuery } from "../../../store/slices/apiSlice"; 
+import { Link } from 'react-router-dom';
 
-const CategoryContainer = () => {
+const CategoryContainer = ({ limitDisplay = true }) => {
+
+  
   const { data: categories, isLoading, error } = useFetchCategoriesQuery();
+  console.log(categories);
 
   if (isLoading) return <p>Loading categories...</p>;
   if (error) return <p>Error loading categories: {error.message}</p>;
@@ -13,7 +17,7 @@ const CategoryContainer = () => {
   if (!categories) return <p>No categories to display</p>;
 
   // Ограничиваем количество отображаемых категорий до первых четырех
-  const displayedCategories = categories.slice(0, 4);
+  const displayedCategories = limitDisplay ? categories.slice(0, 4) : categories;
 
   return (
     <div className={s.categories_container}>

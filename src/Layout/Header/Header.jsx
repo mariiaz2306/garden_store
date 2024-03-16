@@ -38,84 +38,86 @@ const Header = () => {
   }; // функциия для активной вкладки
 
   return (
-    <header className={`header ${theme} container`}>
-      <div className="header__logo-section">
-        <NavLink to="/">
-          <img className="header__logo-section-logo" src={logo} alt="Logo" />
-        </NavLink>
-        <img
-          src={theme === "light" ? dayToggle : nightToggle}
-          alt="Theme"
-          className="header__logo-section__btnChangeTheme"
-          onClick={handleThemeToggle}
-        />
-      </div>
-      <nav className={`header__navigation ${theme} ${isOpen ? "active" : ""}`}>
-        <DiscountButton
-          className="discount-button"
-          onClick={handleDiscountButtonClick}
-        />
-        <ul className={`header__navigation__ul ${theme}`}>
-          <li className="header__navigation__ul-item">
+    <div className="wrapper">
+      <header className={`header ${theme} container`}>
+        <div className="header__logo-section">
+          <NavLink to="/">
+            <img className="header__logo-section-logo" src={logo} alt="Logo" />
+          </NavLink>
+          <img
+            src={theme === "light" ? dayToggle : nightToggle}
+            alt="Theme"
+            className="header__logo-section__btnChangeTheme"
+            onClick={handleThemeToggle}
+          />
+        </div>
+        <nav className={`header__navigation ${theme} ${isOpen ? "active" : ""}`}>
+          <DiscountButton
+            className="discount-button"
+            onClick={handleDiscountButtonClick}
+          />
+          <ul className={`header__navigation__ul ${theme}`}>
+            <li className="header__navigation__ul-item">
+              <NavLink
+                to="/"
+                className={`${getLinkClass("/")} ${theme}`}
+                onClick={closeMenu}
+              >
+                Main Page
+              </NavLink>
+            </li>
+            <li className="header__navigation__ul-item">
+              <NavLink
+                to="/categories"
+                className={`${getLinkClass("/categories")} ${theme}`}
+                onClick={closeMenu}
+              >
+                Categories
+              </NavLink>
+            </li>
+            <li className="header__navigation__ul-item">
+              <NavLink
+                to="/products"
+                className={`${getLinkClass("/products")} ${theme}`}
+                onClick={closeMenu}
+              >
+                All products
+              </NavLink>
+            </li>
+            <li className="header__navigation__ul-item">
+              <NavLink
+                to="/sales"
+                className={`${getLinkClass("/sales")} ${theme}`}
+                onClick={closeMenu}
+              >
+                All sales
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <ul className="header__action__ul">
+          <li className="header__action__ul-item">
             <NavLink
-              to="/"
-              className={`${getLinkClass("/")} ${theme}`}
-              onClick={closeMenu}
+              to="/favorites"
+              className={`header__action__ul-item icon ${theme}`}
             >
-              Main Page
+              <FavIcon />
             </NavLink>
           </li>
-          <li className="header__navigation__ul-item">
+          <li className="header__action__ul-item">
             <NavLink
-              to="/categories"
-              className={`${getLinkClass("/categories")} ${theme}`}
-              onClick={closeMenu}
+              to="/cart"
+              className={`header__action__ul-item icon ${theme}`}
             >
-              Categories
+              <CartIcon />
             </NavLink>
           </li>
-          <li className="header__navigation__ul-item">
-            <NavLink
-              to="/products"
-              className={`${getLinkClass("/products")} ${theme}`}
-              onClick={closeMenu}
-            >
-              All products
-            </NavLink>
-          </li>
-          <li className="header__navigation__ul-item">
-            <NavLink
-              to="/sales"
-              className={`${getLinkClass("/sales")} ${theme}`}
-              onClick={closeMenu}
-            >
-              All sales
-            </NavLink>
+          <li className="header__action__ul-item">
+              <BurgerMenu theme={theme} isActive={isOpen} onClick={() => setIsOpen(!isOpen)} />
           </li>
         </ul>
-      </nav>
-      <ul className="header__action__ul">
-        <li className="header__action__ul-item">
-          <NavLink
-            to="/favorites"
-            className={`header__action__ul-item icon ${theme}`}
-          >
-            <FavIcon />
-          </NavLink>
-        </li>
-        <li className="header__action__ul-item">
-          <NavLink
-            to="/cart"
-            className={`header__action__ul-item icon ${theme}`}
-          >
-            <CartIcon />
-          </NavLink>
-        </li>
-        <li className="header__action__ul-item">
-            <BurgerMenu theme={theme} isActive={isOpen} onClick={() => setIsOpen(!isOpen)} />
-        </li>
-      </ul>
-    </header>
+      </header>
+    </div>
   );
 };
 

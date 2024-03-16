@@ -1,8 +1,10 @@
 import React from "react";
+
+import { useTheme } from "../contexts/ThemeProvider";
+
 import CategoryContainer from "./../components/CategoriesComponents/categoryContainer/CategoryContainer";
 import DiscountForm from "./../components/homeComponents/discountForm/DiscountForm";
 import ProductContainer from "./../components/homeComponents/productComponent/productContainer/ProductContainer";
-import { useTheme } from "../contexts/ThemeProvider";
 import Banner from "../components/Banner/Banner";
 import TitleBreadCrumps from "../UI/titleBreadCrumps/TitleBreadCrumps";
 import BreadcrumpsMain from '../UI/breadcrumpsMain/BreadcrumpsMain';

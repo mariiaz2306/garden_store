@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./ProductsItem.module.css"
+import s from "./ProductsItem.module.css";
 import { Link } from "react-router-dom";
 import Price from "../../../../UI/price/Price";
 import { BASE_URL } from "../../../../config";
@@ -19,8 +19,10 @@ export default function ProductItem({el}) {
   }
 
   return (
-    <div className={s.products_wrapper } >
-      <Link to={`/product/${el.id}`} className={s.products_link}>
+
+    <div className={s.products_wrapper}>
+      <Link to={`/products/${el.id}`} className={s.products_link}>
+
         <div className={s.image_container}>
           <img
             src={`${BASE_URL}${el.image}`}

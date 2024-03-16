@@ -91,6 +91,10 @@ a {
   background-color: $black;
   color: $txt-white;
 
+  .wrapper {
+    border-bottom: 1px solid $grey;
+  }
+
   .footer__item {
     background-color: $bg-gray;
 
@@ -99,22 +103,26 @@ a {
     }
   }
 
+  .breadcrumbs__item {
+    a {
+      color: $grey;
+      &.active {
+        color: $txt-white;
+      }
+    }
+  }
+
   .header__menu::before,
   .header__menu::after,
   .header__menu span {
     background-color: $white;
   }
-  .sale_value{
-    color: $txt-white;
-  }
-  .products_link{
-    color: $txt-white;
-  }
-  .products_wrapper{
-    color: $txt-white;
-  }
-  .discount_btn{
-    color: black;
+ 
+
+
+  option{
+    background: $black;
+
   }
 }
 
@@ -130,4 +138,66 @@ a {
   
 }
 
+// GRID WRAPPER
+.grid {
+  margin-bottom: 5rem;
 
+  &__title {
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 110%;
+    margin-bottom: 2.5rem;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    &__title {
+      margin-bottom: 2rem;
+    }
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    &__title {
+      font-size: 3.5rem;
+    }
+    &__wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    &__title {
+      font-size: 3rem;
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .grid {
+    &__title {
+      font-size: 2.5rem;
+    }
+    &__wrapper {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
