@@ -9,7 +9,6 @@ import {
 import "./FiltrationBar.scss";
 
 const FiltrationBar = ({ showDiscountOption }) => {
-  
   const dispatch = useDispatch();
 
   const { discounted } = useSelector((state) => state.filter);
@@ -32,17 +31,18 @@ const FiltrationBar = ({ showDiscountOption }) => {
         />
       </label>
 
-      {!showDiscountOption && (
-      <label htmlFor="discount" className="discount">
-        Discounted items
-        <input
-          type="checkbox"
-          id="discount"
-          checked={discounted}
-          onChange={(event) => dispatch(discountChange(event.target.checked))}
-        ></input>
-        <span className="custom-checkbox"></span>
-      </label>)}
+      {showDiscountOption && (
+        <label htmlFor="discount" className="discount">
+          Discounted items
+          <input
+            type="checkbox"
+            id="discount"
+            checked={discounted}
+            onChange={(event) => dispatch(discountChange(event.target.checked))}
+          ></input>
+          <span className="custom-checkbox"></span>
+        </label>
+      )}
 
       <label htmlFor="sort">
         Sorted
@@ -52,9 +52,9 @@ const FiltrationBar = ({ showDiscountOption }) => {
         >
           <option>by default</option>
           <option value="asc">Price: Low to High</option>
-    <option value="desc">Price: High to Low</option>
-    <option value="nameAz">Name: A to Z</option>
-    <option value="nameZa">Name: Z to A</option>
+          <option value="desc">Price: High to Low</option>
+          <option value="nameAz">Name: A to Z</option>
+          <option value="nameZa">Name: Z to A</option>
         </select>
       </label>
     </form>

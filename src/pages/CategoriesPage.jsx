@@ -1,10 +1,10 @@
 import React from "react";
+
 import CategoryContainer from "../components/CategoriesComponents/categoryContainer/CategoryContainer";
 import BreadCrumbs from "../components/BreadCrumbs/BreadCrumbs";
 
 export default function CategoriesPage() {
   return (
-    <>
       <section className={`container`}>
         <BreadCrumbs />
         <div className="grid">
@@ -14,6 +14,5 @@ export default function CategoriesPage() {
           </div>
         </div>
       </section>
-    </>
   );
 }

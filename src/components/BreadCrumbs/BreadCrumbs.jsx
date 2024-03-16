@@ -139,7 +139,8 @@ const BreadCrumbs = () => {
           displayName = "Red & White Ceramic Christmas Pots (Set of 6) 15cm";
           break;
         case "/products/34":
-          displayName = "Christmas Double Pine Cone Wreath White-TippedGrey Wreath with Half Pinus Nigra";
+          displayName =
+            "Christmas Double Pine Cone Wreath White-TippedGrey Wreath with Half Pinus Nigra";
           break;
         case "/products/35":
           displayName = "Christmas Wreath Flower Pot Picks - 3 Mixed Designs";

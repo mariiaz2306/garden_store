@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetFilter } from "../store/slices/filterSlice";
 
 export const useFiltration = (data, minPrice, maxPrice, sorted) => {
   const [products, setProducts] = useState(data);
   const { discounted } = useSelector((state) => state.filter);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Сброс фильтров при загрузке новой страницы или перезагрузке текущей страницы
+    dispatch(resetFilter());
+  }, [dispatch]);
 
   useEffect(() => {
     const filterProducts = () => {
