@@ -9,20 +9,25 @@ import {
 import "./FiltrationBar.scss";
 
 const FiltrationBar = ({ showDiscountOption }) => {
+  // Получаем доступ к диспетчеру Redux
   const dispatch = useDispatch();
 
+  // Получаем значения фильтров из хранилища Redux
   const { discounted } = useSelector((state) => state.filter);
 
   return (
     <form>
+      {/* Фильтр по цене */}
       <label htmlFor="price">
         Price
+        {/* Ввод минимальной цены */}
         <input
           type="number"
           id="minPrice"
           placeholder="from"
           onChange={(event) => dispatch(minPriceChange(event.target.value))}
         />
+        {/* Ввод максимальной цены */}
         <input
           type="number"
           id="maxPrice"
@@ -31,21 +36,26 @@ const FiltrationBar = ({ showDiscountOption }) => {
         />
       </label>
 
+      {/* Опция фильтрации по скидке (если showDiscountOption === true) */}
       {showDiscountOption && (
         <label htmlFor="discount" className="discount">
           Discounted items
+          {/* Чекбокс для отображения скидок */}
           <input
             type="checkbox"
             id="discount"
             checked={discounted}
             onChange={(event) => dispatch(discountChange(event.target.checked))}
           ></input>
+          {/* Стилизованный чекбокс */}
           <span className="custom-checkbox"></span>
         </label>
       )}
 
+      {/* Сортировка */}
       <label htmlFor="sort">
         Sorted
+        {/* Выбор метода сортировки */}
         <select
           id="sort"
           onChange={(event) => dispatch(sortedChange(event.target.value))}
