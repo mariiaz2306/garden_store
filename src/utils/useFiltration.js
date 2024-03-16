@@ -3,62 +3,58 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetFilter } from "../store/slices/filterSlice";
 
 export const useFiltration = (data, minPrice, maxPrice, sorted) => {
-  const [products, setProducts] = useState(data); // Состояние для хранения отфильтрованных и отсортированных продуктов
-  const { discounted } = useSelector((state) => state.filter); // Получаем значение фильтра скидок из хранилища Redux
+  const [products, setProducts] = useState(data);
+  const { discounted } = useSelector((state) => state.filter);
 
-  const dispatch = useDispatch(); // Получаем функцию диспетчера Redux
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // Сброс фильтров при монтировании компонента или изменении параметров фильтрации
+    // Сброс фильтров при загрузке новой страницы или перезагрузке текущей страницы
     dispatch(resetFilter());
   }, [dispatch]);
 
   useEffect(() => {
     const filterProducts = () => {
-      if (!data) return; // Если данных нет, ничего не делаем
+      if (!data) return;
 
       let filteredProducts = data.filter((product) => {
-        // Фильтрация продуктов по минимальной и максимальной цене
         return (
           (!minPrice || product.price >= Number(minPrice)) &&
           (!maxPrice || product.price <= Number(maxPrice))
         );
       });
 
-      // Применение фильтрации по скидке, если установлено соответствующее значение
+      // Apply discount filter if necessary
       if (discounted) {
         filteredProducts = filteredProducts.filter(
-          (product) => product.discount_price
+          (product) => product.discont_price
         );
       }
 
-      // Сортировка продуктов
+      // Sorting
       const sortedProducts =
         sorted === "" || sorted === "By default"
-          ? filteredProducts // По умолчанию сортировка не применяется
+          ? filteredProducts
           : sorted === "asc"
-          ? [...filteredProducts].sort((a, b) => a.price - b.price) // По возрастанию цены
+          ? [...filteredProducts].sort((a, b) => a.price - b.price)
           : sorted === "desc"
-          ? [...filteredProducts].sort((a, b) => b.price - a.price) // По убыванию цены
+          ? [...filteredProducts].sort((a, b) => b.price - a.price)
           : sorted === "nameAz"
           ? [...filteredProducts].sort((a, b) =>
               a.title.localeCompare(b.title)
-            ) // По алфавиту, A-Z
+            )
           : sorted === "nameZa"
           ? [...filteredProducts].sort((a, b) =>
               b.title.localeCompare(a.title)
-            ) // По алфавиту, Z-A
+            )
           : filteredProducts;
 
-      setProducts(sortedProducts); // Обновляем состояние продуктов
+      setProducts(sortedProducts);
     };
 
-    // Установка таймера для задержки выполнения фильтрации (300 мс)
     const timerId = setTimeout(filterProducts, 300);
-
-    // Очистка таймера перед каждым повторным рендером компонента
     return () => clearTimeout(timerId);
-  }, [data, minPrice, maxPrice, sorted, discounted]); // Зависимости для повторного запуска эффекта при их изменении
+  }, [data, minPrice, maxPrice, sorted, discounted]);
 
-  return products; // Возвращаем отфильтрованные и отсортированные продукты
+  return products;
 };
