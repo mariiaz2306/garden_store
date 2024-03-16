@@ -1,9 +1,8 @@
 import React from "react";
-import s from "./ProductsItem.module.css"
+import s from "./ProductsItem.module.css";
 import { Link } from "react-router-dom";
 import Price from "../../../../UI/price/Price";
 import { BASE_URL } from "../../../../config";
-
 import  { useDispatch } from "react-redux";
 import { SlHandbag as CartIcon, SlHandbag, SlHeart } from "react-icons/sl";
 import { SlHeart as FavIcon } from "react-icons/sl";
@@ -22,7 +21,7 @@ export default function ProductItem({el}) {
 
   return (
     <div className={s.products_wrapper}>
-      <Link to={`/product/${el.id}`} className={s.products_link}>
+      <Link to={`/products/${el.id}`} className={s.products_link}>
         <div className={s.image_container}>
           <img
             src={`${BASE_URL}${el.image}`}

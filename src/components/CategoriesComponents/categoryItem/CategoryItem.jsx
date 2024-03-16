@@ -1,9 +1,12 @@
-import React from 'react'
-import s from "./CategoryItem.module.css"
-import {BASE_URL } from '../../../config'
-import {Link} from "react-router-dom"
-export default function CategoryItem({ id, title, image }) {
-    return (
+// src/components/CategoryItem.js
+import React from 'react';
+import s from "./CategoryItem.module.css";
+import { BASE_URL } from '../../../config';
+import { Link } from "react-router-dom";
+
+export default function CategoryItem({ id, title, image, price }) {
+  return (
+    <div>
       <div className={s.cart}>
         <Link to={`/categories/${id}`} className={s.category_link}>
           <img
@@ -16,5 +19,6 @@ export default function CategoryItem({ id, title, image }) {
           </div>
         </Link>
       </div>
-    );
-  }
+    </div>
+  );
+}
