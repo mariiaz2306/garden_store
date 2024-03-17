@@ -1,34 +1,44 @@
-import React from "react";
-import { useFetchAllProductsQuery } from "../../store/slices/apiSlice";
-import s from "./style.module.scss";
-import { Link } from "react-router-dom";
-import ProductsItem from "../../components/homeComponents/productComponent/productsItem/ProductsItem";
+import React from 'react'
+import { useFetchAllProductsQuery } from '../../store/slices/apiSlice'
+import { Link } from 'react-router-dom'
+import ProductsItem from '../../components/homeComponents/productComponent/productsItem/ProductsItem'
+import { useFiltration } from '../../utils/useFiltration'
+import { useSelector } from 'react-redux'
+import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
+import FiltrationBar from '../../components/FiltrationBar/FiltrationBar'
 
 export default function SalePage() {
-  const { data: products, isLoading, isError } = useFetchAllProductsQuery();
+  const { data, isLoading, isError } = useFetchAllProductsQuery()
 
-  // Отфильтровываем продукты, чтобы оставить только те, у которых есть скидка
-  const saleProducts =
-    products?.filter((product) => product.discont_price !== null) || [];
+  // Получение фильтров из Redux хранилища
+  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading products.</p>;
-  if (saleProducts.length === 0) return <p>No products on sale right now.</p>;
+  // Фильтрация продуктов с учетом скидок
+const discountedProducts = data?.filter((product) => product.discont_price) || []
+
+
+  // Применение фильтров к отфильтрованным продуктам
+  const products = useFiltration(discountedProducts, minPrice, maxPrice, sorted)
+
+  if (isLoading) return <p>Loading...</p>
+  if (isError) return <p>Error loading products.</p>
 
   return (
-      <section className="container">
-          <h2 className={s.header}>Products on Sale</h2>
-          <div className={s.container}>
-            {saleProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/products/${product.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                  <ProductsItem key={product.id} el={product} />
+    <section className="container">
+      <BreadCrumbs /> {/* Компонент хлебных крошек */}
+      <div className="grid">
+        <h2 className="grid__title">Discounted items</h2> {/* Заголовок раздела */}
+        <FiltrationBar showDiscountOption={false} /> {/* Компонент панели фильтрации (без опции скидки) */}
+        <ul className="grid__wrapper">
+          {/* Вывод отфильтрованных продуктов */}
+          {products &&
+            products.map((product) => (
+              <Link key={product.id} to={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
+                <ProductsItem key={product.id} el={product} />
               </Link>
             ))}
-          </div>
-      </section>
-  );
+        </ul>
+      </div>
+    </section>
+  )
 }

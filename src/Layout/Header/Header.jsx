@@ -145,7 +145,7 @@ const Header = () => {
     console.log("DiscountButton clicked");
  };
   return (
-    <header className={`header ${theme}`}>
+    <header className={`container header ${theme}`}>
       <div className="header__logo-section">
         <img className="header__logo-section-logo" src={logo} alt="Logo" />
         <img
