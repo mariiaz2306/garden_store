@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 import { addSale } from "../../../utils/sale"
 
 
-export default function DiscountForm({classInput}) {
+
+export default function CheckoutForm({classInput}) {
 
   const [resp, setResp] = useState({});
 
@@ -13,7 +14,10 @@ export default function DiscountForm({classInput}) {
 
   const submit = new_product_obj => {
     reset();
+
     console.log(new_product_obj);
+
+
     addSale(new_product_obj, setResp, toast.success('5% discount has been received!'));
 
   };
@@ -32,8 +36,7 @@ export default function DiscountForm({classInput}) {
 
     return (
         <form className={s.form_container} onSubmit={handleSubmit(submit)}> 
-    
-    
+
           <label className={s.input_container}>
              
                
@@ -74,7 +77,9 @@ export default function DiscountForm({classInput}) {
                     },
                   })}
                   /> 
-                                       : <input className={s.input} type="tel" name='number' placeholder='+49' {...numberRegister}/>
+
+                  : <input className={s.input} type="tel" name='number' placeholder='+49' {...numberRegister}/>
+
                 }
 
                  <p className={s.error_text}>{errors.email?.message}</p>

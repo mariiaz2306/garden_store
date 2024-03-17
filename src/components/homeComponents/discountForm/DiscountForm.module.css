@@ -36,6 +36,7 @@
 .discount_input {
     background-color: transparent;
     color: var(--txt-white, #FFF);
+    width: 100%;
 }
 
 .discount_input::placeholder {

@@ -35,6 +35,7 @@ export default function DiscountForm() {
             classInput={s.discount_input}
             classBtn={s.discount_btn}
             txtBtn={buttonText}
+            modalWindow = {ModalWindow}
           />
         </div>
         <ModalWindow showModal={showModal} setShowModal={setShowModal} />

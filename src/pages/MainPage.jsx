@@ -1,6 +1,3 @@
-import React from "react";
-
-import { useTheme } from "../contexts/ThemeProvider";
 
 import CategoryContainer from "./../components/CategoriesComponents/categoryContainer/CategoryContainer";
 import DiscountForm from "./../components/homeComponents/discountForm/DiscountForm";
@@ -8,9 +5,10 @@ import ProductContainer from "./../components/homeComponents/productComponent/pr
 import Banner from "../components/Banner/Banner";
 import TitleBreadCrumps from "../UI/titleBreadCrumps/TitleBreadCrumps";
 import BreadcrumpsMain from '../UI/breadcrumpsMain/BreadcrumpsMain';
+import { useTheme } from "../contexts/ThemeProvider"
 
 export default function MainPage() {
-  const { theme } = useTheme();
+const {theme} = useTheme();
 
   //the links to category and sales pages are added 
 
