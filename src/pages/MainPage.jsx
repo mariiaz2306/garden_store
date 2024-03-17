@@ -3,17 +3,17 @@ import CategoryContainer from "./../components/CategoriesComponents/categoryCont
 import DiscountForm from "./../components/homeComponents/discountForm/DiscountForm";
 import ProductContainer from "./../components/homeComponents/productComponent/productContainer/ProductContainer";
 import Banner from "../components/Banner/Banner";
+import { useSelector } from "react-redux";
 import TitleBreadCrumps from "../UI/titleBreadCrumps/TitleBreadCrumps";
 import BreadcrumpsMain from '../UI/breadcrumpsMain/BreadcrumpsMain';
-import { useTheme } from "../contexts/ThemeProvider"
 
 export default function MainPage() {
-const {theme} = useTheme();
+  const { theme } = useSelector((state) => state.theme);
 
-  //the links to category and sales pages are added 
+  //the links to category and sales pages are added
 
   const breadcrumbsCategories = [
-    { label: "All categories", path: "/categories" },
+      { label: "All categories", path: "/categories" },
   ];
 
   const breadcrumbsSales = [{ label: "All sales", path: "/sales" }];

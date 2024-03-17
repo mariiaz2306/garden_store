@@ -9,11 +9,12 @@ import { RxHamburgerMenu as MenuIcon } from "react-icons/rx";
 import logo from "./media/logo.svg";
 import dayToggle from "./media/modeDay.svg";
 import nightToggle from "./media/modeNight.svg";
-import { useTheme } from "../../contexts/ThemeProvider";
 import DiscountButton from "../../components/DiscountButton/DiscountButton";
 import "../../style/app.scss";
 
 import BurgerMenu from "./../../components/BurgerMenu/BurgerMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../store/slices/themeSlice";
 
 // const Header = () => {
 //   const { theme, handleThemeToggle } = useTheme();
@@ -29,7 +30,7 @@ import BurgerMenu from "./../../components/BurgerMenu/BurgerMenu";
 
 //   const [isOpen, setIsOpen] = useState(); //используем useState для открытого и закрытого состояния бургер-меню
 
-//   const closeMenu = () => { 
+//   const closeMenu = () => {
 //     setIsOpen(false);
 //   }; // автоматическое закрытие бургер-меню при нажатии на категорию
 
@@ -129,7 +130,14 @@ import BurgerMenu from "./../../components/BurgerMenu/BurgerMenu";
 
 
 const Header = () => {
-  const { theme, handleThemeToggle } = useTheme(); // Используем useTheme для получения значения темы и функции смены темы
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+
+  const handleThemeToggle = () => {
+    console.log("Toggling theme...");
+    dispatch(toggleTheme());
+  };
+
   function handleMenuToggle() {
     console.log("menu item clicked");
   }
