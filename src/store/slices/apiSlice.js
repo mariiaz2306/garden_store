@@ -15,6 +15,9 @@ export const apiSlice = createApi({
     fetchAllProducts: builder.query({
       query: () => "products/all",
     }),
+    fetchProductById: builder.query({
+      query: (id) => `products/${id}`,
+    }),
     postDiscount: builder.mutation({
       query: (discountData) => ({
         url: "sale/send",
@@ -30,5 +33,6 @@ export const {
   useFetchCategoriesQuery,
   useFetchCategoryByNameQuery,
   useFetchAllProductsQuery,
+  useFetchProductByIdQuery,
   usePostDiscountMutation,
 } = apiSlice;

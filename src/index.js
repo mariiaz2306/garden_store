@@ -9,11 +9,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import MainPage from "./pages/MainPage";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import CategoriesPage from './pages/CategoriesPage';
-import ProductsPage from './pages/ProductsPage';
-import SalesPage from './pages/SalesPage';
+import ProductsPage from './pages/ProductsPage/ProductsPage';
+import SingleProductPage from "./pages/SingleProductPage/SingleProductPage"
+import SalesPage from './pages/SalesPage/SalesPage';
 import ErrorPage from './pages/ErrorPage';
-
-import SingleProductPage from './pages/SingleProductPage';
 
 
 
