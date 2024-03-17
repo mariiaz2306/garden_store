@@ -1,10 +1,9 @@
 .categories_container {
-    width: 95%;
     margin: auto;
-    margin-top: 5%;
+  
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 30px;
 }
 
 

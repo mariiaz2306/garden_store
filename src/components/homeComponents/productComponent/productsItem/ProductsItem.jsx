@@ -1,19 +1,18 @@
 import React from "react";
-import s from "./ProductsItem.module.css"
+import s from "./ProductsItem.module.css";
 import { Link } from "react-router-dom";
 import Price from "../../../../UI/price/Price";
 import { BASE_URL } from "../../../../config";
-
 import  { useDispatch } from "react-redux";
-import { SlHandbag as CartIcon, SlHandbag, SlHeart } from "react-icons/sl";
-import { SlHeart as FavIcon } from "react-icons/sl";
+
 import shoppingBag1 from "../../../../media/icons/shoppingBag1.svg";
 import heart from "../../../../media/icons/heart.svg";
-import { TbShoppingBag } from "react-icons/tb";
-import BtnCart from "../../../../UI/btnCard/BtnCart";
+import BtnCart, {ButtonTypes} from "../../../../UI/btnCard/BtnCart";
+import { useTheme } from "../../../../contexts/ThemeProvider";
 
 export default function ProductItem({el}) {
   const dispatch = useDispatch()
+  const { theme, handleThemeToggle } = useTheme();
 
   const handleAddToCart = (e) => {
     e.preventDefault()
@@ -21,8 +20,10 @@ export default function ProductItem({el}) {
   }
 
   return (
+
     <div className={s.products_wrapper}>
-      <Link to={`/product/${el.id}`} className={s.products_link}>
+      <Link to={`/products/${el.id}`} className={s.products_link}>
+
         <div className={s.image_container}>
           <img
             src={`${BASE_URL}${el.image}`}
@@ -50,7 +51,7 @@ export default function ProductItem({el}) {
       </Link>
 
       <div className={s.add_btn} onClick={handleAddToCart}>
-      <BtnCart />
+      <BtnCart type={ButtonTypes.ADD_TO_CART}/>
       </div>
 
       <div className={s.products_information}>

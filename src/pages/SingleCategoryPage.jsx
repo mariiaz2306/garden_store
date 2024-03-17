@@ -1,37 +1,45 @@
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { useFetchCategoryByNameQuery } from "../store/slices/apiSlice";
 import { useFiltration } from "../utils/useFiltration";
-import { useFetchAllProductsQuery } from "../store/slices/apiSlice";
 
 import BreadCrumbs from "./../components/BreadCrumbs/BreadCrumbs";
-import FiltrationBar from "../components/FiltrationBar/FiltrationBar";
+import FiltrationBar from "./../components/FiltrationBar/FiltrationBar";
 import ProductItem from "../components/homeComponents/productComponent/productsItem/ProductsItem";
 
-export default function ProductsPage() {
-  // Получаем данные всех продуктов
-  const { data, isLoading, isError } = useFetchAllProductsQuery();
+const SingleCategoryPage = () => {
+  // Получаем параметр из URL
+  const { id } = useParams();
 
-  // Получаем значения фильтров из хранилища Redux
+  // Используем хук useFetchCategoryByNameQuery для получения данных категории
+  const {
+    data: category, // Данные о категории
+    isLoading,      // Флаг загрузки данных
+    isError,        // Флаг ошибки при загрузке данных
+  } = useFetchCategoryByNameQuery(id);
+
+  // Получаем значения фильтров из Redux хранилища
   const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter);
 
-  // Фильтруем продукты с помощью утилиты useFiltration
-  const products = useFiltration(data, minPrice, maxPrice, sorted);
+  // Используем утилиту useFiltration для фильтрации продуктов по заданным критериям
+  const products = useFiltration(category?.data, minPrice, maxPrice, sorted);
 
   // Если данные еще загружаются, отображаем сообщение "Loading..."
   if (isLoading) return <div>Loading...</div>;
   // Если произошла ошибка при загрузке данных, отображаем сообщение об ошибке
   if (isError) return <div>Error loading category.</div>;
 
-  // Если данные успешно загружены, отображаем страницу со всеми продуктами
+  // Если данные успешно загружены, отображаем страницу с категорией и продуктами
   return (
     <section className="container">
       {/* Отображаем хлебные крошки */}
       <BreadCrumbs />
       <div className="grid">
-        {/* Отображаем заголовок страницы */}
-        <h2 className="grid__title">All products</h2>
+        {/* Отображаем заголовок категории */}
+        <h2 className="grid__title">{category.category.title}</h2>
         {/* Отображаем панель фильтрации */}
         <FiltrationBar showDiscountOption={true} />
         {/* Отображаем список продуктов */}
@@ -45,4 +53,6 @@ export default function ProductsPage() {
       </div>
     </section>
   );
-}
+};
+
+export default SingleCategoryPage;
