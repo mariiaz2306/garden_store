@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ThemeProvider } from "./contexts/ThemeProvider";
 import Header from "./Layout/Header/Header";
-import { Toaster } from 'react-hot-toast';
+import {  } from 'react-hot-toast';
 import { ScrollRestoration } from "react-router-dom";
 
 
@@ -17,13 +17,15 @@ function App() {
       <ThemeProvider>
       <ScrollRestoration/>
         <div className="App">
-        <Toaster />
+     
           <Header />
           <Outlet />
           <Footer />
         </div>
       </ThemeProvider>
     </Provider>
+
+
 
   );
 }

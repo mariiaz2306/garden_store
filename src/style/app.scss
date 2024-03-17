@@ -91,6 +91,7 @@ a {
   background-color: $black;
   color: $txt-white;
 
+
   .wrapper {
     border-bottom: 1px solid $grey;
   }
@@ -117,12 +118,12 @@ a {
   .header__menu span {
     background-color: $white;
   }
-  .sale_value{
-    color: $txt-white;
-  }
+ 
+
 
   option{
     background: $black;
+
   }
 }
 
@@ -201,3 +202,12 @@ a {
     }
   }
 }
+
+
+
+.light {
+  background-color: $white ;
+  color: $txt-black;
+}
+
+
