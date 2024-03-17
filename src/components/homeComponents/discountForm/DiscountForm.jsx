@@ -3,6 +3,7 @@ import s from "../discountForm/DiscountForm.module.css";
 import img_discount_form from "../../../media/images/Discount.svg";
 import CheckoutForm from "../checkoutForm/CheckoutForm";
 import { useForm } from "react-hook-form";
+import ModalWindow from "../modalWindow/ModalWindow";
 
 
 
@@ -12,9 +13,11 @@ export default function DiscountForm() {
     const [showModal, setShowModal] = useState(false);
     const [buttonText, setButtonText] = useState("Get a discount");
   
-    const handleDiscountSubmit = () => {
+    const handleDiscountSubmit = (e) => {
+      console.log("Form submitted");
       setShowModal(true);
       setButtonText("Request Submitted");
+      
     };
   
     return (
@@ -34,7 +37,7 @@ export default function DiscountForm() {
             txtBtn={buttonText}
           />
         </div>
-        {/* <ModalWindow showModal={showModal} setShowModal={setShowModal} /> */}
+        <ModalWindow showModal={showModal} setShowModal={setShowModal} />
       </div>
     );
   }

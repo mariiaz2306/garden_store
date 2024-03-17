@@ -7,7 +7,7 @@ import { BASE_URL } from "../../../../config";
 import  { useDispatch } from "react-redux";
 import { SlHandbag as CartIcon, SlHandbag, SlHeart } from "react-icons/sl";
 import { SlHeart as FavIcon } from "react-icons/sl";
-import shoppingBag from "../../../../media/icons/shoppingBag.svg";
+import shoppingBag1 from "../../../../media/icons/shoppingBag1.svg";
 import heart from "../../../../media/icons/heart.svg";
 import { TbShoppingBag } from "react-icons/tb";
 import BtnCart from "../../../../UI/btnCard/BtnCart";
@@ -34,7 +34,7 @@ export default function ProductItem({el}) {
         <button className={s.icon_button} 
         //  onClick={handleAddToCart}
         >
-       <img src={shoppingBag} alt="Add to cart" />
+       <img src={shoppingBag1} alt="Add to cart" />
         </button>
 
             {/* Кнопка добавления в избранное */}
@@ -60,6 +60,7 @@ export default function ProductItem({el}) {
           realPriceClass={s.real_price}
           oldPriceClass={s.old_price}
           saleValueClass={s.sale_value}
+   
         />
       </div>
     </div>
