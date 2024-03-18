@@ -14,17 +14,21 @@
   font-weight: 700;
   line-height: 110%;
   letter-spacing: 3%;
+  margin-right: 4rem;
 }
 .icon_button {
-  height: 4vh;
-  width: 4vw;
+  width: 44px;
+  height: 38px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .rightBlock {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // gap: 50px;
+  position: relative;
 }
 
 .leftBlock {
@@ -40,16 +44,14 @@
 }
 
 .priceBlock {
-  // width: 200px;
   display: flex;
   flex-direction: row;
-  // align-items: flex-end;
   justify-content: flex-start;
   gap: 1rem;
 }
 
 .priceP {
-  color: rgb(40, 40, 40);
+  color: var(--bg-gray);
   font-size: 64px;
   font-weight: 700;
   line-height: 110%;
@@ -106,10 +108,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // flex: 1;
   border: none;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-top: 1px solid var(--count-grey);
+  border-bottom: 1px solid var(--count-grey);
   height: 100%;
   width: 40%;
   border-radius: 10px;
@@ -117,14 +118,15 @@
 }
 .countValue {
   padding: 0 10%;
-  color: #8b8b8b;
+  color: var(--txt-black);
+  font-size: 20px;
 }
 .countButton {
   border-top: none;
   border-bottom: none;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  color: #8b8b8b;
+  border-left: 1px solid var(--count-grey);
+  border-right: 1px solid var(--count-grey);
+  color: var(--txt-grey);
   height: 58px;
   width: 58px;
   border-radius: 10px;
@@ -136,8 +138,8 @@
   width: 232px;
   height: 58px;
   border: none;
-  background-color: #339933;
-  color: white;
+  background-color: var(--green);
+  color: var(--txt-white);
   font-size: 20px;
   font-weight: 600;
   border-radius: 10px;
@@ -162,4 +164,105 @@
   max-width: 80%;
   max-height: 80%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .card {
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 46.5% 46.5%;
+    gap: 5%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .card {
+    gap: 3%;
+  }
+  .rightBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    position: relative;
+  }
+
+  .header {
+    font-size: 32px;
+  }
+  .priceBlock {
+    gap: 0.5rem;
+  }
+  .priceP {
+    font-size: 56px;
+  }
+  .oldPriceP {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .countButtonContainer {
+    width: 50%;
+  }
+
+  .addToCartButton {
+    width: 100%;
+    padding: 16px 32px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .rightBlock {
+    position: static;
+  }
+  .card {
+    position: relative;
+    margin-top: 80px;
+  }
+  .header {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    margin-right: 40px;
+    font-size: 28px;
+  }
+  .icon_button {
+    top: -70px;
+    width: 36.67px;
+    height: 31.67px;
+  }
+  .rightBlock,
+  .leftBlock {
+    height: 179px;
+  }
+  .rightBlock {
+    justify-content: end;
+  }
+  .priceBlock {
+    gap: 0.5rem;
+  }
+  .priceP {
+    font-size: 48px;
+  }
+  .oldPriceP {
+    font-size: 28px;
+  }
+  .countButtonContainer {
+    width: 75%;
+    height: 47px;
+  }
+  .addToCartButton {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 20px;
+  }
+  .percentDiscount {
+    display: none;
+  }
+  .descriptionBlock {
+    display: none;
+  }
 }

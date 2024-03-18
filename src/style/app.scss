@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 // RESET
 
@@ -91,7 +91,6 @@ a {
   background-color: $black;
   color: $txt-white;
 
-
   .wrapper {
     border-bottom: 1px solid $grey;
   }
@@ -118,12 +117,9 @@ a {
   .header__menu span {
     background-color: $white;
   }
- 
 
-
-  option{
+  option {
     background: $black;
-
   }
 }
 
@@ -136,7 +132,6 @@ a {
   .header__menu span {
     background-color: $black;
   }
-  
 }
 
 // GRID WRAPPER
@@ -215,6 +210,8 @@ a {
   --txt-black: #e2dede;
   --txt-white: #727272;
   --txt-grey: #8b8b8b;
+  --icon-stroke: white;
+  --icon-fill: transparent;
 }
 
 .light {
@@ -224,19 +221,17 @@ a {
   --grey-divider: #ddd;
   --grey: #8b8b8b;
   --light-grey: #f1f3f4;
-
+  --count-grey: #dddddd;
   --bg-gray: #404040;
 
   --txt-black: #282828;
   --txt-white: #fff;
   --txt-grey: #8b8b8b;
+  --icon-fill: transparent;
+  --icon-stroke: black;
 }
-
-
 
 .light {
-  background-color: $white ;
+  background-color: $white;
   color: $txt-black;
 }
-
-

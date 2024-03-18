@@ -7,14 +7,20 @@ import { toggleTheme } from '../../store/slices/themeSlice'
 import './Header.scss'
 import '../../style/app.scss'
 
-import { SlHeart as FavIcon } from 'react-icons/sl'
+// import { SlHeart as FavIcon } from 'react-icons/sl'
 import logo from '../../media/icons/logo.svg'
 import dayToggle from '../../media/icons/modeDay.svg'
 import nightToggle from '../../media/icons/modeNight.svg'
-import shoppingBag1 from '../../media/icons/shoppingBag1.svg'
+import shoppingBag from '../../media/icons/shoppingBag1.svg'
+import shoppingBagWhite from '../../media/icons/shoppingBagWhite.svg'
+import heart from '../../media/icons/heart.svg'
+import heartWhite from '../../media/icons/heartWhite.svg'
+
 
 import DiscountButton from '../../components/DiscountButton/DiscountButton'
 import BurgerMenu from './../../components/BurgerMenu/BurgerMenu'
+
+
 
 const Header = () => {
   const { theme } = useSelector((state) => state.theme)
@@ -26,6 +32,8 @@ const Header = () => {
   const handleThemeToggle = () => {
     dispatch(toggleTheme())
   }
+
+
 
   const handleDiscountButtonClick = () => {
     console.log('DiscountButton clicked')
@@ -86,12 +94,12 @@ const Header = () => {
         <ul className="header__action__ul">
           <li className="header__action__ul-item">
             <NavLink to="/favorites" className={`header__action__ul-item icon ${theme}`}>
-              <FavIcon />
+              <img src={theme === 'light' ? heart : heartWhite} alt="favourites" />
             </NavLink>
           </li>
           <li className="header__action__ul-item">
             <NavLink to="/cart" className={`header__action__ul-item icon ${theme}`}>
-            <img src={shoppingBag1} alt="bag" />
+              <img src={theme === 'light' ? shoppingBag : shoppingBagWhite} alt="cart" />
             </NavLink>
           </li>
           <li className="header__action__ul-item">

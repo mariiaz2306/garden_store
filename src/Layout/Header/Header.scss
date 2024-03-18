@@ -1,6 +1,7 @@
-@import "../../style/variables";
+@import '../../style/variables';
+@import '../../style/app.scss';
 
-.wrapper{
+.wrapper {
   border-bottom: 1px solid $grey-divider;
 }
 
@@ -74,7 +75,7 @@
         }
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           left: 0;
           bottom: -0.25rem;
@@ -110,16 +111,53 @@
     gap: 1rem;
 
     .header__action__ul-item {
-      &.icon {
-        font-size: 3rem;
+  &.icon {
+    img {
+      // Значения для экрана 1440px и больше
+      &[alt="favourites"] {
+        height: 38px; // Высота для heart
+        width: 44px; // Ширина для heart
+      }
 
-        @media screen and (max-width: 62.5rem) {
-          font-size: 2.75rem;
+      &[alt="cart"] {
+        height: 48px; // Высота для bag
+        width: 44px; // Ширина для bag
+      }
+
+      @media screen and (max-width: 1000px) {
+        &[alt="favourites"] {
+          height: 34.8px; // Высота для heart при 1000px
+          width: 40.3px; // Ширина для heart при 1000px
         }
-        @media screen and (max-width: 30rem) {
-          font-size: 2rem;
+
+        &[alt="cart"] {
+          height: 44px; // Высота для bag при 1000px
+          width: 40.33px; // Ширина для bag при 1000px
         }
       }
+
+      @media screen and (max-width: 768px) {
+        &[alt="favourites"], &[alt="cart"] {
+          height: 34.8px; // Высота для иконок при 768px
+          width: 40px; // Ширина для иконок при 768px
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        &[alt="favourites"] {
+          height: 25.3px; // Высота для heart при 480px и меньше
+          width: 29.3px; // Ширина для heart при 480px и меньше
+        }
+
+        &[alt="cart"] {
+          height: 32px; // Высота для bag при 480px и меньше
+          width: 29.3px; // Ширина для bag при 480px и меньше
+        }
+      }
+    }
+  }
+}
+
       &.menu {
         cursor: pointer;
         border: none;
@@ -133,7 +171,7 @@
       }
     }
   }
-}
+
 
 @media (max-width: 720px) {
   .header__navigation {
@@ -159,11 +197,24 @@
       gap: 2.25rem;
     }
   }
-
+  // .icon {
+  //   fill: var(--icon-fill);
+  //   stroke: var(--icon-stroke);
+  // }
   .dark {
     background-color: $black;
     color: $txt-white;
   }
+  .dark .icon {
+  --icon-fill: transparent;
+  --icon-stroke: white; /* Пример для темной темы */
+}
+
+.light .icon {
+  --icon-fill: transparent;
+  --icon-stroke: black; /* Пример для светлой темы */
+}
+
 
   .header__navigation.active {
     transform: translateX(0);
@@ -180,10 +231,10 @@
   }
 }
 
-@media screen  and (max-width: 480px) {
-  .header{
+@media screen and (max-width: 480px) {
+  .header {
     height: 4.25rem;
-    &__navigation{
+    &__navigation {
       top: 4.25rem;
     }
   }
