@@ -17,7 +17,7 @@
 .products_img {
     position: relative;
     height: 320px;
-    flex-shrink: 0;
+    flex-shrink: 1;
     align-self: stretch;
     object-fit: cover;
     overflow: hidden;

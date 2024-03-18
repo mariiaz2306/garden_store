@@ -1,32 +1,27 @@
-
-import React from "react";
-
-import { useSelector } from "react-redux";
-
-import { useFiltration } from "../utils/useFiltration";
-import { useFetchAllProductsQuery } from "../store/slices/apiSlice";
-
-import BreadCrumbs from "./../components/BreadCrumbs/BreadCrumbs";
-import FiltrationBar from "../components/FiltrationBar/FiltrationBar";
-import ProductItem from "../components/homeComponents/productComponent/productsItem/ProductsItem";
+import React from 'react'
+import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
+import { Link } from 'react-router-dom'
+import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
+import { useFiltration } from '../utils/useFiltration'
+import { useSelector } from 'react-redux'
+import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
+import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 
 export default function ProductsPage() {
-  // Получаем данные всех продуктов
-  const { data, isLoading, isError } = useFetchAllProductsQuery();
+  const { data, isLoading, isError } = useFetchAllProductsQuery()
+  console.log('products', data)
 
   // Получаем значения фильтров из хранилища Redux
-  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter);
+  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
 
   // Фильтруем продукты с помощью утилиты useFiltration
-  const products = useFiltration(data, minPrice, maxPrice, sorted);
+  const products = useFiltration(data, minPrice, maxPrice, sorted)
 
-  // Если данные еще загружаются, отображаем сообщение "Loading..."
-  if (isLoading) return <div>Loading...</div>;
-  // Если произошла ошибка при загрузке данных, отображаем сообщение об ошибке
-  if (isError) return <div>Error loading category.</div>;
+  if (isLoading) return <p>Loading...</p>
+  if (isError) return <p>Error loading products.</p>
 
-  // Если данные успешно загружены, отображаем страницу со всеми продуктами
   return (
+    // <section className={s.productsPage}>
     <section className="container">
       {/* Отображаем хлебные крошки */}
       <BreadCrumbs />
@@ -37,14 +32,11 @@ export default function ProductsPage() {
         <FiltrationBar showDiscountOption={true} />
         {/* Отображаем список продуктов */}
         <ul className="grid__wrapper">
-          {/* Маппим продукты и отображаем каждый продукт */}
-          {products &&
-            products.map((product) => (
-              <ProductItem key={product.id} el={product} />
-            ))}
+          {products?.map((product) => (
+            <ProductsItem key={product.id} el={product} />
+          ))}
         </ul>
       </div>
     </section>
-  );
+  )
 }
-

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import s from './style.module.scss'
-import { useFetchProductByIdQuery } from '../../store/slices/apiSlice'
-import { BASE_URL } from '../../../src/config.js'
-import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.jsx'
+import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'
+import { BASE_URL } from '../../config.js'
+import BreadCrumbs from '../BreadCrumbs/BreadCrumbs.jsx'
 import heart from '../../media/icons/heart.svg'
 
 // Компонент для модального окна
@@ -44,8 +44,7 @@ export default function SingleProductPage() {
   const closeModal = () => setIsModalOpen(false)
 
   return (
-    <section className="container">
-      <BreadCrumbs />
+    <>
       <div className={s.card}>
         <div className={s.leftBlock}>
           <img src={imgLink} alt="productImage" className={s.productImg} onClick={openModal} />
@@ -74,7 +73,7 @@ export default function SingleProductPage() {
                 +
               </button>
             </div>
-            <button className={s.addToCartButton}>add to Cart</button>
+            <button className={s.addToCartButton}>Add to Cart</button>
           </div>
           <div className={s.descriptionBlock}>
             <p className={s.descriptionHeader}>Description</p>
@@ -83,6 +82,6 @@ export default function SingleProductPage() {
         </div>
         {isModalOpen && <Modal src={imgLink} alt={product.title} onClose={closeModal} />}
       </div>
-    </section>
+    </>
   )
 }
