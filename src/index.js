@@ -14,6 +14,7 @@ import SingleProductPage from './components/SingleProductPage/SingleProductPage'
 import SalesPage from './pages/SalesPage'
 import SingleCategoryPage from './pages/SingleCategoryPage'
 import SingleProduct from './pages/SingleProduct'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        // element: <ErrorPage />,
+        element: <NotFoundPage />,
       },
     ],
   },

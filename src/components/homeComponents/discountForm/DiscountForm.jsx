@@ -17,7 +17,6 @@ export default function DiscountForm() {
       console.log("Form submitted");
       setShowModal(true);
       setButtonText("Request Submitted");
-      
     };
   
     return (
@@ -38,7 +37,7 @@ export default function DiscountForm() {
             modalWindow = {ModalWindow}
           />
         </div>
-        <ModalWindow showModal={showModal} setShowModal={setShowModal} />
+        {/* <ModalWindow showModal={showModal} setShowModal={setShowModal} /> */}
       </div>
     );
   }

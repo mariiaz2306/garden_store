@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import TitleBreadCrumps from "../UI/titleBreadCrumps/TitleBreadCrumps";
 import BreadcrumpsMain from '../UI/breadcrumpsMain/BreadcrumpsMain';
 
+
 export default function MainPage() {
   const { theme } = useSelector((state) => state.theme);
 
@@ -23,6 +24,7 @@ export default function MainPage() {
   return (
     <div className={`main_page ${theme}`}>
       <Banner />
+  
       <div className="container">
         <TitleBreadCrumps
           title="Categories"

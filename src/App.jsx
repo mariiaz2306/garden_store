@@ -7,7 +7,6 @@ import Header from "./Layout/Header/Header";
 import { useSelector } from "react-redux";
 import { ScrollRestoration } from "react-router-dom";
 
-
 function App() {
   return (
     <Provider store={store}>
