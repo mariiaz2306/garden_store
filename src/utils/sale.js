@@ -1,7 +1,6 @@
 
 import { BASE_URL } from './../config';
 
-const URL = `${BASE_URL}/sale/send`
 
 export const addSale = (new_Discount, setResp) => {
     fetch(`${BASE_URL}/sale/send`, {
