@@ -7,11 +7,11 @@ import { toggleTheme } from '../../store/slices/themeSlice'
 import './Header.scss'
 import '../../style/app.scss'
 
-import { SlHandbag as CartIcon } from 'react-icons/sl'
 import { SlHeart as FavIcon } from 'react-icons/sl'
-import logo from './media/logo.svg'
-import dayToggle from './media/modeDay.svg'
-import nightToggle from './media/modeNight.svg'
+import logo from '../../media/icons/logo.svg'
+import dayToggle from '../../media/icons/modeDay.svg'
+import nightToggle from '../../media/icons/modeNight.svg'
+import shoppingBag1 from '../../media/icons/shoppingBag1.svg'
 
 import DiscountButton from '../../components/DiscountButton/DiscountButton'
 import BurgerMenu from './../../components/BurgerMenu/BurgerMenu'
@@ -91,7 +91,7 @@ const Header = () => {
           </li>
           <li className="header__action__ul-item">
             <NavLink to="/cart" className={`header__action__ul-item icon ${theme}`}>
-              <CartIcon />
+            <img src={shoppingBag1} alt="bag" />
             </NavLink>
           </li>
           <li className="header__action__ul-item">

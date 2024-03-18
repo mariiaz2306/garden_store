@@ -7,12 +7,9 @@ import { useDispatch } from 'react-redux'
 
 import shoppingBag1 from '../../../../media/icons/shoppingBag1.svg'
 
-import { SlHandbag as CartIcon, SlHandbag, SlHeart } from 'react-icons/sl'
-import { SlHeart as FavIcon } from 'react-icons/sl'
-import shoppingBag from '../../../../media/icons/shoppingBag.svg'
+
 import heart from '../../../../media/icons/heart.svg'
 import BtnCart, { ButtonTypes } from '../../../../UI/btnCard/BtnCart'
-import { useTheme } from '../../../../contexts/ThemeProvider'
 import { TbShoppingBag } from 'react-icons/tb'
 import { useSelector } from 'react-redux'
 

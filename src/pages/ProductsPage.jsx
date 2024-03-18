@@ -1,50 +1,42 @@
+import React from 'react'
+import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
+import { Link } from 'react-router-dom'
+import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
+import { useFiltration } from '../utils/useFiltration'
+import { useSelector } from 'react-redux'
+import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
+import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 
-// import React from "react";
+export default function ProductsPage() {
+  const { data, isLoading, isError } = useFetchAllProductsQuery()
+  console.log('products', data)
 
-// import { useSelector } from "react-redux";
+  // Получаем значения фильтров из хранилища Redux
+  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
 
-// import { useFiltration } from "../utils/useFiltration";
-// import { useFetchAllProductsQuery } from "../store/slices/apiSlice";
+  // Фильтруем продукты с помощью утилиты useFiltration
+  const products = useFiltration(data, minPrice, maxPrice, sorted)
 
-// import BreadCrumbs from "./../components/BreadCrumbs/BreadCrumbs";
-// import FiltrationBar from "../components/FiltrationBar/FiltrationBar";
-// import ProductItem from "../components/homeComponents/productComponent/productsItem/ProductsItem";
+  if (isLoading) return <p>Loading...</p>
+  if (isError) return <p>Error loading products.</p>
 
-// export default function ProductsPage() {
-//   // Получаем данные всех продуктов
-//   const { data, isLoading, isError } = useFetchAllProductsQuery();
-
-//   // Получаем значения фильтров из хранилища Redux
-//   const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter);
-
-//   // Фильтруем продукты с помощью утилиты useFiltration
-//   const products = useFiltration(data, minPrice, maxPrice, sorted);
-
-//   // Если данные еще загружаются, отображаем сообщение "Loading..."
-//   if (isLoading) return <div>Loading...</div>;
-//   // Если произошла ошибка при загрузке данных, отображаем сообщение об ошибке
-//   if (isError) return <div>Error loading category.</div>;
-
-//   // Если данные успешно загружены, отображаем страницу со всеми продуктами
-//   return (
-//     <section className="container">
-//       {/* Отображаем хлебные крошки */}
-//       <BreadCrumbs />
-//       <div className="grid">
-//         {/* Отображаем заголовок страницы */}
-//         <h2 className="grid__title">All products</h2>
-//         {/* Отображаем панель фильтрации */}
-//         <FiltrationBar showDiscountOption={true} />
-//         {/* Отображаем список продуктов */}
-//         <ul className="grid__wrapper">
-//           {/* Маппим продукты и отображаем каждый продукт */}
-//           {products &&
-//             products.map((product) => (
-//               <ProductItem key={product.id} el={product} />
-//             ))}
-//         </ul>
-//       </div>
-//     </section>
-//   );
-// }
-
+  return (
+    // <section className={s.productsPage}>
+    <section className="container">
+      {/* Отображаем хлебные крошки */}
+      <BreadCrumbs />
+      <div className="grid">
+        {/* Отображаем заголовок страницы */}
+        <h2 className="grid__title">All products</h2>
+        {/* Отображаем панель фильтрации */}
+        <FiltrationBar showDiscountOption={true} />
+        {/* Отображаем список продуктов */}
+        <ul className="grid__wrapper">
+          {products?.map((product) => (
+            <ProductsItem key={product.id} el={product} />
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
