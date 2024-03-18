@@ -1,12 +1,12 @@
 import React from 'react'
-import SingleProductPage from '../components/SingleProductPage/SingleProductPage'
+import SingleProductComponent from '../components/SingleProductComponent/SingleProductComponent'
 import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
 
 const SingleProduct = () => {
   return (
     <section className="container">
       <BreadCrumbs />
-      <SingleProductPage />
+      <SingleProductComponent />
     </section>
   )
 }

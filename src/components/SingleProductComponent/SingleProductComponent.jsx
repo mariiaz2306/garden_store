@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import s from './style.module.scss'
 import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'
 import { BASE_URL } from '../../config.js'
-import BreadCrumbs from '../BreadCrumbs/BreadCrumbs.jsx'
 import heart from '../../media/icons/heart.svg'
 
 // Компонент для модального окна
@@ -13,7 +12,7 @@ const Modal = ({ src, alt, onClose }) => (
   </div>
 )
 
-export default function SingleProductPage() {
+export default function SingleProductComponent() {
   const { id } = useParams()
 
   // Деструктуризация - data: мы извлекаем свойство data из объекта.
