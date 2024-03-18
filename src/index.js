@@ -13,6 +13,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage';
 import SingleProductPage from "./pages/SingleProductPage/SingleProductPage"
 import SalesPage from './pages/SalesPage/SalesPage';
 import ErrorPage from './pages/ErrorPage';
+import SingleCategoryPage from './pages/SingleCategoryPage';
 
 
 
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/categories/:id",
 
-        element: <SingleProductPage />,
+        element: <SingleCategoryPage />,
 
       },
       {
