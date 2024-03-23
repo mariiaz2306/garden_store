@@ -10,6 +10,8 @@
 .title {
     padding-right: 32px;
     white-space: nowrap;
+    font-size:3rem;
+    font-weight: 600;
 }
 
 .line {

@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./slices/themeSlice";
 import filterReducer from './slices/filterSlice'
 import { apiSlice } from "./slices/apiSlice"; 
+import cartReducer from "./slices/cartSlice";
 import {
   FLUSH,
   PAUSE,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   theme: themeReducer,
   filter: filterReducer,
+  cart: cartReducer,
 });
 
 const persistConfig = {
