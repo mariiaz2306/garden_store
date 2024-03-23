@@ -6,7 +6,7 @@
     cursor: pointer;
     line-height: 130%;
     border-radius: var(--radius-small, 6px);
-    background: var(--green, #393);
+    background: var(--green, rgb(6, 235, 6));
     color: var(--txt-white, #FFF);
 }
 
