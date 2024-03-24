@@ -1,86 +1,107 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import s from './style.module.scss'
-import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'
-import { BASE_URL } from '../../config.js'
-import heart from '../../media/icons/heart.svg'
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'; // Импорт хука для получения данных о продукте
+import { BASE_URL } from '../../config.js'; // Импорт базового URL
+
+import s from './style.module.scss'; // Импорт стилей модуля
+import heart from '../../media/icons/heart.svg'; // Импорт иконки сердца
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
+  // Объявление компонента модального окна
   <div className={s.modalBackdrop} onClick={onClose}>
-    <img src={src} alt={alt} className={s.modalImage} />
+    <img src={src} alt={alt} className={s.modalImage} /> {/* Изображение в модальном окне */}
   </div>
-)
+);
 
 export default function SingleProductComponent() {
-  const { id } = useParams()
+  // Функциональный компонент для отображения информации о продукте
 
-  // Деструктуризация - data: мы извлекаем свойство data из объекта.
-  // [product] указывает на деструктуризацию массива, содержащегося в data, и присваивание его первого элемента переменной product.
-  // пустой массив [] задает значение по умолчанию для data, если в нем нет значения (например, если data undefined).
-  // Это предотвращает ошибки, связанные с попыткой деструктурировать несуществующую структуру.
+  const { id } = useParams(); // Получение параметра id из URL
 
-  const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id)
+  // Деструктуризация данных о продукте из хука useFetchProductByIdQuery
+  const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id);
 
-  const [isModalOpen, setIsModalOpen] = useState(false) // Состояние для управления модальным окном
-  const [count, setCount] = useState(0)
+  // Состояния для управления модальным окном и количеством товаров
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [count, setCount] = useState(0);
 
-  if (isLoading) return <p>Loading...</p>
-  if (isError || !product) return <p>Product not found or error loading the product.</p>
+  // Состояние для управления обрезанным описанием
+  const [isTruncated, setIsTruncated] = useState(true);
 
-  const increaseCount = () => {
-    setCount((prev) => prev + 1)
-  }
+  // Обрезанное описание продукта
+  const truncatedDescription = `${product?.description.substring(0, 300)}...`;
 
-  const decreaseCount = () => {
-    setCount((prev) => (prev > 0 ? prev - 1 : 0))
-  }
+  // Функция для переключения обрезанного описания
+  const toggleTruncate = () => setIsTruncated(!isTruncated);
 
-  const imgLink = `${BASE_URL}${product.image}`
-  const discountPercent = product.discont_price ? ((product.price - product.discont_price) / product.price) * 100 : 0
+  // Вывод индикатора загрузки при загрузке данных о продукте
+  if (isLoading) return <p>Loading...</p>;
+  // Вывод сообщения об ошибке при ошибке загрузки данных или если продукт не найден
+  if (isError || !product) return <p>Product not found or error loading the product.</p>;
 
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  // Функции для управления количеством товаров в корзине
+  const increaseCount = () => setCount((prev) => prev + 1);
+  const decreaseCount = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
 
+  // Формирование ссылки на изображение продукта
+  const imgLink = `${BASE_URL}${product.image}`;
+  // Расчет скидки в процентах
+  const discountPercent = product.discont_price ? ((product.price - product.discont_price) / product.price) * 100 : 0;
+
+  // Функции для открытия и закрытия модального окна
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  // Возвращение JSX-разметки для отображения информации о продукте
   return (
     <>
       <div className={s.card}>
+        {/* Блок с левой частью продукта */}
         <div className={s.leftBlock}>
           <img src={imgLink} alt="productImage" className={s.productImg} onClick={openModal} />
-        </div>
-        <div className={s.rightBlock}>
-          <div className={s.headerContainer}>
-            <p className={s.header}>{product.title}</p>
-            <img className={s.icon_button} src={heart} alt="Add to favorites" />
-          </div>
-          <div className={s.priceBlock}>
-            <p className={s.priceP}>{product.discont_price ? `$${product.discont_price}` : `$${product.price}`}</p>
-            {product.discont_price && <p className={s.oldPriceP}>{`$${product.price}`}</p>}
-            {product.discont_price && (
-              <div className={s.percentDiscount}>
-                <p className={s.percentDiscountP}>-{discountPercent.toFixed(0)}%</p>
-              </div>
-            )}
-          </div>
-          <div className={s.buttonsContainer}>
-            <div className={s.countButtonContainer}>
-              <button className={s.countButton} onClick={decreaseCount}>
-                -
-              </button>
-              <p className={s.countValue}>{count}</p>
-              <button className={s.countButton} onClick={increaseCount}>
-                +
-              </button>
+          {/* Отображение скидки на изображении продукта */}
+          {product.discont_price && (
+            <div className={s.discountOnImage}>
+              <p className={s.discountText}>-{discountPercent.toFixed(0)}%</p>
             </div>
-            <button className={s.addToCartButton}>Add to Cart</button>
-          </div>
-          <div className={s.descriptionBlock}>
-            <p className={s.descriptionHeader}>Description</p>
-            <p className={s.descriptionText}>{product.description}</p>
-          </div>
+          )}
         </div>
+        {/* Блок с заголовком и иконкой "Добавить в избранное" */}
+        <div className={s.headerContainer}>
+          <p className={s.header}>{product.title}</p>
+          <img className={s.icon_button} src={heart} alt="Add to favorites" />
+        </div>
+        {/* Блок с ценой и скидкой */}
+        <div className={s.priceBlock}>
+          <p className={s.priceP}>{product.discont_price ? `$${product.discont_price}` : `$${product.price}`}</p>
+          {product.discont_price && <p className={s.oldPriceP}>{`$${product.price}`}</p>}
+          {product.discont_price && (
+            <div className={s.percentDiscount}>
+              <p className={s.percentDiscountP}>-{discountPercent.toFixed(0)}%</p>
+            </div>
+          )}
+        </div>
+        {/* Блок с кнопками для управления количеством товаров */}
+        <div className={s.buttonsContainer}>
+          <div className={s.countButtonContainer}>
+            <button className={s.countButton} onClick={decreaseCount}>-</button>
+            <p className={s.countValue}>{count}</p>
+            <button className={s.countButton} onClick={increaseCount}>+</button>
+          </div>
+          <button className={s.addToCartButton}>Add to Cart</button>
+        </div>
+        {/* Блок с описанием продукта */}
+        <div className={s.descriptionBlock}>
+          <p className={s.descriptionHeader}>Description</p>
+          <p className={s.descriptionText}>{isTruncated ? truncatedDescription : product.description}</p>
+          {/* Кнопка для переключения обрезанного описания */}
+          {isTruncated && <a onClick={toggleTruncate}>Read more</a>}
+        </div>
+        {/* Модальное окно */}
         {isModalOpen && <Modal src={imgLink} alt={product.title} onClose={closeModal} />}
       </div>
     </>
-  )
+  );
 }
