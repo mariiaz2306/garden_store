@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'; // Импорт хука для получения данных о продукте
 import { BASE_URL } from '../../config.js'; // Импорт базового URL
 
 import s from './style.module.scss'; // Импорт стилей модуля
 import heart from '../../media/icons/heart.svg'; // Импорт иконки сердца
+import heartWhite from '../../media/icons/heartWhite.svg'
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
@@ -22,6 +24,8 @@ export default function SingleProductComponent() {
 
   // Деструктуризация данных о продукте из хука useFetchProductByIdQuery
   const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id);
+
+  const { theme } = useSelector((state) => state.theme)
 
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +75,7 @@ export default function SingleProductComponent() {
         {/* Блок с заголовком и иконкой "Добавить в избранное" */}
         <div className={s.headerContainer}>
           <p className={s.header}>{product.title}</p>
-          <img className={s.icon_button} src={heart} alt="Add to favorites" />
+          <img className={s.icon_button} src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
         </div>
         {/* Блок с ценой и скидкой */}
         <div className={s.priceBlock}>
@@ -97,7 +101,7 @@ export default function SingleProductComponent() {
           <p className={s.descriptionHeader}>Description</p>
           <p className={s.descriptionText}>{isTruncated ? truncatedDescription : product.description}</p>
           {/* Кнопка для переключения обрезанного описания */}
-          {isTruncated && <a onClick={toggleTruncate}>Read more</a>}
+          {isTruncated && <a className='readMore' onClick={toggleTruncate}>Read more</a>}
         </div>
         {/* Модальное окно */}
         {isModalOpen && <Modal src={imgLink} alt={product.title} onClose={closeModal} />}
