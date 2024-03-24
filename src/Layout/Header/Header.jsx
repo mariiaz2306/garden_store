@@ -16,13 +16,13 @@ import shoppingBagWhite from '../../media/icons/shoppingBagWhite.svg'
 import heart from '../../media/icons/heart.svg'
 import heartWhite from '../../media/icons/heartWhite.svg'
 
-
 import DiscountButton from '../../components/DiscountButton/DiscountButton'
 import BurgerMenu from './../../components/BurgerMenu/BurgerMenu'
 
-
-
 const Header = () => {
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
+  const likedProductsCount = likedProducts.length
+
   const { theme } = useSelector((state) => state.theme)
 
   const location = useLocation() // Получаем текущий URL
@@ -32,8 +32,6 @@ const Header = () => {
   const handleThemeToggle = () => {
     dispatch(toggleTheme())
   }
-
-
 
   const handleDiscountButtonClick = () => {
     console.log('DiscountButton clicked')
@@ -94,7 +92,10 @@ const Header = () => {
         <ul className="header__action__ul">
           <li className="header__action__ul-item">
             <NavLink to="/favorites" className={`header__action__ul-item icon ${theme}`}>
-              <img src={theme === 'light' ? heart : heartWhite} alt="favourites" />
+              <div className="cart-count-container">
+                {likedProductsCount > 0 && <span className="cart-count">{likedProductsCount}</span>}
+                <img src={theme === 'light' ? heart : heartWhite} alt="favourites" />
+              </div>
             </NavLink>
           </li>
           <li className="header__action__ul-item">
