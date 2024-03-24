@@ -121,6 +121,10 @@ a {
   option {
     background: $black;
   }
+
+  .readMore{
+    color: $txt-white;
+  }
 }
 
 .light {
@@ -197,11 +201,6 @@ a {
     }
   }
 }
-
-
-
-
-
 
 .dark {
   --green: #393;
