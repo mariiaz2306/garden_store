@@ -1,13 +1,21 @@
+import React from 'react';
+import s from './ModalWindow.module.scss';
 
-import React from "react";
-import s from "../modalWindow/ModalWindow.module.css";
+export default function ModalWindow({ onClose, children }) {
+  const handleBackdropClick = (event) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
 
-export default function DiscountModal({ onClose }) {
   return (
-    <div className={s.modal}>
+    <div className={s.modal} onClick={handleBackdropClick}>
       <div className={s.modalContent}>
-        <span className={s.close} onClick={onClose}>&times;</span>
-        <p className = {s.congrats}>Congratulations! Your discount of 5% has been received!</p>
+        <div className={s.title}>
+          <h3>Congratulations!</h3>
+          <span className={s.close} onClick={onClose}>&times;</span>
+        </div>
+        {children}
       </div>
     </div>
   );
