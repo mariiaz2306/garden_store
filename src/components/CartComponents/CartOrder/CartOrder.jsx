@@ -1,13 +1,23 @@
 import React, {useState} from "react";
+
 import s from "./CartOrder.module.css";
+
 import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm';
-import CartModalWindow from "../CartModalWindow/CartModalWindow";
+import ModalWindow from "../../homeComponents/ModalWindow/ModalWindow";
 
-
-
-export default function CartOrder({ basketCart }) {
+export default function CartOrder({ basketCart}) {
     // Используем useState для управления состоянием отправки заказа
     const [sendingOrder, setSendingOrder] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleDiscountSubmit = () => {
+      setShowModal(true);
+    };
+
+    const handleOrderSubmit = () => {
+      setSendingOrder(true); // Устанавливаем sendingOrder в true при отправке заказа
+      setShowModal(true); // Показываем модальное окно при отправке заказа
+    };
 
     // Вычисляем общую стоимость всех товаров в корзине
     const totalPrice =
@@ -36,15 +46,24 @@ export default function CartOrder({ basketCart }) {
            </div >
         </div>
 
-      <CheckoutForm
-      setSendingOrder={setSendingOrder}// Передаем функцию для управления состоянием отправки заказа
-      classInput={s.input}
-      classBtn={s.discount_btn}
-      txtBtn="Checkout"
-      cartModalWindow = {CartModalWindow}// Передаем компонент модального окна для корзины, 
-      //общее упраление модалками прописано в CheckoutForm
-       />
-        
+        <CheckoutForm
+       handleOrderSubmit={handleOrderSubmit} 
+       handleDiscountSubmit={handleDiscountSubmit}
+        classInput={s.input}
+        classBtn={s.discount_btn}
+        txtBtn="Checkout"
+        cartModalWindow={ModalWindow}
+      />
+      {showModal && (
+        <ModalWindow onClose={() => setShowModal(false)}>
+          <p className={s.congrats}>
+            Your order has been successfully placed on the website.
+          </p>
+          <p className={s.congrats}>
+            A manager will contact you shortly to confirm your order.
+          </p>
+        </ModalWindow>
+      )}
    </div>
     )
 }

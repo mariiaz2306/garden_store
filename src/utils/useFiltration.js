@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetFilter } from "../store/slices/filterSlice";
 
-export const useFiltration = (data, minPrice, maxPrice, sorted) => {
+export const useFiltration = (data) => {
   const [products, setProducts] = useState(data);
-  const { discounted } = useSelector((state) => state.filter);
+  const { discounted, minPrice, maxPrice, sorted } = useSelector((state) => state.filter);
 
   const dispatch = useDispatch();
 
