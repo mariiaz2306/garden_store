@@ -3,13 +3,10 @@ import {useForm } from "react-hook-form";
 import s from "../checkoutForm/CheckoutForm.module.css";
 import { addSale } from "../../../utils/sale";
 import DiscountModal from "../modalWindow/ModalWindow";
+import CartModalWindow from "../../CartComponents/CartModalWindow/CartModalWindow";
+ 
 
-
-
-
-
-
-export default function CheckoutForm({classInput}) {
+export default function CheckoutForm({classInput, classBtn, txtBtn, isDiscountForm}) {
 
   const [resp, setResp] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -74,11 +71,19 @@ className={`${classInput} ${s.input}`}
   })}
 />
 </label>               
-<button 
-    className={s.getDiscount}>{resp.status === 'OK' ? 'Discount has been received' : 'Get a discount'}
- </button>
 
-  {showModal && <DiscountModal onClose={() => setShowModal(false)} />}
+   <button className={`${classBtn} ${s.getDiscount}`} >
+        {txtBtn}
+      </button>
+
+      {showModal && (
+        // Отображаем соответствующее модальное окно в зависимости от флага isDiscountForm
+        isDiscountForm ? (
+          <DiscountModal onClose={() => setShowModal(false)} />
+        ) : (
+          <CartModalWindow onClose={() => setShowModal(false)} />
+        )
+      )}
 </form>
      
     );

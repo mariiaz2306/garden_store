@@ -19,6 +19,7 @@ import SingleProductPage from './pages/SingleProductPage';
 
 
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import CartPage from './pages/CartPage'
 
 
 const router = createBrowserRouter([
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        // element: <CartPage />,
+        element: <CartPage />,
       },
       {
         path: '/favorites',
