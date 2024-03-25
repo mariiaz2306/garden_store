@@ -4,6 +4,7 @@ import s from "./CartOrder.module.css";
 
 import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm';
 import ModalWindow from "../../homeComponents/ModalWindow/ModalWindow";
+import { useSelector } from 'react-redux';
 
 export default function CartOrder({ basketCart}) {
     // Используем useState для управления состоянием отправки заказа
@@ -18,53 +19,49 @@ export default function CartOrder({ basketCart}) {
       setSendingOrder(true); // Устанавливаем sendingOrder в true при отправке заказа
       setShowModal(true); // Показываем модальное окно при отправке заказа
     };
-
+const totalSum = useSelector((state) => state.cart.totalSum)
     // Вычисляем общую стоимость всех товаров в корзине
-    const totalPrice =
-    basketCart?.reduce(
-      (acc, { price, discont_price, count }) => acc + count * (discont_price || price),
-      0
-    ) || 0; 
+    // const totalPrice =
+    // basketCart?.reduce(
+    //   (acc, { price, discont_price, count }) => acc + count * (discont_price || price),
+    //   0
+    // ) || 0; 
     // это нужно убрать
 
     return (
-        <div className={s.container}> 
-           {/* Заголовок деталей заказа */}
+      <div className={s.container}>
+        {/* Заголовок деталей заказа */}
         <h3 className={s.h3_order}>Order Details</h3>
 
-         {/* Отображение общего количества товаров в корзине */}
+        {/* Отображение общего количества товаров в корзине */}
         <div className={s.total_items}>
-            <p className={s.total_items_sum}>{basketCart.length} items</p>
+          <p className={s.total_items_sum}>{basketCart.length} items</p>
         </div>
 
-         {/* Отображение общей стоимости заказа */}
+        {/* Отображение общей стоимости заказа */}
         <div className={s.total_price}>
-            <p className={s.total_p}>Total</p>
-            <div>
+          <p className={s.total_p}>Total</p>
+          <div>
             <p className={s.total_sum}>
-              $ {totalPrice.toFixed(2)} {/* Отображаем общую стоимость с округлением до двух знаков после запятой */}
+              $ {totalSum.toFixed(2)} {/* Отображаем общую стоимость с округлением до двух знаков после запятой */}
             </p>
-           </div >
+          </div>
         </div>
 
         <CheckoutForm
-       handleOrderSubmit={handleOrderSubmit} 
-       handleDiscountSubmit={handleDiscountSubmit}
-        classInput={s.input}
-        classBtn={s.discount_btn}
-        txtBtn="Checkout"
-        cartModalWindow={ModalWindow}
-      />
-      {showModal && (
-        <ModalWindow onClose={() => setShowModal(false)}>
-          <p className={s.congrats}>
-            Your order has been successfully placed on the website.
-          </p>
-          <p className={s.congrats}>
-            A manager will contact you shortly to confirm your order.
-          </p>
-        </ModalWindow>
-      )}
-   </div>
+          handleOrderSubmit={handleOrderSubmit}
+          handleDiscountSubmit={handleDiscountSubmit}
+          classInput={s.input}
+          classBtn={s.discount_btn}
+          txtBtn="Checkout"
+          cartModalWindow={ModalWindow}
+        />
+        {showModal && (
+          <ModalWindow onClose={() => setShowModal(false)}>
+            <p className={s.congrats}>Your order has been successfully placed on the website.</p>
+            <p className={s.congrats}>A manager will contact you shortly to confirm your order.</p>
+          </ModalWindow>
+        )}
+      </div>
     )
 }
