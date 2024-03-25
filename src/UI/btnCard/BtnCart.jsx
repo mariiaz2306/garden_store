@@ -45,6 +45,15 @@ export const ButtonTypes = {
             {isSubmitting ? "Added" : "Add to cart"}
           </button>
         )}
+
+
+       {type===ButtonTypes.SHOPPING &&(
+        <Link to={"/products"}>
+        <button className={s.btn_green}>
+          Continue shopping
+        </button>
+        </Link>
+       )} 
           </div>
   );
 }  

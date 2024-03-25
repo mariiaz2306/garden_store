@@ -18,8 +18,8 @@ export default function ProductItem({ el }) {
   const { theme } = useSelector((state) => state.theme)
   const handleAddToCart = (e) => {
     e.preventDefault()
-    dispatch(addProduct(el))
-  }
+    
+    dispatch(addProduct({...el, quantity: 1})); // Предполагаем, что el - это объект товара с нужными полями
 
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const isLiked = likedProducts.some((likedProduct) => likedProduct.id === el.id)
@@ -54,20 +54,22 @@ export default function ProductItem({ el }) {
       </div>
 
       <div className={s.add_btn} onClick={handleAddToCart}>
-        <BtnCart type={ButtonTypes.ADD_TO_CART} />
+        <BtnCart 
+        type={ButtonTypes.ADD_TO_CART}
+        onClick = {handleAddToCart}
+         />
       </div>
 
       <div className={s.products_information}>
         <Link to={`/products/${el.id}`} className={s.products_link}>
           <h3 className={s.products_title}>{el.title}</h3>
         </Link>
-        <Price
-          el={el}
-          theme={theme}
-          realPriceClass={s.real_price}
-          oldPriceClass={s.old_price}
-          saleValueClass={s.sale_value}
-        />
+        <Price el={el} 
+        theme={theme} 
+        realPriceClass={s.real_price} 
+        oldPriceClass={s.old_price} 
+        saleValueClass={s.sale_value}
+         />
       </div>
     </div>
   )
