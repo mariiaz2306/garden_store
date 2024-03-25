@@ -1,0 +1,10 @@
+.cartProductsContainer {
+  /* margin-right: 40px;
+  display: grid;
+  grid-template-rows: 1fr; */
+}
+.info {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}

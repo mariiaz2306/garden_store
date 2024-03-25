@@ -24,7 +24,8 @@ export default function CartOrder({ basketCart}) {
     basketCart?.reduce(
       (acc, { price, discont_price, count }) => acc + count * (discont_price || price),
       0
-    ) || 0;
+    ) || 0; 
+    // это нужно убрать
 
     return (
         <div className={s.container}> 
