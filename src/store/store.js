@@ -3,6 +3,7 @@ import themeReducer from "./slices/themeSlice";
 import filterReducer from './slices/filterSlice'
 import { apiSlice } from "./slices/apiSlice"; 
 import cartReducer from "./slices/cartSlice";
+import likedProductsReducer from './slices/likedProductsSlice';
 import {
   FLUSH,
   PAUSE,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   filter: filterReducer,
   cart: cartReducer,
+  likedProducts: likedProductsReducer,
 });
 
 const persistConfig = {

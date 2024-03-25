@@ -124,6 +124,7 @@
         width: 44px; // Ширина для bag
       }
 
+      
       @media screen and (max-width: 1000px) {
         &[alt="favourites"] {
           height: 34.8px; // Высота для heart при 1000px
@@ -172,6 +173,26 @@
     }
   }
 
+
+  .cart-count-container {
+    position: relative;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: $green;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 50%;
+  }
 
 @media (max-width: 720px) {
   .header__navigation {
@@ -238,6 +259,14 @@
       top: 4.25rem;
     }
   }
+
+  .cart-count{
+    font-size: 8px;
+    width: 17px;
+    height: 17px;
+    top: -4px;
+    left: -4px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -253,3 +282,5 @@
     margin: 0 auto;
   }
 }
+
+

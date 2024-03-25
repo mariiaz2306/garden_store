@@ -7,11 +7,10 @@ import { useDispatch } from 'react-redux'
 
 import shoppingBag1 from '../../../../media/icons/shoppingBag1.svg'
 
-
 import heart from '../../../../media/icons/heart.svg'
 import BtnCart, { ButtonTypes } from '../../../../UI/btnCard/BtnCart'
-import { TbShoppingBag } from 'react-icons/tb'
 import { useSelector } from 'react-redux'
+import { addLikedProduct, removeLikedProduct } from '../../../../store/slices/likedProductsSlice'
 
 export default function ProductItem({ el }) {
   const dispatch = useDispatch()
@@ -20,37 +19,52 @@ export default function ProductItem({ el }) {
     e.preventDefault()
   }
 
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
+  const isLiked = likedProducts.some((likedProduct) => likedProduct.id === el.id)
+
+  const toggleLiked = () => {
+    if (isLiked) {
+      dispatch(removeLikedProduct(el))
+    } else {
+      dispatch(addLikedProduct(el))
+    }
+  }
+
   return (
     <div className={s.products_wrapper}>
-      <Link to={`/products/${el.id}`} className={s.products_link}>
-        <div className={s.image_container}>
+      <div className={s.image_container}>
+        <Link to={`/products/${el.id}`} className={s.products_link}>
           <img src={`${BASE_URL}${el.image}`} alt={el.title} className={s.products_img} />
-          <div className={s.icons_wrapper}>
-            <button
-              className={s.icon_button}
-              //  onClick={handleAddToCart}
-            >
-              <img src={shoppingBag1} alt="Add to cart" />
-            </button>
+        </Link>
+        <div className={s.icons_wrapper}>
 
-            {/* Кнопка добавления в избранное */}
-            <button
-              className={s.icon_button}
-              // onClick={handleAddToCart}
-            >
-              <img src={heart} alt="Add to favorites" />
-            </button>
-          </div>
+          {/* Кнопка добавления в избранное */}
+          <button
+            className={s.icon_button}
+            onClick={toggleLiked}
+            isLiked={isLiked}
+          >
+            <img className={s.svgIcon} src={heart} alt="Add to favorites" />
+          </button>
+
+          <button
+            className={s.icon_button}
+            //  onClick={handleAddToCart}
+          >
+            <img src={shoppingBag1} alt="Add to cart" />
+          </button>
         </div>
-      </Link>
+      </div>
 
       <div className={s.add_btn} onClick={handleAddToCart}>
         <BtnCart type={ButtonTypes.ADD_TO_CART} />
       </div>
 
       <div className={s.products_information}>
-        <h3 className={s.products_title}>{el.title}</h3>
-        <Price el={el} realPriceClass={s.real_price} oldPriceClass={s.old_price} saleValueClass={s.sale_value} />
+        <Link to={`/products/${el.id}`} className={s.products_link}>
+          <h3 className={s.products_title}>{el.title}</h3>
+        </Link>
+        <Price el={el} theme={theme} realPriceClass={s.real_price} oldPriceClass={s.old_price} saleValueClass={s.sale_value} />
       </div>
     </div>
   )

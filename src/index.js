@@ -20,6 +20,7 @@ import SingleProductPage from './pages/SingleProductPage';
 
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import CartPage from './pages/CartPage'
+import FavoritesPage from './pages/FavoritesPage'
 
 
 const router = createBrowserRouter([
@@ -48,8 +49,6 @@ const router = createBrowserRouter([
         path: '/products/:id',
 
         element: <SingleProductPage />,
-
-        // element: <SingleProductPage />,
       },
       {
         path: '/sales',
@@ -61,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/favorites',
-        // element: <FavoritesPage />,
+        element: <FavoritesPage />,
       },
       {
         path: '*',

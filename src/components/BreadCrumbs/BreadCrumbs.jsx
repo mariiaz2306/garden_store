@@ -148,6 +148,9 @@ const BreadCrumbs = () => {
         case "/sales":
           displayName = "All sales";
           break;
+        case "/favorites":
+          displayName = "Liked products";
+          break;
         default:
           displayName = crumb; // Если специальное название не задано, используем текущий crumb
       }
