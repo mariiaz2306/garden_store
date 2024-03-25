@@ -3,7 +3,7 @@ import themeReducer from "./slices/themeSlice";
 import filterReducer from './slices/filterSlice'
 import { apiSlice } from "./slices/apiSlice"; 
 import cartReducer from "./slices/cartSlice";
-import likedProductsReducer from './slices/likedProductsSlice';
+import likedProductsReducer from "./slices/likedProductsSlice"
 import {
   FLUSH,
   PAUSE,
@@ -16,6 +16,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+
 // Используем apiSlice.reducerPath в качестве ключа для редьюсера apiSlice
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -23,7 +24,7 @@ const rootReducer = combineReducers({
   filter: filterReducer,
   cart: cartReducer,
   likedProducts: likedProductsReducer,
-});
+})
 
 const persistConfig = {
   key: "root",

@@ -18,8 +18,8 @@ export default function ProductItem({ el }) {
   const { theme } = useSelector((state) => state.theme)
   const handleAddToCart = (e) => {
     e.preventDefault()
+    
     dispatch(addProduct({...el, quantity: 1})); // Предполагаем, что el - это объект товара с нужными полями
-  }
 
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const isLiked = likedProducts.some((likedProduct) => likedProduct.id === el.id)
@@ -39,13 +39,8 @@ export default function ProductItem({ el }) {
           <img src={`${BASE_URL}${el.image}`} alt={el.title} className={s.products_img} />
         </Link>
         <div className={s.icons_wrapper}>
-
           {/* Кнопка добавления в избранное */}
-          <button
-            className={s.icon_button}
-            onClick={toggleLiked}
-            isLiked={isLiked}
-          >
+          <button className={s.icon_button} onClick={toggleLiked} isLiked={isLiked}>
             <img className={s.svgIcon} src={heart} alt="Add to favorites" />
           </button>
 
