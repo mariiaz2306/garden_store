@@ -72,19 +72,19 @@
     cursor: pointer;
   }
 
-  .svgIcon path{
+  .svgIcon {
     fill: white !important; /* Белая заливка по умолчанию */
     transition: fill 0.3s ease; /* Добавляем плавное изменение цвета при ховере */
   }
   
   /* SVG с заливкой при наведении */
   .svgIcon:hover path {
-    fill: green; /* Зелёная заливка при наведении */
+    fill: black; /* Зелёная заливка при наведении */
   }
   
   /* SVG с заливкой при нажатии */
   .svgIcon:active path{
-    fill: black; /* Чёрная заливка при нажатии */
+    fill: green; /* Чёрная заливка при нажатии */
   }
 
 .products_title {
