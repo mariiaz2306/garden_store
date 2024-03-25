@@ -4,6 +4,7 @@ import TitleBreadCrumps from "../UI/titleBreadCrumps/TitleBreadCrumps";
 import s from "./NotFoundPage/NotFoundPage.module.css";
 import CartOrder from "../components/CartComponents/CartOrder/CartOrder";
 import { saveCartItems } from "../utils/cartLocalStorage";
+import EmptyCart from "../components/CartComponents/EmptyCart/EmptyCart";
 
 export default function CartPage() {
     const basketCart = useSelector((state) => state.cart.products);
@@ -26,6 +27,7 @@ export default function CartPage() {
                 classTitleContainer={s.title_container}
             />
             <CartOrder basketCart={basketCart}/>
+            <EmptyCart/>
       
         </section>
     )

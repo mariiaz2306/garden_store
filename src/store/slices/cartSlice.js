@@ -10,15 +10,19 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addProduct(state, action) {
-           const objectExists = state.products.find((product) => product => product.id === action.payload.id)
-           objectExists
-           ? (objectExists.quantity +=1)
-            : state.products.push({...action.payload, quantity: 1})
+            // Исправленная строка: удалено лишнее объявление функции внутри find
+            const objectExists = state.products.find(product => product.id === action.payload.id);
+            if (objectExists) {
+                objectExists.quantity += 1; // Если объект существует, увеличиваем количество
+            } else {
+                state.products.push({...action.payload, quantity: 1}); // Иначе, добавляем новый объект
+            }
         },
+        
         deleteProduct(state, action) {
-           const index= state.products = state.products.findIndex(product => product.id !== action.payload.id)
-           
+            state.products = state.products.filter(product => product.id !== action.payload.id);
         },
+        
         decreaseProduct( state, action) {
             state.products = state.products.filter(product => product.id !== action.payload)
         },
