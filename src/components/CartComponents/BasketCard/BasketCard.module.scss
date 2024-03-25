@@ -1,0 +1,99 @@
+@import '../../../style/_variables';
+
+.card {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+
+  border: 1px solid rgb(221, 221, 221);
+  height: 180px;
+  border-radius: 12px;
+   box-sizing: border-box;
+}
+
+.cardArea {
+display: flex;
+  gap: 32px;
+  /* grid-template-columns: 1fr 2fr 1.3fr;  */
+}
+
+.card img {
+  width: 200px;
+  height: 178px;
+  box-sizing: border-box;
+  /* grey divider */
+  border-radius: 12px 0 0 12px;
+  border-right: 1px solid rgb(221, 221, 221);
+}
+.topLevel{
+  display: flex;
+  justify-content: space-between;
+  margin: 32px 0;
+}
+
+.deleteButton {
+  width: 25px;
+  height: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.deleteButton:hover {
+  color: red;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  color: #3a3a3a;
+  font-weight: 600;
+  width: 100%;
+}
+
+
+.countButtonContainer {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  border-top: 0.0625rem solid $grey-divider;
+  border-bottom: 0.0625rem solid $grey-divider;
+  height: 100%;
+  width: 40%;
+  border-radius: 0.625rem;
+  cursor: pointer;
+}
+
+.countButton {
+  border-top: none;
+  border-bottom: none;
+  border-left: 0.0625rem solid $grey-divider;
+  border-right: 0.0625rem solid $grey-divider;
+  color: $txt-grey;
+  height: 3.625rem;
+  width: 3.625rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.priceBlock {
+  display: flex;
+  align-items: center;
+}
+
+.newPrice {
+  font-size: 35px;
+}
+
+.oldPrice {
+  font-size: 15px;
+  color: #8b8b8b;
+  text-decoration: line-through;
+}

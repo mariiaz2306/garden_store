@@ -11,12 +11,14 @@ import heart from '../../../../media/icons/heart.svg'
 import BtnCart, { ButtonTypes } from '../../../../UI/btnCard/BtnCart'
 import { useSelector } from 'react-redux'
 import { addLikedProduct, removeLikedProduct } from '../../../../store/slices/likedProductsSlice'
+import { addProduct } from '../../../../store/slices/cartSlice'
 
 export default function ProductItem({ el }) {
   const dispatch = useDispatch()
   const { theme } = useSelector((state) => state.theme)
   const handleAddToCart = (e) => {
     e.preventDefault()
+    dispatch(addProduct(el))
   }
 
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
@@ -37,13 +39,8 @@ export default function ProductItem({ el }) {
           <img src={`${BASE_URL}${el.image}`} alt={el.title} className={s.products_img} />
         </Link>
         <div className={s.icons_wrapper}>
-
           {/* Кнопка добавления в избранное */}
-          <button
-            className={s.icon_button}
-            onClick={toggleLiked}
-            isLiked={isLiked}
-          >
+          <button className={s.icon_button} onClick={toggleLiked} isLiked={isLiked}>
             <img className={s.svgIcon} src={heart} alt="Add to favorites" />
           </button>
 
@@ -64,7 +61,13 @@ export default function ProductItem({ el }) {
         <Link to={`/products/${el.id}`} className={s.products_link}>
           <h3 className={s.products_title}>{el.title}</h3>
         </Link>
-        <Price el={el} theme={theme} realPriceClass={s.real_price} oldPriceClass={s.old_price} saleValueClass={s.sale_value} />
+        <Price
+          el={el}
+          theme={theme}
+          realPriceClass={s.real_price}
+          oldPriceClass={s.old_price}
+          saleValueClass={s.sale_value}
+        />
       </div>
     </div>
   )
