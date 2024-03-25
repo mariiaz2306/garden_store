@@ -20,7 +20,7 @@ export default function ProductItem({ el }) {
     e.preventDefault()
     
     dispatch(addProduct({...el, quantity: 1})); // Предполагаем, что el - это объект товара с нужными полями
-
+  }
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const isLiked = likedProducts.some((likedProduct) => likedProduct.id === el.id)
 
