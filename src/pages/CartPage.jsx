@@ -6,6 +6,7 @@ import s from "./NotFoundPage/NotFoundPage.module.css";
 import CartOrder from "../components/CartComponents/CartOrder/CartOrder";
 import { saveCartItems } from "../utils/cartLocalStorage";
 import EmptyCart from "../components/CartComponents/EmptyCart/EmptyCart";
+import CartComponent from './../components/CartComponents/CartComponent/CartComponent';
 
 export default function CartPage() {
   const breadcrumbs = [{ label: 'Back to all products', path: '/products' }]
