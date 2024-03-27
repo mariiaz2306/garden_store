@@ -3,15 +3,19 @@ import s from "../discountForm/DiscountForm.module.css";
 import img_discount_form from "../../../media/images/Discount.svg";
 import CheckoutForm from "../checkoutForm/CheckoutForm";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import { useDispatch } from 'react-redux';
+import { applyDiscount } from "../../../store/slices/cartSlice";
 
 export default function DiscountForm() {
+  const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false);
   const [buttonText, setButtonText] = useState("Get a discount");
 
   const handleDiscountSubmit = (e) => {
-    console.log("Form submitted");
-    setShowModal(true);
-    setButtonText("Request Submitted");
+    console.log('Form submitted')
+    setShowModal(true)
+    setButtonText('Request Submitted')
+    dispatch(applyDiscount()) // Диспатчим экшен применения скидки
   };
 
   return (
