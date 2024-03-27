@@ -7,61 +7,58 @@ import ModalWindow from "../../homeComponents/ModalWindow/ModalWindow";
 import { useSelector } from 'react-redux';
 
 export default function CartOrder({ basketCart}) {
-    // Используем useState для управления состоянием отправки заказа
-    const [sendingOrder, setSendingOrder] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+  // Используем useState для управления состоянием отправки заказа
+  const [sendingOrder, setSendingOrder] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-    const handleDiscountSubmit = () => {
-      setShowModal(true);
-    };
+  const handleDiscountSubmit = () => {
+    setShowModal(true)
+  }
 
-    const handleOrderSubmit = () => {
-      setSendingOrder(true); // Устанавливаем sendingOrder в true при отправке заказа
-      setShowModal(true); // Показываем модальное окно при отправке заказа
-    };
-const totalSum = useSelector((state) => state.cart.totalSum)
-    // Вычисляем общую стоимость всех товаров в корзине
-    // const totalPrice =
-    // basketCart?.reduce(
-    //   (acc, { price, discont_price, count }) => acc + count * (discont_price || price),
-    //   0
-    // ) || 0; 
-    // это нужно убрать
+  const handleOrderSubmit = () => {
+    setSendingOrder(true) // Устанавливаем sendingOrder в true при отправке заказа
+    setShowModal(true) // Показываем модальное окно при отправке заказа
+  }
+  const totalSum = useSelector((state) => state.cart.totalSum)
+  const discountApplied = useSelector((state) => state.cart.discountApplied)
 
-    return (
-      <div className={s.container}>
-        {/* Заголовок деталей заказа */}
-        <h3 className={s.h3_order}>Order Details</h3>
+  // Вычисляем итоговую сумму с учетом скидки
+  const finalTotalSum = discountApplied ? totalSum * 0.95 : totalSum
 
-        {/* Отображение общего количества товаров в корзине */}
-        <div className={s.total_items}>
-          <p className={s.total_items_sum}>{basketCart.length} items</p>
-        </div>
+  return (
+    <div className={s.container}>
+      {/* Заголовок деталей заказа */}
+      <h3 className={s.h3_order}>Order Details</h3>
 
-        {/* Отображение общей стоимости заказа */}
-        <div className={s.total_price}>
-          <p className={s.total_p}>Total</p>
-          <div>
-            <p className={s.total_sum}>
-              $ {totalSum.toFixed(2)} {/* Отображаем общую стоимость с округлением до двух знаков после запятой */}
-            </p>
-          </div>
-        </div>
-
-        <CheckoutForm
-          handleOrderSubmit={handleOrderSubmit}
-          handleDiscountSubmit={handleDiscountSubmit}
-          classInput={s.input}
-          classBtn={s.discount_btn}
-          txtBtn="Checkout"
-          cartModalWindow={ModalWindow}
-        />
-        {showModal && (
-          <ModalWindow onClose={() => setShowModal(false)}>
-            <p className={s.congrats}>Your order has been successfully placed on the website.</p>
-            <p className={s.congrats}>A manager will contact you shortly to confirm your order.</p>
-          </ModalWindow>
-        )}
+      {/* Отображение общего количества товаров в корзине */}
+      <div className={s.total_items}>
+        <p className={s.total_items_sum}>{basketCart.length} items</p>
       </div>
-    )
+
+      {/* Отображение общей стоимости заказа */}
+      <div className={s.total_price}>
+        <p className={s.total_p}>Total</p>
+        <div>
+          <p className={s.total_sum}>
+            $ {finalTotalSum.toFixed(2)} {/* Отображаем общую стоимость с округлением до двух знаков после запятой */}
+          </p>
+        </div>
+      </div>
+
+      <CheckoutForm
+        handleOrderSubmit={handleOrderSubmit}
+        handleDiscountSubmit={handleDiscountSubmit}
+        classInput={s.input}
+        classBtn={s.discount_btn}
+        txtBtn="Checkout"
+        cartModalWindow={ModalWindow}
+      />
+      {showModal && (
+        <ModalWindow onClose={() => setShowModal(false)}>
+          <p className={s.congrats}>Your order has been successfully placed on the website.</p>
+          <p className={s.congrats}>A manager will contact you shortly to confirm your order.</p>
+        </ModalWindow>
+      )}
+    </div>
+  )
 }

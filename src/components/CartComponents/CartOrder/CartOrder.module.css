@@ -3,7 +3,8 @@
 .container {
     padding: 32px;
     padding-bottom: 0;
-    width: 50%;
+    max-height: 682px;
+    width: 548px;
     border-radius: var(--radius-big, 12px);
     background: var(--light-grey, #F1F3F4);
 }
@@ -53,8 +54,9 @@
     color: var(--txt-white, #fff);
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1200px) {
     .container {
+         width: 470px;
         padding: 32px 20px 0 20px;
     }
 
@@ -66,7 +68,11 @@
         padding-bottom: 20px;
     }
 }
-
+@media(max-width: 1000px){
+.container{
+    width: 100%;
+}
+}
 @media (max-width: 768px) {
     .h3_order,
     .total_p,

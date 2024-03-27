@@ -2,39 +2,32 @@
 
 .card {
   display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-
   border: 1px solid rgb(221, 221, 221);
-  height: 180px;
+  min-height: 180px;
   border-radius: 12px;
-   box-sizing: border-box;
-}
-
-.cardArea {
-display: flex;
-  gap: 32px;
-  /* grid-template-columns: 1fr 2fr 1.3fr;  */
 }
 
 .card img {
   width: 200px;
-  height: 178px;
-  box-sizing: border-box;
-  /* grey divider */
+  min-height: 178px;
   border-radius: 12px 0 0 12px;
   border-right: 1px solid rgb(221, 221, 221);
 }
-.topLevel{
+.topLevel {
   display: flex;
   justify-content: space-between;
-  margin: 32px 0;
+  margin-bottom: 32px;
 }
-
+.header {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 130%;
+}
 .deleteButton {
+  color: $txt-black;
   width: 25px;
   height: 25px;
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 600;
   border: none;
   background-color: transparent;
@@ -53,19 +46,23 @@ display: flex;
   color: #3a3a3a;
   font-weight: 600;
   width: 100%;
+  padding: 32px;
 }
-
 
 .countButtonContainer {
   box-sizing: border-box;
   display: flex;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 212px;
+  min-width: 156px;
+  max-width: 212px;
   align-items: center;
   justify-content: space-between;
   border: none;
   border-top: 0.0625rem solid $grey-divider;
   border-bottom: 0.0625rem solid $grey-divider;
   height: 100%;
-  width: 40%;
   border-radius: 0.625rem;
   cursor: pointer;
 }
@@ -77,23 +74,96 @@ display: flex;
   border-right: 0.0625rem solid $grey-divider;
   color: $txt-grey;
   height: 3.625rem;
-  width: 3.625rem;
   border-radius: 0.625rem;
   cursor: pointer;
   font-size: 2rem;
+  min-width: 3.625rem;
+}
+
+.countValue {
+  flex-shrink: 1; // Позволяет сжиматься
+  flex-grow: 1; // Позволяет расти
+  flex-basis: 58px; // Начальная базовая ширина
+  min-width: 20px; // Минимальная ширина, до которой элемент может сжаться
+  max-width: 58px; // Максимальная ширина элемента
+  text-align: center;
 }
 
 .priceBlock {
   display: flex;
   align-items: center;
+  gap: 32px;
+  max-height: 60px;
 }
-
+.prices {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
 .newPrice {
-  font-size: 35px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 110%;
 }
 
 .oldPrice {
   font-size: 15px;
-  color: #8b8b8b;
+  color: $txt-grey;
   text-decoration: line-through;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 130%;
+}
+@media screen and (max-width: 1300px) {
+  .card {
+    height: 226px;
+  }
+  img {
+    height: auto;
+  }
+  .priceBlock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .infoBlock {
+    padding: 20px;
+  }
+  .topLevel {
+    margin-bottom: 12px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .card {
+    height: 136px;
+  }
+  .priceBlock {
+    flex-direction: row;
+    align-items:none;
+  }
+  .topLevel {
+    margin-bottom: 32px;
+  }
+  .infoBlock {
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 640px){
+.card {
+    height: 226px;
+  }
+  img {
+    height: auto;
+  }
+  .priceBlock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .infoBlock {
+    padding: 20px;
+  }
+  .topLevel {
+    margin-bottom: 12px;
+  }
 }

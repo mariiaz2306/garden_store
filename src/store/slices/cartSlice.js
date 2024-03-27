@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   products: [],
   totalSum: 0,
+  discountApplied: false,
 }
 
 const cartSlice = createSlice({
@@ -10,58 +11,69 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct(state, action) {
-      // Ищем, есть ли уже продукт в корзине
       const existingProductIndex = state.products.findIndex((product) => product.id === action.payload.id)
       if (existingProductIndex !== -1) {
-        // Если продукт найден, увеличиваем его количество
         state.products[existingProductIndex].quantity += 1
-        // и обновляем общую сумму, добавляя стоимость продукта
-        state.totalSum += state.products[existingProductIndex].price
       } else {
-        // Если продукт не найден, добавляем его в массив с количеством 1
         state.products.push({ ...action.payload, quantity: 1 })
-        // и обновляем общую сумму, добавляя стоимость нового продукта
-        state.totalSum += action.payload.price
       }
 
+      // Пересчитываем общую сумму, учитывая скидочную цену
+      state.totalSum = state.products.reduce((total, product) => {
+        const priceToUse = product.discont_price ? product.discont_price : product.price
+        return total + priceToUse * product.quantity
+      }, 0)
     },
 
     deleteProduct(state, action) {
-      // Находим продукт по id
-      const existingProductIndex = state.products.findIndex((product) => product.id === action.payload)
-      if (existingProductIndex !== -1) {
-        // Если продукт найден, вычитаем его общую стоимость из общей суммы
-        const existingProduct = state.products[existingProductIndex]
-        state.totalSum -= existingProduct.price * existingProduct.quantity
-        // и удаляем его из массива продуктов
-        state.products.splice(existingProductIndex, 1)
+      const index = state.products.findIndex((product) => product.id === action.payload)
+      if (index !== -1) {
+        const product = state.products[index]
+        const priceToUse = product.discont_price ? product.discont_price : product.price
+        state.totalSum -= priceToUse * product.quantity
+        state.products.splice(index, 1)
+
+        // Пересчитываем общую сумму после удаления товара
+        state.totalSum = state.products.reduce((total, product) => {
+          const priceToUse = product.discont_price ? product.discont_price : product.price
+          return total + priceToUse * product.quantity
+        }, 0)
       }
     },
 
     decreaseProduct(state, action) {
-      const existingProductIndex = state.products.findIndex((product) => product.id === action.payload)
-      if (existingProductIndex !== -1) {
-        const existingProduct = state.products[existingProductIndex]
-        if (existingProduct.quantity > 1) {
-          // Если количество продукта больше 1, уменьшаем его на 1
-          existingProduct.quantity -= 1
-          // и уменьшаем общую сумму на стоимость одного продукта
-          state.totalSum -= existingProduct.price
+      const index = state.products.findIndex((product) => product.id === action.payload)
+      if (index !== -1) {
+        const product = state.products[index]
+        if (product.quantity > 1) {
+          product.quantity -= 1
+          const priceToUse = product.discont_price ? product.discont_price : product.price
+          state.totalSum -= priceToUse
         } else {
-          // Если продукт в количестве 1, удаляем его из корзины
-          state.products.splice(existingProductIndex, 1)
-          // и уменьшаем общую сумму на его стоимость
-          state.totalSum -= existingProduct.price
+          const priceToUse = product.discont_price ? product.discont_price : product.price
+          state.totalSum -= priceToUse
+          state.products.splice(index, 1)
         }
+
+        // Пересчитываем общую сумму после изменения количества
+        state.totalSum = state.products.reduce((total, product) => {
+          const priceToUse = product.discont_price ? product.discont_price : product.price
+          return total + priceToUse * product.quantity
+        }, 0)
       }
     },
 
     clearCart(state) {
       state.products = []
       state.totalSum = 0
+      state.discountApplied = false
+    },
+
+    applyDiscount(state) {
+      state.discountApplied = true
     },
   },
 })
 
-export const { addProduct, deleteProduct, decreaseProduct, clearCart } = cartSlice.actions
+export const { addProduct, deleteProduct, decreaseProduct, clearCart, applyDiscount } = cartSlice.actions
 export default cartSlice.reducer
