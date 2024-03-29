@@ -13,19 +13,31 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
   // Подготовка объекта продукта для передачи в действия Redux
   const product = { id, title, image, price, quantity, discont_price }
-
+ const truncatedTitle = title.length > 37 ? title.substring(0, 37) + '…' : title
   return (
     <div className={s.card}>
-      <div className={s.cardArea}>
-        <img src={imgLink} alt="productPhoto" />
+      {/* <div className={s.cardArea}> */}
+      <img src={imgLink} alt="productPhoto" />
 
-        <div className={s.infoBlock}>
-          <div className={s.topLevel}>
-            <p>{title}</p>
-            <button onClick={() => dispatch(deleteProduct(id))} className={s.deleteButton}>
-              &#x2715;
+      <div className={s.infoBlock}>
+        <div className={s.topLevel}>
+          <h1 className={s.header}>{truncatedTitle}</h1>
+          <button onClick={() => dispatch(deleteProduct(id))} className={s.deleteButton}>
+            &#x2715;
+            {/* <DeleteIcon/> */}
+          </button>
+        </div>
+        <div className={s.priceBlock}>
+          <div className={s.countButtonContainer}>
+            <button className={s.countButton} onClick={() => dispatch(decreaseProduct(id))}>
+              -
+            </button>
+            <p className={s.countValue}>{quantity}</p>
+            <button className={s.countButton} onClick={() => dispatch(addProduct(product))}>
+              +
             </button>
           </div>
+
           <div className={s.priceBlock}>
             <div className={s.countButtonContainer}>
               <button className={s.countButton} onClick={() => dispatch(decreaseProduct(id))}>
@@ -42,6 +54,7 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   )
 }
