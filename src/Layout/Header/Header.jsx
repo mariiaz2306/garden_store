@@ -18,8 +18,19 @@ import heartWhite from '../../media/icons/heartWhite.svg'
 
 import DiscountButton from '../../components/DiscountButton/DiscountButton'
 import BurgerMenu from './../../components/BurgerMenu/BurgerMenu'
+import DiscountPopUp from '../../components/DiscountPopUp/DiscountPopUp'
 
 const Header = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDiscountButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const cartProducts = useSelector((state) => state.cart.products);
+  const cartProductsCount = cartProducts.length
+
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const likedProductsCount = likedProducts.length
 
@@ -31,10 +42,6 @@ const Header = () => {
 
   const handleThemeToggle = () => {
     dispatch(toggleTheme())
-  }
-
-  const handleDiscountButtonClick = () => {
-    console.log('DiscountButton clicked')
   }
 
   const [isOpen, setIsOpen] = useState() //используем useState для открытого и закрытого состояния бургер-меню
@@ -93,14 +100,17 @@ const Header = () => {
           <li className="header__action__ul-item">
             <NavLink to="/favorites" className={`header__action__ul-item icon ${theme}`}>
               <div className="cart-count-container">
-                {likedProductsCount > 0 && <span className="cart-count">{likedProductsCount}</span>}
+                {likedProductsCount > 0 && <span className="cart-count heart">{likedProductsCount}</span>}
                 <img src={theme === 'light' ? heart : heartWhite} alt="favourites" />
               </div>
             </NavLink>
           </li>
           <li className="header__action__ul-item">
             <NavLink to="/cart" className={`header__action__ul-item icon ${theme}`}>
+            <div className="cart-count-container">
+                {cartProductsCount > 0 && <span className="cart-count cart">{cartProductsCount}</span>}
               <img src={theme === 'light' ? shoppingBag : shoppingBagWhite} alt="cart" />
+              </div>
             </NavLink>
           </li>
           <li className="header__action__ul-item">
@@ -108,6 +118,9 @@ const Header = () => {
           </li>
         </ul>
       </header>
+      {isModalOpen && (
+          <DiscountPopUp onClose={() => setIsModalOpen(false)}/>
+      )}
     </div>
   )
 }

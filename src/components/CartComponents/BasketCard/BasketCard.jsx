@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { addProduct, deleteProduct, decreaseProduct } from '../../../store/slices/cartSlice'
 import { BASE_URL } from '../../../config'
 
-export default function BasketCard({ id, quantity, title, image, price, discont_price }) {
+export default function BasketCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
   const imgLink = `${BASE_URL}${image}`
 
   const dispatch = useDispatch()
@@ -27,19 +27,18 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
             </button>
           </div>
           <div className={s.priceBlock}>
-            
-              <div className={s.countButtonContainer}>
-                <button className={s.countButton} onClick={() => dispatch(decreaseProduct(id))}>
-                  -
-                </button>
-                <p className={s.countValue}>{quantity}</p>
-                <button className={s.countButton} onClick={() => dispatch(addProduct(product))}>
-                  +
-                </button>
-              </div>
-           
+            <div className={s.countButtonContainer}>
+              <button className={s.countButton} onClick={() => dispatch(decreaseProduct(id))}>
+                -
+              </button>
+              <p className={s.countValue}>{quantity}</p>
+              <button className={s.countButton} onClick={() => dispatch(addProduct(product))}>
+                +
+              </button>
+            </div>
+
             <p className={s.newPrice}>{`$${price}`}</p>
-            <p className={s.oldPrice}>{discont_price ? `$${discont_price}` : ''}</p>
+            <p className={s.oldPrice}>{oldPrice || discont_price ? `$${oldPrice || discont_price}` : ''}</p>
           </div>
         </div>
       </div>
