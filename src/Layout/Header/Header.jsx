@@ -21,14 +21,13 @@ import BurgerMenu from './../../components/BurgerMenu/BurgerMenu'
 import DiscountPopUp from '../../components/DiscountPopUp/DiscountPopUp'
 
 const Header = () => {
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleDiscountButtonClick = () => {
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true)
+  }
 
-  const cartProducts = useSelector((state) => state.cart.products);
+  const cartProducts = useSelector((state) => state.cart.products)
   const cartProductsCount = cartProducts.length
 
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
@@ -107,9 +106,9 @@ const Header = () => {
           </li>
           <li className="header__action__ul-item">
             <NavLink to="/cart" className={`header__action__ul-item icon ${theme}`}>
-            <div className="cart-count-container">
+              <div className="cart-count-container">
                 {cartProductsCount > 0 && <span className="cart-count cart">{cartProductsCount}</span>}
-              <img src={theme === 'light' ? shoppingBag : shoppingBagWhite} alt="cart" />
+                <img src={theme === 'light' ? shoppingBag : shoppingBagWhite} alt="cart" />
               </div>
             </NavLink>
           </li>
@@ -118,9 +117,7 @@ const Header = () => {
           </li>
         </ul>
       </header>
-      {isModalOpen && (
-          <DiscountPopUp onClose={() => setIsModalOpen(false)}/>
-      )}
+      {isModalOpen && <DiscountPopUp onClose={() => setIsModalOpen(false)} />}
     </div>
   )
 }
