@@ -70,6 +70,7 @@ const DiscountPopUp = ({ onClose }) => {
 
       // Закрываем модальное окно после добавления товара в корзину
       setIsModalOpen(false);
+      setIsOpen(false);
     }
   };
 
