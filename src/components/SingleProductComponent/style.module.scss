@@ -26,11 +26,16 @@
 }
 
 .icon_button {
-  width: 2.75rem;
-  height: 2.375rem;
   margin-left: 1.25rem;
+  border: none;
+  height: 48px;
+  background-color: transparent;
+  flex-shrink: 0;
   cursor: pointer;
-
+  img {
+    width: 44px;
+    height: 38px;
+  }
   &:hover {
     opacity: 0.7;
   }
@@ -173,7 +178,6 @@
 
 .modalImage {
   position: absolute;
-  top: 11.25rem;
   max-width: 80%;
   max-height: 80%;
   cursor: pointer;
@@ -185,13 +189,13 @@
 
 // MEDIA QUERIES
 
-@media screen and (max-width: 62.5rem) {
+@media screen and (max-width: 1000px) {
   .priceP {
     margin-right: 1.25rem;
   }
 }
 
-@media screen and (max-width: 48rem) {
+@media screen and (max-width: 768px) {
   .card {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -247,6 +251,11 @@
 @media screen and (max-width: 30rem) {
   .card {
     margin-top: 2rem;
+  }
+  
+  .icon_button{
+    width: 40px;
+    height: 40px;
   }
 }
 

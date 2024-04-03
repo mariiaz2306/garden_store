@@ -192,6 +192,16 @@
     font-size: 11px;
     font-weight: 600;
     border-radius: 50%;
+    &.cart{
+      top: -3px;
+      left: -8px;
+    }
+  }
+
+  @media (max-width: 768px){
+    .cart-count.cart{
+      top: -8px;
+    }
   }
 
 @media (max-width: 720px) {
@@ -266,6 +276,9 @@
     height: 17px;
     top: -4px;
     left: -4px;
+    &.cart{
+      top: -1px;
+    }
   }
 }
 
