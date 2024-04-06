@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "../discountForm/DiscountForm.module.css";
+import s from "../discountForm/DiscountForm.module.scss";
 import img_discount_form from "../../../media/images/Discount.svg";
 import CheckoutForm from "../checkoutForm/CheckoutForm";
 import ModalWindow from "../ModalWindow/ModalWindow";
@@ -28,13 +28,15 @@ export default function DiscountForm() {
           alt="Discount form"
           className={s.discount_img}
         />
-        <CheckoutForm
-          handleDiscountSubmit={handleDiscountSubmit}
-          classInput={s.discount_input}
-          classBtn={s.discount_btn}
-          txtBtn={buttonText}
-          cartModalWindow={ModalWindow}
-        />
+       <div className={s.check_block}>
+          <CheckoutForm
+            handleDiscountSubmit={handleDiscountSubmit}
+            classInput={s.discount_input}
+            classBtn={s.discount_btn}
+            txtBtn={buttonText}
+            cartModalWindow={ModalWindow}
+          />
+       </div>
       </div>
       {showModal && (
         <ModalWindow onClose={() => setShowModal(false)}>
