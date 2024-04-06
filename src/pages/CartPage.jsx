@@ -10,7 +10,7 @@ export default function CartPage() {
   return (
     <section className={`container`}>
       <TitleBreadCrumps title=" Shopping Cart" breadcrumbs={breadcrumbs} classTitleContainer={s.title_container} />
-      <CartComponent />
+       <CartComponent/>
     </section>
   )
 }

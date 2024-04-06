@@ -20,6 +20,7 @@ export default function DiscountForm() {
   }
 
   return (
+    
     <div className={s.form_wrapper} id="discount">
       <h2 className={s.form_text}>5% off on the first order</h2>
       <div className={s.inform}>
