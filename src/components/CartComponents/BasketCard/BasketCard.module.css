@@ -1,4 +1,4 @@
-@import '../../../style/_variables';
+/* @import '../../../style/_variables'; */
 
 .card {
   display: flex;
@@ -7,9 +7,9 @@
   border-radius: 12px;
 }
 
-.card img {
+.card .img {
   width: 200px;
-  min-height: 178px;
+  height: auto;
   border-radius: 12px 0 0 12px;
   border-right: 1px solid rgb(221, 221, 221);
 }
@@ -22,9 +22,10 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 130%;
+  color: var(--txt-black);
 }
 .deleteButton {
-  color: $txt-black;
+  color: var(--txt-black);
   width: 25px;
   height: 25px;
   font-size: 20px;
@@ -50,6 +51,7 @@
 }
 
 .countButtonContainer {
+   color: var(--txt-black);
   box-sizing: border-box;
   display: flex;
   flex-shrink: 1;
@@ -60,8 +62,8 @@
   align-items: center;
   justify-content: space-between;
   border: none;
-  border-top: 0.0625rem solid $grey-divider;
-  border-bottom: 0.0625rem solid $grey-divider;
+  border-top: 0.0625rem solid var(--grey-divider,#DDD);
+  border-bottom: 0.0625rem solid var(--grey-divider,#DDD);
   height: 100%;
   border-radius: 0.625rem;
   cursor: pointer;
@@ -70,9 +72,9 @@
 .countButton {
   border-top: none;
   border-bottom: none;
-  border-left: 0.0625rem solid $grey-divider;
-  border-right: 0.0625rem solid $grey-divider;
-  color: $txt-grey;
+  border-left: 0.0625rem solid var(--grey-divider);
+  border-right: 0.0625rem solid var(--grey-divider);
+  color: var(--txt-grey);
   height: 3.625rem;
   border-radius: 0.625rem;
   cursor: pointer;
@@ -81,11 +83,11 @@
 }
 
 .countValue {
-  flex-shrink: 1; // Позволяет сжиматься
-  flex-grow: 1; // Позволяет расти
-  flex-basis: 58px; // Начальная базовая ширина
-  min-width: 20px; // Минимальная ширина, до которой элемент может сжаться
-  max-width: 58px; // Максимальная ширина элемента
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 58px;
+  min-width: 20px;
+  max-width: 58px;
   text-align: center;
 }
 
@@ -104,11 +106,12 @@
   font-size: 40px;
   font-weight: 600;
   line-height: 110%;
+   color: var(--txt-black);
 }
 
 .oldPrice {
   font-size: 15px;
-  color: $txt-grey;
+  color: var(--txt-grey);
   text-decoration: line-through;
   font-size: 20px;
   font-weight: 500;
@@ -139,7 +142,7 @@
   }
   .priceBlock {
     flex-direction: row;
-    align-items:none;
+    align-items: center;
   }
   .topLevel {
     margin-bottom: 32px;
@@ -147,12 +150,16 @@
   .infoBlock {
     padding: 20px;
   }
+  .img {
+    height: auto;
+    min-width: 200px;
+  }
 }
-@media screen and (max-width: 640px){
-.card {
+@media screen and (max-width: 684px) {
+  .card {
     height: 226px;
   }
-  img {
+  .img {
     height: auto;
   }
   .priceBlock {
@@ -165,5 +172,71 @@
   }
   .topLevel {
     margin-bottom: 12px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .priceBlock {
+    height: 47px;
+  }
+  .countButtonContainer {
+    height: 47px;
+  }
+  .countButton {
+    width: 47px;
+    height: 47px;
+    min-width: 47px;
+  }
+  .card .img {
+    flex-shrink: 1;
+    min-width: 116px;
+    width: 100%;
+    height: auto;
+  }
+  .newPrice {
+    font-size: 30px;
+  }
+
+  .oldPrice {
+    font-size: 18px;
+  }
+  .header {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 440px) {
+  .countButton {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 22px;
+    text-align: center;
+  }
+  .countButtonContainer {
+    height: 32px;
+    min-width: 120px;
+  }
+  .infoBlock {
+    flex-shrink: 1;
+  }
+  .card {
+    min-height: 180px;
+    min-height: 180px;
+     height: 180px;
+  }
+  .img {
+    flex-shrink: 0; 
+    width: 180px; 
+    min-width: 180px; 
+    height: auto;
+  }
+    .newPrice {
+    font-size: 24px;
+  }
+
+  .oldPrice {
+    font-size: 16px;
+  }
+  .header {
+    font-size: 20px;
   }
 }

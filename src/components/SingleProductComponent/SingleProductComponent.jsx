@@ -9,6 +9,7 @@ import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedPro
 import s from './style.module.scss'; // Импорт стилей модуля
 import heart from '../../media/icons/heart.svg'; // Импорт иконки сердца
 import heartWhite from '../../media/icons/heartWhite.svg'
+import { addProduct } from '../../store/slices/cartSlice.js';
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
@@ -27,7 +28,13 @@ export default function SingleProductComponent() {
   const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id);
 
   const { theme } = useSelector((state) => state.theme)
+  const dispatch = useDispatch()
 
+  const handleAddToCart = (e) => {
+    e.preventDefault()
+
+    dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
+  }
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [count, setCount] = useState(0);
@@ -41,7 +48,7 @@ export default function SingleProductComponent() {
   // Функция для переключения обрезанного описания
   const toggleTruncate = () => setIsTruncated(!isTruncated);
 
-  const dispatch = useDispatch()
+
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === product?.id)
 
@@ -89,7 +96,7 @@ export default function SingleProductComponent() {
         <div className={s.headerContainer}>
           <p className={s.header}>{product.title}</p>
           <button className={s.icon_button} onClick={toggleLiked} isLiked={isLiked}>
-          <img src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
+            <img src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
           </button>
         </div>
         {/* Блок с ценой и скидкой */}
@@ -105,22 +112,32 @@ export default function SingleProductComponent() {
         {/* Блок с кнопками для управления количеством товаров */}
         <div className={s.buttonsContainer}>
           <div className={s.countButtonContainer}>
-            <button className={s.countButton} onClick={decreaseCount}>-</button>
+            <button className={s.countButton} onClick={decreaseCount}>
+              -
+            </button>
             <p className={s.countValue}>{count}</p>
-            <button className={s.countButton} onClick={increaseCount}>+</button>
+            <button className={s.countButton} onClick={increaseCount}>
+              +
+            </button>
           </div>
-          <button className={s.addToCartButton}>Add to Cart</button>
+          <button className={s.addToCartButton} onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
         {/* Блок с описанием продукта */}
         <div className={s.descriptionBlock}>
           <p className={s.descriptionHeader}>Description</p>
           <p className={s.descriptionText}>{isTruncated ? truncatedDescription : product.description}</p>
           {/* Кнопка для переключения обрезанного описания */}
-          {isTruncated && <a className='readMore' onClick={toggleTruncate}>Read more</a>}
+          {isTruncated && (
+            <a className="readMore" onClick={toggleTruncate}>
+              Read more
+            </a>
+          )}
         </div>
         {/* Модальное окно */}
         {isModalOpen && <Modal src={imgLink} alt={product.title} onClose={closeModal} />}
       </div>
     </>
-  );
+  )
 }
