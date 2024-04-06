@@ -1,6 +1,7 @@
 @import '../../../style/_variables';
 
 .form_wrapper {
+
   padding: 32px 32px 0px;
   display: flex;
   flex-direction: column;
@@ -11,6 +12,7 @@
   border-radius: 12px;
   background: linear-gradient(261deg, #0b710b 32.63%, #393 98.96%);
   overflow: hidden;
+
 }
 
 .form_text {
@@ -44,19 +46,23 @@
 }
 
 .discount_input {
+
   background-color: transparent;
   color: $txt-white;
   display: flex;
   row-gap: 16px;
+
 }
 
 .discount_input::placeholder {
   color: $txt-white;
 }
 
+
 .discount_btn {
   background: $white;
   color: $txt-black;
+
 }
 
 .discount_btn:hover {

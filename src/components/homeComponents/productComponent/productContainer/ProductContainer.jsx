@@ -13,8 +13,6 @@ const ProductContainer = () => {
     (product) => product.discont_price !== null
   );
 
-  console.log("discountedProducts:", discountedProducts);
-
   let randomDiscountedProducts = [];
 
   //логика выбора 4 рандомных товаров со скидкой

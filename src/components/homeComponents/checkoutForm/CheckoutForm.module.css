@@ -13,19 +13,18 @@
     width: 100%;
 }
 
-.getDiscount,
+.btn,
 .input {
     padding: 16px 32px;
     border-radius: var(--radius-small, 6px);
     border: 1px solid var(--white, #fff);
     font-size: 20px;
     line-height: 130%;
-    width: 100%;
 }
 
 .input {
     font-weight: 500;
-    color: var(--txt-white, #f9f7f7);
+    color: var(--txt-grey, #8B8B8B);
     outline: none;
     width: 100%;
 }
@@ -41,20 +40,11 @@
     margin-right: auto;
 }
 
-.getDiscount{
+.btn {
     cursor: pointer;
     width: 100%;
     font-weight: 600;
 }
-
-.getDiscount:hover {
-    background: var(--black, #282828);
-    color: var(--txt-white, #FFF);
-    transition: 0.3s;
-    border: none;
-}
-
-
 
 @media(max-width: 1000px) {
     .form_container {
@@ -63,22 +53,24 @@
 
     .input_container {
         row-gap: var(--radius-big, 12px);
+        width: 100%;
     }
 
-    .getDiscount,
+    .btn,
     .input {
         padding: 16px 20px;
     }
 }
 
-@media(max-width: 480px) {
+@media(max-width: 700px) {
     .form_container {
         padding-bottom: 24px;
     }
 
-    .getDiscount,
+    .btn,
     .input {
         padding: var(--radius-big, 12px) 20px;
         font-size: 18px;
+        width: 500px!important;
     }
 }
