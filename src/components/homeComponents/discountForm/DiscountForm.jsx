@@ -4,6 +4,7 @@ import img_discount_form from "../../../media/images/Discount.svg";
 import CheckoutForm from "../checkoutForm/CheckoutForm";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { useDispatch } from 'react-redux';
+
 import { applyDiscount } from "../../../store/slices/cartSlice";
 
 export default function DiscountForm() {
