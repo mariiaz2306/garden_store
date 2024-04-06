@@ -7,7 +7,7 @@
 
 @media (max-width: 768px) {
     .products_container{
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)!important;
         gap: 10px;
     }
 }

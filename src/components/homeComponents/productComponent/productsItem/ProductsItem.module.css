@@ -101,7 +101,7 @@
 }
 
 .real_price {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
     padding-right: 16px;
 }
@@ -130,44 +130,37 @@
 
     .real_price {
         padding-right: 12px;
+ 
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 700px) {
     .products_wrapper {
-        height: 496px;
+        height: 486px;
     }
 
     .products_img {
         height: 353px;
     }
-}
-
-@media(max-width: 480px) {
-    .products_wrapper {
-        height: 350px;
-    }
-
-    .products_img {
-        height: 210px;
-    }
-
-    .products_title,
-    .old_price {
+    .products_title  {
         font-size: 18px;
+        width: 150px;
     }
 
     .real_price {
-        font-size: 36px;
+        font-size: 25px!important;
     }
-}
-
-@media(max-width: 480px) {
-    .products_wrapper {
-        height: 458px;
+    
+    .old_price {
+        font-size: 20px!important;
     }
 
-    .products_img {
-        height: 320px;
-    }
+  
 }
+
+
+
+
+
+
+
