@@ -31,6 +31,7 @@
     .title {
         padding-right: 20px;
         white-space: normal;
+        font-size: 56px;
     }
 }
 
@@ -43,10 +44,15 @@
     .line {
         display: none;
     }
+
+    .title{
+        font-size: 48px;
+    }
 }
 
 @media(max-width: 360px) {
     .title {
         white-space: nowrap;
+        font-size: 40px;
     }
 }

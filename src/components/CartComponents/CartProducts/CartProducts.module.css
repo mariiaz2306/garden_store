@@ -4,6 +4,7 @@
   flex: 1;
   gap: 16px;
 }
+
 .info {
   display: flex;
   justify-content: center;

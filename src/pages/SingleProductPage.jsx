@@ -1,4 +1,5 @@
 import React from 'react'
+
 import SingleProductComponent from '../components/SingleProductComponent/SingleProductComponent'
 import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
 

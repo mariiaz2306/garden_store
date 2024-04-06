@@ -1,16 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import ProductItem from '../components/homeComponents/productComponent/productsItem/ProductsItem';
-import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs';
-import FiltrationBar from '../components/FiltrationBar/FiltrationBar';
-import { useFiltration } from './../utils/useFiltration';
+import { useSelector } from 'react-redux'
+import { useFiltration } from './../utils/useFiltration'
+
+import ProductItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
+import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
+import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 
 const FavoritesPage = () => {
-    const likedProducts = useSelector((state) => state.likedProducts.likedProducts);
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
 
-    const { minPrice, maxPrice, sorted } = useSelector((state) => state.filter);
+  const { minPrice, maxPrice, sorted } = useSelector((state) => state.filter)
 
-  const filteredProducts = useFiltration(likedProducts, minPrice, maxPrice, sorted);
+  const filteredProducts = useFiltration(likedProducts, minPrice, maxPrice, sorted)
 
   return (
     <section className="container">
@@ -19,9 +20,7 @@ const FavoritesPage = () => {
         <h2 className="grid__title">Liked products</h2> {/* Заголовок раздела */}
         <FiltrationBar showDiscountOption={false} /> {/* Компонент панели фильтрации (без опции скидки) */}
         <ul className="grid__wrapper">
-        {filteredProducts && filteredProducts.map((product) => (
-        <ProductItem key={product.id} el={product} />
-      ))}
+          {filteredProducts && filteredProducts.map((product) => <ProductItem key={product.id} el={product} />)}
         </ul>
       </div>
     </section>

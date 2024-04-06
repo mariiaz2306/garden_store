@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { CartProducts } from '../CartProducts/CartProducts'
-import CartOrder from '../CartOrder/CartOrder'
 import { useSelector } from 'react-redux'
 import { saveCartItems } from '../../../utils/cartLocalStorage'
-import s from './CartComponent.module.css'
+
+import CartOrder from '../CartOrder/CartOrder'
+import { CartProducts } from '../CartProducts/CartProducts'
 import EmptyCartComponent from '../EmptyCartComponent/EmptyCartComponent'
+import s from './CartComponent.module.css'
 
 function CartComponent() {
   const basketCart = useSelector((state) => state.cart.products)
@@ -17,7 +18,6 @@ function CartComponent() {
     saveCartItems(basketCart)
   }, [basketCart])
 
-  
   return isCartEmpty ? (
     <EmptyCartComponent />
   ) : (

@@ -1,6 +1,7 @@
 import React from 'react'
-import s from './CartProducts.module.css'
 import { useSelector } from 'react-redux'
+
+import s from './CartProducts.module.css'
 import BasketCard from '../BasketCard/BasketCard'
 
 export const CartProducts = () => {

@@ -40,10 +40,17 @@
     margin-right: auto;
 }
 
-.btn {
+.getDiscount {
     cursor: pointer;
     width: 100%;
     font-weight: 600;
+}
+
+.getDiscount:hover {
+    background: var(--black, #282828);
+    color: var(--txt-white, #FFF);
+    transition: 0.3s;
+    border: none;
 }
 
 @media(max-width: 1000px) {
