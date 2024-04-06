@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-
 import { useForm } from 'react-hook-form'
 
 import s from '../checkoutForm/CheckoutForm.module.css'
 import { addSale } from '../../../utils/sale'
-import DiscountModal from '../ModalWindow/ModalWindow'
 
-export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit}) {
+export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit }) {
   const [resp, setResp] = useState({})
   const [showModal, setShowModal] = useState(false)
 

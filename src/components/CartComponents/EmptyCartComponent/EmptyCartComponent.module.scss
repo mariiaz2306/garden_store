@@ -1,7 +1,9 @@
 @import '../../../style/app.scss';
+
 .EmptyCartcontainer {
   margin-bottom: 48px;
 }
+
 .text {
   color: --txt-black;
   font-size: 20px;
@@ -10,6 +12,7 @@
   letter-spacing: 0%;
   text-align: left;
 }
+
 .btn {
   border-radius: 6px;
   background: $green;
@@ -24,6 +27,7 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
+
 .btn:hover {
   background-color: rgb(42, 131, 42);
 }

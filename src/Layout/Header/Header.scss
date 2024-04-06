@@ -228,10 +228,7 @@
       gap: 2.25rem;
     }
   }
-  // .icon {
-  //   fill: var(--icon-fill);
-  //   stroke: var(--icon-stroke);
-  // }
+
   .dark {
     background-color: $black;
     color: $txt-white;
@@ -245,7 +242,6 @@
   --icon-fill: transparent;
   --icon-stroke: black; /* Пример для светлой темы */
 }
-
 
   .header__navigation.active {
     transform: translateX(0);

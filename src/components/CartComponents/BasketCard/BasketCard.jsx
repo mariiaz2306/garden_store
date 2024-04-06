@@ -1,10 +1,9 @@
 import React from 'react'
-import s from './BasketCard.module.scss'
-// import plus from '../../media/plus.png'
-// import minus from '../../media/minus.png'
 import { useDispatch } from 'react-redux'
 import { addProduct, deleteProduct, decreaseProduct } from '../../../store/slices/cartSlice'
 import { BASE_URL } from '../../../config'
+
+import s from './BasketCard.module.scss'
 
 export default function BasketCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
   const imgLink = `${BASE_URL}${image}`
@@ -13,18 +12,15 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
   // Подготовка объекта продукта для передачи в действия Redux
   const product = { id, title, image, price, quantity, discont_price }
- const truncatedTitle = title.length > 37 ? title.substring(0, 37) + '…' : title
+  const truncatedTitle = title.length > 37 ? title.substring(0, 37) + '…' : title
   return (
     <div className={s.card}>
-      {/* <div className={s.cardArea}> */}
       <img src={imgLink} alt="productPhoto" />
-
       <div className={s.infoBlock}>
         <div className={s.topLevel}>
           <h1 className={s.header}>{truncatedTitle}</h1>
           <button onClick={() => dispatch(deleteProduct(id))} className={s.deleteButton}>
             &#x2715;
-            {/* <DeleteIcon/> */}
           </button>
         </div>
         <div className={s.priceBlock}>
@@ -54,7 +50,6 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
           </div>
         </div>
       </div>
-      {/* </div> */}
     </div>
   )
 }

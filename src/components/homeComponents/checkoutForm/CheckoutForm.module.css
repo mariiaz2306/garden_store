@@ -41,7 +41,7 @@
     margin-right: auto;
 }
 
-.getDiscount{
+.getDiscount {
     cursor: pointer;
     width: 100%;
     font-weight: 600;
@@ -53,8 +53,6 @@
     transition: 0.3s;
     border: none;
 }
-
-
 
 @media(max-width: 1000px) {
     .form_container {

@@ -13,16 +13,19 @@
   border-radius: 12px 0 0 12px;
   border-right: 1px solid rgb(221, 221, 221);
 }
+
 .topLevel {
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
 }
+
 .header {
   font-size: 20px;
   font-weight: 500;
   line-height: 130%;
 }
+
 .deleteButton {
   color: $txt-black;
   width: 25px;
@@ -95,11 +98,13 @@
   gap: 32px;
   max-height: 60px;
 }
+
 .prices {
   display: flex;
   align-items: baseline;
   gap: 16px;
 }
+
 .newPrice {
   font-size: 40px;
   font-weight: 600;
@@ -114,6 +119,7 @@
   font-weight: 500;
   line-height: 130%;
 }
+
 @media screen and (max-width: 1300px) {
   .card {
     height: 226px;
@@ -133,13 +139,14 @@
     margin-bottom: 12px;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .card {
     height: 136px;
   }
   .priceBlock {
     flex-direction: row;
-    align-items:none;
+    align-items: none;
   }
   .topLevel {
     margin-bottom: 32px;
@@ -148,8 +155,9 @@
     padding: 20px;
   }
 }
-@media screen and (max-width: 640px){
-.card {
+
+@media screen and (max-width: 640px) {
+  .card {
     height: 226px;
   }
   img {
