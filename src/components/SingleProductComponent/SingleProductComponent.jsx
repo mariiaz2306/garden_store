@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'; // Импорт хука для получения данных о продукте
 import { BASE_URL } from '../../config.js'; // Импорт базового URL
+import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedProductsSlice.js';
 
 import s from './style.module.scss'; // Импорт стилей модуля
 import heart from '../../media/icons/heart.svg'; // Импорт иконки сердца
@@ -40,6 +41,18 @@ export default function SingleProductComponent() {
   // Функция для переключения обрезанного описания
   const toggleTruncate = () => setIsTruncated(!isTruncated);
 
+  const dispatch = useDispatch()
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
+  const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === product?.id)
+
+  const toggleLiked = () => {
+    if (isLiked) {
+      dispatch(removeLikedProduct(product))
+    } else {
+      dispatch(addLikedProduct(product))
+    }
+  }
+
   // Вывод индикатора загрузки при загрузке данных о продукте
   if (isLoading) return <p>Loading...</p>;
   // Вывод сообщения об ошибке при ошибке загрузки данных или если продукт не найден
@@ -75,7 +88,9 @@ export default function SingleProductComponent() {
         {/* Блок с заголовком и иконкой "Добавить в избранное" */}
         <div className={s.headerContainer}>
           <p className={s.header}>{product.title}</p>
-          <img className={s.icon_button} src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
+          <button className={s.icon_button} onClick={toggleLiked} isLiked={isLiked}>
+          <img src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
+          </button>
         </div>
         {/* Блок с ценой и скидкой */}
         <div className={s.priceBlock}>

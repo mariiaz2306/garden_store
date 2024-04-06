@@ -11,7 +11,7 @@ import heart from '../../../../media/icons/heart.svg'
 import BtnCart, { ButtonTypes } from '../../../../UI/btnCard/BtnCart'
 import { useSelector } from 'react-redux'
 import { addLikedProduct, removeLikedProduct } from '../../../../store/slices/likedProductsSlice'
-import { addProduct } from '../../../../store/slices/cartSlice'
+import { addProduct, deleteProduct } from '../../../../store/slices/cartSlice'
 
 export default function ProductItem({ el }) {
   const dispatch = useDispatch()
@@ -21,6 +21,18 @@ export default function ProductItem({ el }) {
     
     dispatch(addProduct({...el, quantity: 1})); // Предполагаем, что el - это объект товара с нужными полями
   }
+
+  const cartProducts = useSelector((state) => state.cart.products);
+  const isProductInCart = cartProducts.some((product) => product.id === el.id);
+
+  const handleToggleCart = () => {
+    if (isProductInCart) {
+      dispatch(deleteProduct(el.id)); // Удаляем товар из корзины
+    } else {
+      dispatch(addProduct({ ...el, quantity: 1 })); // Добавляем товар в корзину
+    }
+  };
+
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const isLiked = likedProducts.some((likedProduct) => likedProduct.id === el.id)
 
@@ -45,8 +57,7 @@ export default function ProductItem({ el }) {
           </button>
 
           <button
-            className={s.icon_button}
-            //  onClick={handleAddToCart}
+            className={s.icon_button} onClick={handleToggleCart}
           >
             <img src={shoppingBag1} alt="Add to cart" />
           </button>
