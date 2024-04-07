@@ -1,27 +1,56 @@
-import React from 'react'
-import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
-import { Link } from 'react-router-dom'
-import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
-import { useFiltration } from '../utils/useFiltration'
-import { useSelector } from 'react-redux'
-import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
-import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
+import React, { useEffect, useState } from 'react';
+import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem';
+import { useFetchAllProductsQuery } from '../store/slices/apiSlice';
+import { useFiltration } from '../utils/useFiltration';
+import { useSelector } from 'react-redux';
+import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs';
+import FiltrationBar from '../components/FiltrationBar/FiltrationBar';
+import SkeletonLoader from '../components/SkeletonComponent/SkeletonComponent';
 
 export default function ProductsPage() {
-  const { data, isLoading, isError } = useFetchAllProductsQuery()
-  console.log('products', data)
+  const { data, isLoading, isError } = useFetchAllProductsQuery();
+  console.log('products', data);
 
   // Получаем значения фильтров из хранилища Redux
-  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
+  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter);
 
   // Фильтруем продукты с помощью утилиты useFiltration
-  const products = useFiltration(data, minPrice, maxPrice, sorted)
+  const products = useFiltration(data, minPrice, maxPrice, sorted);
 
-  if (isLoading) return <p>Loading...</p>
-  if (isError) return <p>Error loading products.</p>
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 4000); // Показывать скелетон в течение 4 секунд
+
+    return () => clearTimeout(timer);
+  }, []); // Запускаем таймер только при монтировании компонента
+
+  if (isError) {
+    return <p>Error loading products.</p>;
+  }
+
+  // Показываем скелетон в течение 4 секунд или пока данные загружаются
+  if (isLoading || showSkeleton) {
+    return (
+      <section className="container">
+        {/* Отображаем хлебные крошки */}
+        <BreadCrumbs />
+        <div className="grid">
+          {/* Отображаем заголовок страницы */}
+          <h2 className="grid__title">All products</h2>
+          {/* Отображаем панель фильтрации */}
+          <FiltrationBar showDiscountOption={true} />
+          {/* Отображаем скелетон списка продуктов */}
+          <SkeletonLoader />
+        </div>
+      </section>
+    );
+  }
+
+  // Если isLoading стал false и нет ошибок загрузки, отображаем фактические данные
   return (
-    // <section className={s.productsPage}>
     <section className="container">
       {/* Отображаем хлебные крошки */}
       <BreadCrumbs />
@@ -30,13 +59,13 @@ export default function ProductsPage() {
         <h2 className="grid__title">All products</h2>
         {/* Отображаем панель фильтрации */}
         <FiltrationBar showDiscountOption={true} />
-        {/* Отображаем список продуктов */}
+        {/* Отображаем список фактических продуктов */}
         <ul className="grid__wrapper">
-          {products?.map((product) => (
+          {products.map((product) => (
             <ProductsItem key={product.id} el={product} />
           ))}
         </ul>
       </div>
     </section>
-  )
+  );
 }
