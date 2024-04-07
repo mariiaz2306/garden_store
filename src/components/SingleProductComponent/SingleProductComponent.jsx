@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js'; // Импорт хука для получения данных о продукте
-import { BASE_URL } from '../../config.js'; // Импорт базового URL
-import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedProductsSlice.js';
+import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js' // Импорт хука для получения данных о продукте
+import { BASE_URL } from '../../config.js' // Импорт базового URL
+import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedProductsSlice.js'
 
-import s from './style.module.scss'; // Импорт стилей модуля
-import heart from '../../media/icons/heart.svg'; // Импорт иконки сердца
+import s from './style.module.scss' // Импорт стилей модуля
+import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
 import heartWhite from '../../media/icons/heartWhite.svg'
 import { addProduct } from '../../store/slices/cartSlice.js';
 
@@ -17,15 +20,15 @@ const Modal = ({ src, alt, onClose }) => (
   <div className={s.modalBackdrop} onClick={onClose}>
     <img src={src} alt={alt} className={s.modalImage} /> {/* Изображение в модальном окне */}
   </div>
-);
+)
 
 export default function SingleProductComponent() {
   // Функциональный компонент для отображения информации о продукте
 
-  const { id } = useParams(); // Получение параметра id из URL
+  const { id } = useParams() // Получение параметра id из URL
 
   // Деструктуризация данных о продукте из хука useFetchProductByIdQuery
-  const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id);
+  const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id)
 
   const { theme } = useSelector((state) => state.theme)
   const dispatch = useDispatch()
@@ -36,17 +39,17 @@ export default function SingleProductComponent() {
     dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
   }
   // Состояния для управления модальным окном и количеством товаров
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [count, setCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [count, setCount] = useState(0)
 
   // Состояние для управления обрезанным описанием
-  const [isTruncated, setIsTruncated] = useState(true);
+  const [isTruncated, setIsTruncated] = useState(true)
 
   // Обрезанное описание продукта
-  const truncatedDescription = `${product?.description.substring(0, 300)}...`;
+  const truncatedDescription = `${product?.description.substring(0, 300)}...`
 
   // Функция для переключения обрезанного описания
-  const toggleTruncate = () => setIsTruncated(!isTruncated);
+  const toggleTruncate = () => setIsTruncated(!isTruncated)
 
 
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
@@ -61,22 +64,22 @@ export default function SingleProductComponent() {
   }
 
   // Вывод индикатора загрузки при загрузке данных о продукте
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>
   // Вывод сообщения об ошибке при ошибке загрузки данных или если продукт не найден
-  if (isError || !product) return <p>Product not found or error loading the product.</p>;
+  if (isError || !product) return <p>Product not found or error loading the product.</p>
 
   // Функции для управления количеством товаров в корзине
-  const increaseCount = () => setCount((prev) => prev + 1);
-  const decreaseCount = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
+  const increaseCount = () => setCount((prev) => prev + 1)
+  const decreaseCount = () => setCount((prev) => (prev > 0 ? prev - 1 : 0))
 
   // Формирование ссылки на изображение продукта
-  const imgLink = `${BASE_URL}${product.image}`;
+  const imgLink = `${BASE_URL}${product.image}`
   // Расчет скидки в процентах
-  const discountPercent = product.discont_price ? ((product.price - product.discont_price) / product.price) * 100 : 0;
+  const discountPercent = product.discont_price ? ((product.price - product.discont_price) / product.price) * 100 : 0
 
   // Функции для открытия и закрытия модального окна
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
   // Возвращение JSX-разметки для отображения информации о продукте
   return (

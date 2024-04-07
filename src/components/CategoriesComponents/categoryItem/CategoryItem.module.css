@@ -27,6 +27,6 @@
 
 @media(max-width: 1000px) {
   .category_image {
-      height: 250px;
+    height: 250px;
   }
 }

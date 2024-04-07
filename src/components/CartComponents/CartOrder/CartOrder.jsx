@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from 'react'
 
-import s from "./CartOrder.module.css";
+import s from './CartOrder.module.css'
 
-import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm';
-import ModalWindow from "../../homeComponents/ModalWindow/ModalWindow";
-import { useSelector } from 'react-redux';
+import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
+import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
+import { useSelector } from 'react-redux'
 
-export default function CartOrder({ basketCart}) {
+export default function CartOrder({ basketCart }) {
   // Используем useState для управления состоянием отправки заказа
   const [sendingOrder, setSendingOrder] = useState(false)
   const [showModal, setShowModal] = useState(false)

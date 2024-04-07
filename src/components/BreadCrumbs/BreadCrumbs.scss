@@ -1,4 +1,4 @@
-@import "../../style/variables";
+@import '../../style/variables';
 
 .breadcrumbs {
   margin: 2.5rem 0;
@@ -24,7 +24,7 @@
     }
 
     &:not(:last-child)::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       right: -1.0625rem;

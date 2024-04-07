@@ -1,19 +1,15 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  maxPriceChange,
-  minPriceChange,
-  discountChange,
-  sortedChange,
-} from "../../store/slices/filterSlice";
-import "./FiltrationBar.scss";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { maxPriceChange, minPriceChange, discountChange, sortedChange } from '../../store/slices/filterSlice'
+
+import './FiltrationBar.scss'
 
 const FiltrationBar = ({ showDiscountOption }) => {
   // Получаем доступ к диспетчеру Redux
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // Получаем значения фильтров из хранилища Redux
-  const { discounted } = useSelector((state) => state.filter);
+  const { discounted } = useSelector((state) => state.filter)
 
   return (
     <form>
@@ -56,10 +52,7 @@ const FiltrationBar = ({ showDiscountOption }) => {
       <label htmlFor="sort">
         Sorted
         {/* Выбор метода сортировки */}
-        <select
-          id="sort"
-          onChange={(event) => dispatch(sortedChange(event.target.value))}
-        >
+        <select id="sort" onChange={(event) => dispatch(sortedChange(event.target.value))}>
           <option>by default</option>
           <option value="asc">Price: Low to High</option>
           <option value="desc">Price: High to Low</option>
@@ -68,7 +61,7 @@ const FiltrationBar = ({ showDiscountOption }) => {
         </select>
       </label>
     </form>
-  );
-};
+  )
+}
 
-export default FiltrationBar;
+export default FiltrationBar

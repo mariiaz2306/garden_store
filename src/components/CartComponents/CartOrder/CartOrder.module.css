@@ -1,4 +1,3 @@
-
 /* styles for OrderDetails Container */
 .container {
     padding: 32px;
@@ -56,7 +55,7 @@
 
 @media(max-width: 1200px) {
     .container {
-         width: 470px;
+        width: 470px;
         padding: 32px 20px 0 20px;
     }
 
@@ -68,12 +67,15 @@
         padding-bottom: 20px;
     }
 }
-@media(max-width: 1000px){
-.container{
-    width: 100%;
+
+@media(max-width: 1000px) {
+    .container {
+        width: 100%;
+    }
 }
-}
+
 @media (max-width: 768px) {
+
     .h3_order,
     .total_p,
     .total_items_sum {
@@ -86,6 +88,7 @@
 }
 
 @media (max-width: 480px) {
+
     .h3_order,
     .total_p,
     .total_items_sum {
@@ -102,4 +105,3 @@
         font-size: 40px;
     }
 }
-

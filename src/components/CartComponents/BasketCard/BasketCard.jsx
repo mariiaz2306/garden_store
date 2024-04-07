@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import s from './BasketCard.module.css'
 import { useDispatch } from 'react-redux'
 import { addProduct, deleteProduct, decreaseProduct } from '../../../store/slices/cartSlice'
 import { BASE_URL } from '../../../config'
 import { Link } from 'react-router-dom'
+
+import s from './BasketCard.module.css'
 
 export default function BasketCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
   const imgLink = `${BASE_URL}${image}`
@@ -11,6 +12,7 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
   // Подготовка объекта продукта для передачи в действия Redux
   const product = { id, title, image, price, quantity, discont_price }
+
   const [truncatedTitle, setTruncatedTitle] = useState(title)
 
   useEffect(() => {

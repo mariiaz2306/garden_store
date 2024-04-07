@@ -27,6 +27,7 @@
 }
 
 @media(max-width: 480px) {
+
     .btn_div,
     .breadcrumbLine {
         display: none;

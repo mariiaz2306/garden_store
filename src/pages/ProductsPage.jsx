@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem';
-import { useFetchAllProductsQuery } from '../store/slices/apiSlice';
-import { useFiltration } from '../utils/useFiltration';
-import { useSelector } from 'react-redux';
-import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs';
-import FiltrationBar from '../components/FiltrationBar/FiltrationBar';
-import SkeletonLoader from '../components/SkeletonComponent/SkeletonComponent';
+import React from 'react'
+import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
+import { useFiltration } from '../utils/useFiltration'
+import { useSelector } from 'react-redux'
+
+import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
+import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
+import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useFetchAllProductsQuery();

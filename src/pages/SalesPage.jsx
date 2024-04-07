@@ -1,9 +1,9 @@
 import React from 'react'
 import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
-import { Link } from 'react-router-dom'
-import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
 import { useFiltration } from '../utils/useFiltration'
 import { useSelector } from 'react-redux'
+
+import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
 import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
 import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 
