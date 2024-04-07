@@ -162,10 +162,10 @@
   }
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 600px) {
   .discount-popup {
     &__content {
-      max-width: 27.5rem;
+      max-width: 470px;
     }
 
     &__title {
@@ -197,6 +197,14 @@
 
     &__add-to-cart {
       font-size: 1.125rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .discount-popup {
+    &__content {
+      max-width: 350px;
     }
   }
 }

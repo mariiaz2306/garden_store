@@ -7,7 +7,7 @@
     line-height: 130%;
     border-radius: var(--radius-small, 6px);
     background: var(--green, rgb(6, 235, 6));
-    color: var(--txt-white, #FFF);
+    color: var(--txt-white, #fff);
 }
 
 .card_btn .btn_green {
