@@ -25,6 +25,8 @@ export default function CartOrder({ basketCart }) {
   // Вычисляем итоговую сумму с учетом скидки
   const finalTotalSum = discountApplied ? totalSum * 0.95 : totalSum
 
+// const finalTotalSum = totalSum;
+
   return (
     <div className={s.container}>
       {/* Заголовок деталей заказа */}
