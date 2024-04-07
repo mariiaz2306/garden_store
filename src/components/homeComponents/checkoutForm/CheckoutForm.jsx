@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
-import s from '../checkoutForm/CheckoutForm.module.css'
 import { addSale } from '../../../utils/sale'
 
-export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit }) {
+import s from '../checkoutForm/CheckoutForm.module.css'
+
+export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit}) {
   const [resp, setResp] = useState({})
   const [showModal, setShowModal] = useState(false)
 
@@ -24,48 +24,55 @@ export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDisco
 
   return (
     <form className={s.form_container} onSubmit={handleSubmit(submit)}>
-     <label className={s.input_container}>
+      <label className={s.input_container}>
+        <p className={s.error_message}>{errors.name?.message}</p>
         <input
-          {...register("name", {
-            required: "File is required!",
-          })}
           type="text"
           placeholder="Name"
+          {...register('name', {
+            required: '*Name is required',
+          })}
           className={`${classInput} ${s.input}`}
         />
-        {errors?.name && (
-          <p className={s.error_message}>{errors.name?.message}</p>
-        )}
 
+        <p className={s.error_message}>{errors.phone?.message}</p>
         <input
-          {...register("phone", {
-            required: "File is required!",
-            minLength: { value: 13, message: "Minimum number length 13" },
-            maxLength: { value: 13, message: "Maximum number length 13" },
-          })}
           type="tel"
           placeholder="Phone number"
           className={`${classInput} ${s.input}`}
-        />
-        {errors?.phone && (
-          <p className={s.error_message}>{errors.phone?.message}</p>
-        )}
-
-        <input
-          {...register("email", {
-            required: "File is required!",
+          {...register('phone', {
+            required: '*Phone number is required',
+            pattern: {
+              value: /^\d+$/,
+              message: 'Please enter only digits',
+            },
+            minLength: {
+              value: 13,
+              message: 'Phone number must be at least 13 characters',
+            },
+            maxLength: {
+              value: 13,
+              message: 'Phone number must be at most 13 characters',
+            },
           })}
+        />
+
+        <p className={s.error_message}>{errors.email?.message}</p>
+        <input
           type="email"
           placeholder="Email"
           className={`${classInput} ${s.input}`}
+          {...register('email', {
+            required: '*Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Please enter a valid email',
+            },
+          })}
         />
-        {errors?.email && (
-          <p className={s.error_message}>{errors.email?.message}</p>
-        )}
       </label>
-      <button className={`${classBtn} ${s.btn}`} >
-        {txtBtn}
-      </button>
+
+      <button className={`${classBtn} ${s.getDiscount}`}>{txtBtn}</button>
     </form>
   )
 }
