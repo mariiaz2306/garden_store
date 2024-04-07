@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
-import s from './BasketCard.module.css'
-=======
-import React from 'react'
->>>>>>> 43bc339 (adaptive pages)
 import { useDispatch } from 'react-redux'
 import { addProduct, deleteProduct, decreaseProduct } from '../../../store/slices/cartSlice'
 import { BASE_URL } from '../../../config'
 import { Link } from 'react-router-dom'
 
-import s from './BasketCard.module.scss'
+import s from './BasketCard.module.css'
 
 export default function BasketCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
   const imgLink = `${BASE_URL}${image}`
@@ -17,7 +12,7 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
   // Подготовка объекта продукта для передачи в действия Redux
   const product = { id, title, image, price, quantity, discont_price }
-<<<<<<< HEAD
+
   const [truncatedTitle, setTruncatedTitle] = useState(title)
 
   useEffect(() => {
@@ -47,12 +42,6 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
   return (
     <div className={s.card}>
       <img className={s.img} src={imgLink} alt="productPhoto" />
-=======
-  const truncatedTitle = title.length > 37 ? title.substring(0, 37) + '…' : title
-  return (
-    <div className={s.card}>
-      <img src={imgLink} alt="productPhoto" />
->>>>>>> 43bc339 (adaptive pages)
       <div className={s.infoBlock}>
         <div className={s.topLevel}>
           <Link to={`/products/${id}`}>

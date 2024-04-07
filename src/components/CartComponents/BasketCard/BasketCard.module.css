@@ -149,11 +149,7 @@
   }
   .priceBlock {
     flex-direction: row;
-<<<<<<< HEAD:src/components/CartComponents/BasketCard/BasketCard.module.css
     align-items: center;
-=======
-    align-items: none;
->>>>>>> 43bc339 (adaptive pages):src/components/CartComponents/BasketCard/BasketCard.module.scss
   }
   .topLevel {
     margin-bottom: 32px;
@@ -166,12 +162,8 @@
     min-width: 200px;
   }
 }
-<<<<<<< HEAD:src/components/CartComponents/BasketCard/BasketCard.module.css
-@media screen and (max-width: 684px) {
-=======
 
 @media screen and (max-width: 640px) {
->>>>>>> 43bc339 (adaptive pages):src/components/CartComponents/BasketCard/BasketCard.module.scss
   .card {
     height: 226px;
   }

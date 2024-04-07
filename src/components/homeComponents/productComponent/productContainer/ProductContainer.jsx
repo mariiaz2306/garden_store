@@ -12,11 +12,7 @@ const ProductContainer = () => {
 
   const discountedProducts = products?.filter((product) => product.discont_price !== null)
 
-<<<<<<< HEAD
-  let randomDiscountedProducts = [];
-=======
   let randomDiscountedProducts = []
->>>>>>> 43bc339 (adaptive pages)
 
   //логика выбора 4 рандомных товаров со скидкой
   while (randomDiscountedProducts.length < 4) {

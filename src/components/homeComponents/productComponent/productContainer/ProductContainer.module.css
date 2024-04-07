@@ -15,14 +15,8 @@
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
-    .products_container{
-        grid-template-columns: repeat(2, 1fr)!important;
-        gap: 10px;
-=======
     .products_container {
         grid-template-columns: repeat(2, 1fr);
->>>>>>> 43bc339 (adaptive pages)
     }
 }
 
