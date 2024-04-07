@@ -4,7 +4,6 @@ import s from './CartOrder.module.css'
 
 import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
 import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
-import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { clearCart } from '../../../store/slices/cartSlice'
