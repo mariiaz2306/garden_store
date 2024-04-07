@@ -73,6 +73,14 @@
     cursor: pointer;
 }
 
+.svgIcon {
+    filter: url('./../../../../media/icons/heart.svg');
+}
+
+.svgIcon:hover{
+    filter: url('../../../../media/icons/blackHeart.svg');
+}
+
 .products_title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
