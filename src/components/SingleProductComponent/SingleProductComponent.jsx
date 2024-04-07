@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useFetchProductByIdQuery } from '../../store/slices/apiSlice.js' // Импорт хука для получения данных о продукте
 import { BASE_URL } from '../../config.js' // Импорт базового URL
