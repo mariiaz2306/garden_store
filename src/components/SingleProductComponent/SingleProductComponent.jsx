@@ -29,11 +29,12 @@ export default function SingleProductComponent() {
 
   const { theme } = useSelector((state) => state.theme)
   const dispatch = useDispatch()
+const [isAdded, setIsAdded] = useState(false)
 
   const handleAddToCart = (e) => {
     e.preventDefault()
-
     dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
+     setIsAdded(true)
   }
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -121,7 +122,7 @@ export default function SingleProductComponent() {
             </button>
           </div>
           <button className={s.addToCartButton} onClick={handleAddToCart}>
-            Add to Cart
+            {isAdded ? 'Added' : 'Add to Cart'}
           </button>
         </div>
         {/* Блок с описанием продукта */}
