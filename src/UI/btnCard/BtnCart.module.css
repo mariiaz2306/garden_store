@@ -25,14 +25,14 @@
 }
 
 .disabled_hover:hover {
-    background: var(--light-grey, #F1F3F4);
+    background: var(--bg-light-grey, #F1F3F4);
     outline: 1px solid var(--black, #282828);
     color: #282828;
 }
 
 .submitted button {
     border-radius: var(--radius-small, 6px);
-    background: var(--light-grey, #F1F3F4);
+    background: var(--bg-light-grey, #F1F3F4);
     outline: 1px solid var(--black, #282828);
     color: #282828;
 }
