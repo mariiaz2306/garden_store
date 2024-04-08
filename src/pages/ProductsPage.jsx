@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import { useFetchAllProductsQuery } from '../store/slices/apiSlice'
 import { useFiltration } from '../utils/useFiltration'
 import { useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import ProductsItem from '../components/homeComponents/productComponent/productsItem/ProductsItem'
 import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs'
 import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
-import SkeletonLoader from '../components/SkeletonComponent/SkeletonComponent'
+import SkeletonLoader from './../components/SkeletonComponent/SkeletonComponent';
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useFetchAllProductsQuery()
@@ -44,7 +44,7 @@ export default function ProductsPage() {
           {/* Отображаем панель фильтрации */}
           <FiltrationBar showDiscountOption={true} />
           {/* Отображаем скелетон списка продуктов */}
-          <SkeletonLoader />
+         <SkeletonLoader/>
         </div>
       </section>
     )
