@@ -46,11 +46,12 @@
     cursor: pointer;
     width: 100%;
     font-weight: 600;
+    border: none;
 }
 
 .getDiscount:hover {
-    background: var(--black, #282828);
-    color: var(--txt-white, #FFF);
+    background: #282828;
+    color: #FFF;
     transition: 0.3s;
     border: none;
 }

@@ -9,27 +9,27 @@ import FiltrationBar from '../components/FiltrationBar/FiltrationBar'
 import SkeletonLoader from './../components/SkeletonComponent/SkeletonComponent';
 
 export default function ProductsPage() {
-  const { data, isLoading, isError } = useFetchAllProductsQuery();
-  console.log('products', data);
+  const { data, isLoading, isError } = useFetchAllProductsQuery()
+  console.log('products', data)
 
   // Получаем значения фильтров из хранилища Redux
-  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter);
+  const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
 
   // Фильтруем продукты с помощью утилиты useFiltration
-  const products = useFiltration(data, minPrice, maxPrice, sorted);
+  const products = useFiltration(data, minPrice, maxPrice, sorted)
 
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(true)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowSkeleton(false);
-    }, 4000); // Показывать скелетон в течение 4 секунд
+      setShowSkeleton(false)
+    }, 4000) // Показывать скелетон в течение 4 секунд
 
-    return () => clearTimeout(timer);
-  }, []); // Запускаем таймер только при монтировании компонента
+    return () => clearTimeout(timer)
+  }, []) // Запускаем таймер только при монтировании компонента
 
   if (isError) {
-    return <p>Error loading products.</p>;
+    return <p>Error loading products.</p>
   }
 
   // Показываем скелетон в течение 4 секунд или пока данные загружаются
@@ -47,7 +47,7 @@ export default function ProductsPage() {
          <SkeletonLoader/>
         </div>
       </section>
-    );
+    )
   }
 
   // Если isLoading стал false и нет ошибок загрузки, отображаем фактические данные
@@ -68,5 +68,5 @@ export default function ProductsPage() {
         </ul>
       </div>
     </section>
-  );
+  )
 }

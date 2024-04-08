@@ -164,7 +164,7 @@ a {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
     }
   }
@@ -191,7 +191,7 @@ a {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .grid {
     &__title {
       font-size: 2.5rem;
@@ -205,15 +205,15 @@ a {
 .dark {
   --green: #393;
   --white: #fff;
-  --black: #dadada;
+  --black: #282828;
   --grey-divider: #ddd;
   --grey: #8b8b8b;
-  --light-grey: #0f0f0f;
+  --light-grey: #F1F3F4;
 
   --bg-gray: #cac7c7;
 
   --txt-black: #e6e3e3;
-  --txt-white: #727272;
+  --txt-white: #fff;
   --txt-grey: #8b8b8b;
   --icon-stroke: white;
   --icon-fill: transparent;
