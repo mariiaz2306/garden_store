@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,6 +9,7 @@ import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedPro
 import s from './style.module.scss' // Импорт стилей модуля
 import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
 import heartWhite from '../../media/icons/heartWhite.svg'
+import greenHeart from '../../media/icons/greenHeart.svg'
 import { addProduct } from '../../store/slices/cartSlice.js';
 
 // Компонент для модального окна
@@ -35,6 +36,7 @@ export default function SingleProductComponent() {
 
     dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
   }
+
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [count, setCount] = useState(0)
@@ -48,17 +50,23 @@ export default function SingleProductComponent() {
   // Функция для переключения обрезанного описания
   const toggleTruncate = () => setIsTruncated(!isTruncated)
 
-
-  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
-  const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === product?.id)
+  const [isHeartClicked, setIsHeartClicked] = useState(() => {
+    const heartState = localStorage.getItem(`isHeartClicked_${id}`);
+    return heartState ? JSON.parse(heartState) : false;
+  });
 
   const toggleLiked = () => {
-    if (isLiked) {
-      dispatch(removeLikedProduct(product))
+    setIsHeartClicked(!isHeartClicked);
+    if (!isHeartClicked) {
+      dispatch(addLikedProduct(product));
     } else {
-      dispatch(addLikedProduct(product))
+      dispatch(removeLikedProduct(product));
     }
-  }
+  };
+
+  useEffect(() => {
+    localStorage.setItem(`isHeartClicked_${id}`, JSON.stringify(isHeartClicked));
+  }, [id, isHeartClicked]);
 
   // Вывод индикатора загрузки при загрузке данных о продукте
   if (isLoading) return <p>Loading...</p>
@@ -95,8 +103,8 @@ export default function SingleProductComponent() {
         {/* Блок с заголовком и иконкой "Добавить в избранное" */}
         <div className={s.headerContainer}>
           <p className={s.header}>{product.title}</p>
-          <button className={s.icon_button} onClick={toggleLiked} isLiked={isLiked}>
-            <img src={theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
+          <button className={s.icon_button} onClick={toggleLiked}>
+            <img src={isHeartClicked ? greenHeart : (theme === 'light' ? heart : heartWhite)} alt="Add to favorites" />
           </button>
         </div>
         {/* Блок с ценой и скидкой */}
