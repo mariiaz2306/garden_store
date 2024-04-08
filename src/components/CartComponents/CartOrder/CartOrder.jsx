@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 
 import s from './CartOrder.module.css'
 
-import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
 import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
+import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { clearCart } from '../../../store/slices/cartSlice'
 
 export default function CartOrder({ basketCart }) {
   // Используем useState для управления состоянием отправки заказа
+  const dispatch = useDispatch()
   const [sendingOrder, setSendingOrder] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -18,12 +21,15 @@ export default function CartOrder({ basketCart }) {
   const handleOrderSubmit = () => {
     setSendingOrder(true) // Устанавливаем sendingOrder в true при отправке заказа
     setShowModal(true) // Показываем модальное окно при отправке заказа
+    dispatch(clearCart()) // очистка корзині
   }
   const totalSum = useSelector((state) => state.cart.totalSum)
   const discountApplied = useSelector((state) => state.cart.discountApplied)
 
   // Вычисляем итоговую сумму с учетом скидки
   const finalTotalSum = discountApplied ? totalSum * 0.95 : totalSum
+
+  // const finalTotalSum = totalSum;
 
   return (
     <div className={s.container}>

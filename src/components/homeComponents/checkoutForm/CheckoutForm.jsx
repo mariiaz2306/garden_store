@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form'
 import { addSale } from '../../../utils/sale'
 
 import s from '../checkoutForm/CheckoutForm.module.css'
+import DiscountModal from '../ModalWindow/ModalWindow'
+import { useDispatch } from 'react-redux'
+import { clearCart } from '../../../store/slices/cartSlice'
 
-export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit}) {
+export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit }) {
   const [resp, setResp] = useState({})
   const [showModal, setShowModal] = useState(false)
-
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -20,6 +23,11 @@ export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDisco
     addSale(new_product_obj, setResp)
     handleDiscountSubmit()
     setShowModal(true)
+
+    setTimeout(() => {
+      dispatch(clearCart())
+      setShowModal(false)
+    }, 5000) // через 5 секунд после отправки заказа модалка закроет ся и корзина очистится
   }
 
   return (

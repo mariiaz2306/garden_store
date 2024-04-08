@@ -1,8 +1,9 @@
 import React from 'react'
 
-import s from './../components/NotFound/NotFound.module.css'
 import TitleBreadCrumps from '../UI/titleBreadCrumps/TitleBreadCrumps'
+import s from '../components/NotFound/NotFound.module.css'
 import CartComponent from './../components/CartComponents/CartComponent/CartComponent'
+
 
 export default function CartPage() {
   const breadcrumbs = [{ label: 'Back to all products', path: '/products' }]
@@ -10,7 +11,8 @@ export default function CartPage() {
   return (
     <section className={`container`}>
       <TitleBreadCrumps title=" Shopping Cart" breadcrumbs={breadcrumbs} classTitleContainer={s.title_container} />
-       <CartComponent/>
+      <CartComponent />
     </section>
   )
 }
+
