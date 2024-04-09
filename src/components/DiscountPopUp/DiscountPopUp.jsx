@@ -81,37 +81,18 @@ const DiscountPopUp = ({ onClose }) => {
     setDiscountedProduct(null)
   }
 
-  // // Проверка, лайкнут ли продукт
-  // const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
-  // const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === discountedProduct?.id)
+  // Проверка, лайкнут ли продукт
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
+  const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === discountedProduct?.id)
 
-  // // Переключение состояния лайка продукта
-  // const toggleLiked = () => {
-  //   if (isLiked) {
-  //     dispatch(removeLikedProduct(discountedProduct))
-  //   } else {
-  //     dispatch(addLikedProduct(discountedProduct))
-  //   }
-  // }
-  const { id } = useParams()
-
-  const [isHeartClicked, setIsHeartClicked] = useState(() => {
-    const heartState = localStorage.getItem(`isHeartClicked_${id}`)
-    return heartState ? JSON.parse(heartState) : false
-  })
-
+  // Переключение состояния лайка продукта
   const toggleLiked = () => {
-    setIsHeartClicked(!isHeartClicked)
-    if (!isHeartClicked) {
-      dispatch(addLikedProduct(products))
+    if (isLiked) {
+      dispatch(removeLikedProduct(discountedProduct))
     } else {
-      dispatch(removeLikedProduct(products))
+      dispatch(addLikedProduct(discountedProduct))
     }
   }
-
-  useEffect(() => {
-    localStorage.setItem(`isHeartClicked_${id}`, JSON.stringify(isHeartClicked))
-  }, [id, isHeartClicked])
 
   return (
     <div className={`discount-popup ${isOpen ? 'open' : ''}`} onClick={handleBackdropClick}>
@@ -130,8 +111,8 @@ const DiscountPopUp = ({ onClose }) => {
               </Link>
               <span className="discount-popup__discont">-50%</span>
               <button className="discount-popup__icon" onClick={toggleLiked}>
-            <img src={isHeartClicked ? greenHeart :  heart} alt="Add to favorites" />
-          </button>
+                <img src={isLiked ? greenHeart : heart} alt="Add to favorites" />
+              </button>
             </div>
             <div className="discount-popup__product-details">
               <Link to={`/products/${discountedProduct.id}`}>
