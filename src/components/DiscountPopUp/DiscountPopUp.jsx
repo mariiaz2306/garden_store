@@ -4,9 +4,10 @@ import { useFetchAllProductsQuery } from '../../store/slices/apiSlice'
 import { addProduct } from '../../store/slices/cartSlice'
 import { BASE_URL } from '../../config'
 import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedProductsSlice'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
+import greenHeart from '../../media/icons/greenHeart.svg'
 import './DiscountPopUp.scss'
 
 const DiscountPopUp = ({ onClose }) => {
@@ -80,18 +81,37 @@ const DiscountPopUp = ({ onClose }) => {
     setDiscountedProduct(null)
   }
 
-  // Проверка, лайкнут ли продукт
-  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
-  const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === discountedProduct?.id)
+  // // Проверка, лайкнут ли продукт
+  // const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
+  // const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === discountedProduct?.id)
 
-  // Переключение состояния лайка продукта
+  // // Переключение состояния лайка продукта
+  // const toggleLiked = () => {
+  //   if (isLiked) {
+  //     dispatch(removeLikedProduct(discountedProduct))
+  //   } else {
+  //     dispatch(addLikedProduct(discountedProduct))
+  //   }
+  // }
+  const { id } = useParams()
+
+  const [isHeartClicked, setIsHeartClicked] = useState(() => {
+    const heartState = localStorage.getItem(`isHeartClicked_${id}`)
+    return heartState ? JSON.parse(heartState) : false
+  })
+
   const toggleLiked = () => {
-    if (isLiked) {
-      dispatch(removeLikedProduct(discountedProduct))
+    setIsHeartClicked(!isHeartClicked)
+    if (!isHeartClicked) {
+      dispatch(addLikedProduct(products))
     } else {
-      dispatch(addLikedProduct(discountedProduct))
+      dispatch(removeLikedProduct(products))
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem(`isHeartClicked_${id}`, JSON.stringify(isHeartClicked))
+  }, [id, isHeartClicked])
 
   return (
     <div className={`discount-popup ${isOpen ? 'open' : ''}`} onClick={handleBackdropClick}>
@@ -109,9 +129,9 @@ const DiscountPopUp = ({ onClose }) => {
                 <img src={`${BASE_URL}/${discountedProduct.image}`} alt={discountedProduct.name} />
               </Link>
               <span className="discount-popup__discont">-50%</span>
-              <button className="discount-popup__icon" onClick={toggleLiked} isLiked={isLiked}>
-                <img src={heart} alt="Add to favorites" />
-              </button>
+              <button className="discount-popup__icon" onClick={toggleLiked}>
+            <img src={isHeartClicked ? greenHeart :  heart} alt="Add to favorites" />
+          </button>
             </div>
             <div className="discount-popup__product-details">
               <Link to={`/products/${discountedProduct.id}`}>
