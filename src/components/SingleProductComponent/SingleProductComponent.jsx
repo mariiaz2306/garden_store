@@ -135,7 +135,11 @@ export default function SingleProductComponent() {
               +
             </button>
           </div>
-          <button className={`${s.addToCartButton} ${isAdded ? s.addedButton : s.notAddedButton}`}  onClick={handleAddToCart}>
+          <button
+            className={`${s.addToCartButton} ${isAdded ? s.addedButton : s.notAddedButton}`}
+            disabled={count === 0} // Добавляем атрибут disabled, если количество товара равно 0
+            onClick={handleAddToCart}
+          >
             {isAdded ? 'Added' : 'Add to Cart'}
           </button>
         </div>
@@ -156,3 +160,4 @@ export default function SingleProductComponent() {
     </>
   )
 }
+
