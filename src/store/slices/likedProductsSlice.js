@@ -10,7 +10,7 @@ const likedProductsSlice = createSlice({
       state.likedProducts.push(action.payload)
     },
     removeLikedProduct: (state, action) => {
-      state.likedProducts = state.likedProducts.filter((product) => product.id !== action.payload.id)
+      state.likedProducts = state.likedProducts.filter((product) => product?.id !== action.payload.id)
     },
   },
 })

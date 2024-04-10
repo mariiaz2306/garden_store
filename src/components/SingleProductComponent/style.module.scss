@@ -165,7 +165,23 @@
    transition: background-color 0.3s ease, filter 0.3s ease;
 }
 .addToCartButton:hover {
-    filter: brightness(85%); /* Затемнение на 15% */
+  background: $black;
+  transform: 0.3s;
+ border: 1px solid $txt-white;
+}
+
+.addedButton {
+  border-radius: 6px;
+  background: $light-grey;
+  outline: 1px solid $black;
+  color: $txt-black;
+}
+
+.addedButton:hover {
+  border-radius: 6px;
+  background: $light-grey;
+  outline: 1px solid $black;
+  color: $txt-black;
 }
 
 .modalBackdrop {

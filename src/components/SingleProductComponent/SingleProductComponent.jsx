@@ -10,7 +10,8 @@ import s from './style.module.scss' // Импорт стилей модуля
 import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
 import heartWhite from '../../media/icons/heartWhite.svg'
 import greenHeart from '../../media/icons/greenHeart.svg'
-import { addProduct } from '../../store/slices/cartSlice.js';
+import { addProduct } from '../../store/slices/cartSlice.js'
+import BtnCard, { ButtonTypes } from '../../UI/btnCard/BtnCart.jsx'
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
@@ -29,18 +30,28 @@ export default function SingleProductComponent() {
   const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id)
 
   const { theme } = useSelector((state) => state.theme)
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const dispatch = useDispatch()
-const [isAdded, setIsAdded] = useState(false)
+  const [isAdded, setIsAdded] = useState(false)
+  const [isHeartClicked, setIsHeartClicked] = useState(false)
+
+  useEffect(() => {
+    const isProductLiked = likedProducts.some((likedProduct) => likedProduct.id === product?.id)
+    setIsHeartClicked(isProductLiked)
+  }, [likedProducts, product])
 
   const handleAddToCart = (e) => {
     e.preventDefault()
     dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
-     setIsAdded(true)
+    setIsAdded(true)
+    setTimeout(() => {
+      setIsAdded(false)
+    }, 2000)
   }
 
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
 
   // Состояние для управления обрезанным описанием
   const [isTruncated, setIsTruncated] = useState(true)
@@ -51,23 +62,18 @@ const [isAdded, setIsAdded] = useState(false)
   // Функция для переключения обрезанного описания
   const toggleTruncate = () => setIsTruncated(!isTruncated)
 
-  const [isHeartClicked, setIsHeartClicked] = useState(() => {
-    const heartState = localStorage.getItem(`isHeartClicked_${id}`);
-    return heartState ? JSON.parse(heartState) : false;
-  });
-
   const toggleLiked = () => {
-    setIsHeartClicked(!isHeartClicked);
+    setIsHeartClicked(!isHeartClicked)
     if (!isHeartClicked) {
-      dispatch(addLikedProduct(product));
+      dispatch(addLikedProduct(product))
     } else {
-      dispatch(removeLikedProduct(product));
+      dispatch(removeLikedProduct(product))
     }
-  };
+  }
 
   useEffect(() => {
-    localStorage.setItem(`isHeartClicked_${id}`, JSON.stringify(isHeartClicked));
-  }, [id, isHeartClicked]);
+    localStorage.setItem(`isHeartClicked_${id}`, JSON.stringify(isHeartClicked))
+  }, [id, isHeartClicked])
 
   // Вывод индикатора загрузки при загрузке данных о продукте
   if (isLoading) return <p>Loading...</p>
@@ -105,7 +111,7 @@ const [isAdded, setIsAdded] = useState(false)
         <div className={s.headerContainer}>
           <p className={s.header}>{product.title}</p>
           <button className={s.icon_button} onClick={toggleLiked}>
-            <img src={isHeartClicked ? greenHeart : (theme === 'light' ? heart : heartWhite)} alt="Add to favorites" />
+            <img src={isHeartClicked ? greenHeart : theme === 'light' ? heart : heartWhite} alt="Add to favorites" />
           </button>
         </div>
         {/* Блок с ценой и скидкой */}
@@ -129,7 +135,11 @@ const [isAdded, setIsAdded] = useState(false)
               +
             </button>
           </div>
-          <button className={s.addToCartButton} onClick={handleAddToCart}>
+          <button
+            className={`${s.addToCartButton} ${isAdded ? s.addedButton : s.notAddedButton}`}
+            disabled={count === 0} // Добавляем атрибут disabled, если количество товара равно 0
+            onClick={handleAddToCart}
+          >
             {isAdded ? 'Added' : 'Add to Cart'}
           </button>
         </div>
@@ -150,3 +160,4 @@ const [isAdded, setIsAdded] = useState(false)
     </>
   )
 }
+

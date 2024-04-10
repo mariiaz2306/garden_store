@@ -7,6 +7,7 @@ import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedPro
 import { Link } from 'react-router-dom'
 
 import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
+import greenHeart from '../../media/icons/greenHeart.svg'
 import './DiscountPopUp.scss'
 
 const DiscountPopUp = ({ onClose }) => {
@@ -109,8 +110,8 @@ const DiscountPopUp = ({ onClose }) => {
                 <img src={`${BASE_URL}/${discountedProduct.image}`} alt={discountedProduct.name} />
               </Link>
               <span className="discount-popup__discont">-50%</span>
-              <button className="discount-popup__icon" onClick={toggleLiked} isLiked={isLiked}>
-                <img src={heart} alt="Add to favorites" />
+              <button className="discount-popup__icon" onClick={toggleLiked}>
+                <img src={isLiked ? greenHeart : heart} alt="Add to favorites" />
               </button>
             </div>
             <div className="discount-popup__product-details">

@@ -20,7 +20,7 @@ const FavoritesPage = () => {
         <h2 className="grid__title">Liked products</h2> {/* Заголовок раздела */}
         <FiltrationBar showDiscountOption={false} /> {/* Компонент панели фильтрации (без опции скидки) */}
         <ul className="grid__wrapper">
-          {filteredProducts && filteredProducts.map((product) => <ProductItem key={product.id} el={product} />)}
+          {filteredProducts && filteredProducts.map((product) => product && <ProductItem key={product.id} el={product} />)}
         </ul>
       </div>
     </section>
@@ -28,3 +28,4 @@ const FavoritesPage = () => {
 }
 
 export default FavoritesPage
+

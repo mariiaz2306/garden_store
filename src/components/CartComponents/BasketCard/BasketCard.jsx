@@ -62,11 +62,8 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
             </button>
           </div>
           <div className={s.prices}>
-            {/* Показываем новую цену со скидкой, если она есть, иначе показываем обычную цену */}
-            <p className={s.newPrice}>{discont_price ? `$${discont_price}` : `$${price}`}</p>
-
-            {/* Показываем старую цену только если есть скидочная цена */}
-            {discont_price ? <p className={s.oldPrice}>${price}</p> : ''}
+          <p className={s.newPrice}>{`$${price}`}</p>
+            <p className={s.oldPrice}>{oldPrice || discont_price ? `$${oldPrice || discont_price}` : ''}</p>
           </div>
         </div>
       </div>
