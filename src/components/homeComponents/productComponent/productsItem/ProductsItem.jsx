@@ -20,15 +20,19 @@ export default function ProductItem({ el }) {
     return heartState ? JSON.parse(heartState) : false;
   });
 
-  const [isBagClicked, setIsBagClicked] = useState(() => {
-    const bagState = localStorage.getItem(`isBagClicked_${el.id}`);
-    return bagState ? JSON.parse(bagState) : false;
-  });
-
   const cartProducts = useSelector((state) => state.cart.products);
   const isProductInCart = cartProducts.some((product) => product.id === el.id);
   const likedProducts = useSelector((state) => state.likedProducts.likedProducts);
   const isLiked = likedProducts.some((likedProduct) => likedProduct?.id === el.id);
+
+  useEffect(() => {
+    const bagState = localStorage.getItem(`isBagClicked_${el.id}`);
+    if (bagState !== null) {
+      setIsBagClicked(JSON.parse(bagState));
+    }
+  }, [el.id]);
+
+  const [isBagClicked, setIsBagClicked] = useState(false);
 
   const handleToggleLiked = () => {
     if (el) {
@@ -45,8 +49,8 @@ export default function ProductItem({ el }) {
   
   const handleToggleCart = () => {
     if (el) {
-      const newState = !isBagClicked;
-      setIsBagClicked(newState);
+      const newState = !isProductInCart;
+      setIsBagClicked(newState); // Устанавливаем состояние isBagClicked в зависимости от наличия товара в корзине
       if (!isProductInCart) {
         dispatch(addProduct({ ...el, quantity: 1 }));
       } else {
@@ -55,10 +59,9 @@ export default function ProductItem({ el }) {
       localStorage.setItem(`isBagClicked_${el.id}`, JSON.stringify(newState));
     }
   };
-  
 
   const handleBtnCartClick = () => {
-    setIsBagClicked(true); // Устанавливаем состояние isBagClicked в true при нажатии на кнопку BtnCart
+    setIsBagClicked(true);
     dispatch(addProduct({ ...el, quantity: 1 }));
     localStorage.setItem(`isBagClicked_${el.id}`, JSON.stringify(true));
   };
@@ -74,7 +77,7 @@ export default function ProductItem({ el }) {
             <img src={isLiked ? greenHeart : heart} alt="Add to favorites" />
           </button>
           <button className={s.icon_button} onClick={handleToggleCart}>
-            <img src={isBagClicked ? greenBag : shoppingBag1} alt="Add to cart" />
+            <img src={isProductInCart ? greenBag : shoppingBag1} alt="Add to cart" />
           </button>
         </div>
       </div>
