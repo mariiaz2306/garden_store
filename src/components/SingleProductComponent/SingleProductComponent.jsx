@@ -11,6 +11,7 @@ import heart from '../../media/icons/heart.svg' // Импорт иконки с�
 import heartWhite from '../../media/icons/heartWhite.svg'
 import greenHeart from '../../media/icons/greenHeart.svg'
 import { addProduct } from '../../store/slices/cartSlice.js'
+import BtnCard, { ButtonTypes } from '../../UI/btnCard/BtnCart.jsx'
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
@@ -43,11 +44,14 @@ export default function SingleProductComponent() {
     e.preventDefault()
     dispatch(addProduct({ ...product, quantity: 1 })) // Предполагаем, что el - это объект товара с нужными полями
     setIsAdded(true)
+    setTimeout(() => {
+      setIsAdded(false)
+    }, 2000)
   }
 
   // Состояния для управления модальным окном и количеством товаров
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
 
   // Состояние для управления обрезанным описанием
   const [isTruncated, setIsTruncated] = useState(true)
@@ -131,7 +135,7 @@ export default function SingleProductComponent() {
               +
             </button>
           </div>
-          <button className={s.addToCartButton} onClick={handleAddToCart}>
+          <button className={`${s.addToCartButton} ${isAdded ? s.addedButton : s.notAddedButton}`}  onClick={handleAddToCart}>
             {isAdded ? 'Added' : 'Add to Cart'}
           </button>
         </div>
