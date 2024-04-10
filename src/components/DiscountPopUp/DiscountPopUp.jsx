@@ -4,7 +4,7 @@ import { useFetchAllProductsQuery } from '../../store/slices/apiSlice'
 import { addProduct } from '../../store/slices/cartSlice'
 import { BASE_URL } from '../../config'
 import { addLikedProduct, removeLikedProduct } from '../../store/slices/likedProductsSlice'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import heart from '../../media/icons/heart.svg' // Импорт иконки сердца
 import greenHeart from '../../media/icons/greenHeart.svg'

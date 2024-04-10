@@ -29,8 +29,15 @@ export default function SingleProductComponent() {
   const { data: [product] = [], isLoading, isError } = useFetchProductByIdQuery(id)
 
   const { theme } = useSelector((state) => state.theme)
+  const likedProducts = useSelector((state) => state.likedProducts.likedProducts)
   const dispatch = useDispatch()
   const [isAdded, setIsAdded] = useState(false)
+  const [isHeartClicked, setIsHeartClicked] = useState(false)
+
+  useEffect(() => {
+    const isProductLiked = likedProducts.some((likedProduct) => likedProduct.id === product?.id)
+    setIsHeartClicked(isProductLiked)
+  }, [likedProducts, product])
 
   const handleAddToCart = (e) => {
     e.preventDefault()
@@ -50,11 +57,6 @@ export default function SingleProductComponent() {
 
   // Функция для переключения обрезанного описания
   const toggleTruncate = () => setIsTruncated(!isTruncated)
-
-  const [isHeartClicked, setIsHeartClicked] = useState(() => {
-    const heartState = localStorage.getItem(`isHeartClicked_${id}`)
-    return heartState ? JSON.parse(heartState) : false
-  })
 
   const toggleLiked = () => {
     setIsHeartClicked(!isHeartClicked)
