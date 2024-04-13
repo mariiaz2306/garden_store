@@ -15,7 +15,6 @@ import BtnCard, { ButtonTypes } from '../../UI/btnCard/BtnCart.jsx'
 
 // Компонент для модального окна
 const Modal = ({ src, alt, onClose }) => (
-  // Объявление компонента модального окна
   <div className={s.modalBackdrop} onClick={onClose}>
     <img src={src} alt={alt} className={s.modalImage} /> {/* Изображение в модальном окне */}
   </div>

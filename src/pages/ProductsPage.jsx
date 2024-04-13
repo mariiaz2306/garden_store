@@ -10,7 +10,6 @@ import SkeletonLoader from './../components/SkeletonComponent/SkeletonComponent'
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useFetchAllProductsQuery()
-  console.log('products', data)
 
   // Получаем значения фильтров из хранилища Redux
   const { minPrice, maxPrice, sorted } = useSelector((store) => store.filter)
@@ -23,10 +22,10 @@ export default function ProductsPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSkeleton(false)
-    }, 4000) // Показывать скелетон в течение 4 секунд
+    }, 2000) 
 
     return () => clearTimeout(timer)
-  }, []) // Запускаем таймер только при монтировании компонента
+  }, []) 
 
   if (isError) {
     return <p>Error loading products.</p>

@@ -5,75 +5,58 @@ const initialState = {
   totalSum: 0,
   discountApplied: false,
 }
+// Вспомогательная функция для пересчета общей суммы
+function calculateTotalSum(products) {
+  return products.reduce((total, product) => {
+    const priceToUse = product.discont_price ? product.discont_price : product.price;
+    return total + priceToUse * product.quantity;
+  }, 0);
+}
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addProduct(state, action) {
-      const existingProductIndex = state.products.findIndex((product) => product.id === action.payload.id)
+      const existingProductIndex = state.products.findIndex((product) => product.id === action.payload.id);
       if (existingProductIndex !== -1) {
-        state.products[existingProductIndex].quantity += 1
+        state.products[existingProductIndex].quantity += 1;
       } else {
-        state.products.push({ ...action.payload, quantity: 1 })
+        state.products.push({ ...action.payload, quantity: 1 });
       }
-
-      // Пересчитываем общую сумму, учитывая скидочную цену
-      state.totalSum = state.products.reduce((total, product) => {
-        const priceToUse = product.discont_price ? product.discont_price : product.price
-        return total + priceToUse * product.quantity
-      }, 0)
+      state.totalSum = calculateTotalSum(state.products);
     },
 
     deleteProduct(state, action) {
-      const index = state.products.findIndex((product) => product.id === action.payload)
+      const index = state.products.findIndex((product) => product.id === action.payload);
       if (index !== -1) {
-        const product = state.products[index]
-        const priceToUse = product.discont_price ? product.discont_price : product.price
-        state.totalSum -= priceToUse * product.quantity
-        state.products.splice(index, 1)
-
-        // Пересчитываем общую сумму после удаления товара
-        state.totalSum = state.products.reduce((total, product) => {
-          const priceToUse = product.discont_price ? product.discont_price : product.price
-          return total + priceToUse * product.quantity
-        }, 0)
+        state.products.splice(index, 1);
       }
+      state.totalSum = calculateTotalSum(state.products);
     },
 
     decreaseProduct(state, action) {
-      const index = state.products.findIndex((product) => product.id === action.payload)
-      if (index !== -1) {
-        const product = state.products[index]
-        if (product.quantity > 1) {
-          product.quantity -= 1
-          const priceToUse = product.discont_price ? product.discont_price : product.price
-          state.totalSum -= priceToUse
-        } else {
-          const priceToUse = product.discont_price ? product.discont_price : product.price
-          state.totalSum -= priceToUse
-          state.products.splice(index, 1)
-        }
-
-        // Пересчитываем общую сумму после изменения количества
-        state.totalSum = state.products.reduce((total, product) => {
-          const priceToUse = product.discont_price ? product.discont_price : product.price
-          return total + priceToUse * product.quantity
-        }, 0)
+      const index = state.products.findIndex((product) => product.id === action.payload);
+      if (index !== -1 && state.products[index].quantity > 1) {
+        state.products[index].quantity -= 1;
+      } else {
+        state.products.splice(index, 1);
       }
+      state.totalSum = calculateTotalSum(state.products);
     },
 
     clearCart(state) {
-      state.products = []
-      state.totalSum = 0
-      state.discountApplied = false
+      state.products = [];
+      state.totalSum = 0;
+      state.discountApplied = false;
     },
 
     applyDiscount(state) {
-      state.discountApplied = true
+      state.discountApplied = true;
+      state.totalSum = calculateTotalSum(state.products);  // Пример, если скидка влияет на цену
     },
   },
 })
 
-export const { addProduct, deleteProduct, decreaseProduct, clearCart, applyDiscount } = cartSlice.actions
-export default cartSlice.reducer
+export const { addProduct, deleteProduct, decreaseProduct, clearCart, applyDiscount } = cartSlice.actions;
+export default cartSlice.reducer;

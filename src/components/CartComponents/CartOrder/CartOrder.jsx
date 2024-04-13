@@ -1,56 +1,71 @@
 import React, { useState } from 'react'
-
-import s from './CartOrder.module.css'
-
-import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
-import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { clearCart } from '../../../store/slices/cartSlice'
 
+import s from './CartOrder.module.css'
+import ModalWindow from '../../homeComponents/ModalWindow/ModalWindow'
+import CheckoutForm from '../../homeComponents/checkoutForm/CheckoutForm'
+
+import { BASE_URL } from '../../../config'
+
 export default function CartOrder({ basketCart }) {
-  // Используем useState для управления состоянием отправки заказа
   const dispatch = useDispatch()
-  const [sendingOrder, setSendingOrder] = useState(false)
+  // const [sendingOrder, setSendingOrder] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
   const handleDiscountSubmit = () => {
     setShowModal(true)
   }
 
-  const handleOrderSubmit = () => {
-    setSendingOrder(true) // Устанавливаем sendingOrder в true при отправке заказа
-    setShowModal(true) // Показываем модальное окно при отправке заказа
-    dispatch(clearCart()) // очистка корзині
+  const handleOrderSubmit = async () => {
+    // setSendingOrder(true)
+    setShowModal(true)
+
+    // Данные для отправки
+    const orderData = {
+      items: basketCart,
+      total: finalTotalSum,
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/order/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      // Отображение модального окна и его автоматическое закрытие через 5 секунд
+      setTimeout(() => {
+        // очистка корзины
+        dispatch(clearCart())
+        setShowModal(false) // закрытие модального окна
+      }, 3000)
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error)
+    }
   }
+
   const totalSum = useSelector((state) => state.cart.totalSum)
   const discountApplied = useSelector((state) => state.cart.discountApplied)
-
-  // Вычисляем итоговую сумму с учетом скидки
   const finalTotalSum = discountApplied ? totalSum * 0.95 : totalSum
-
-  // const finalTotalSum = totalSum;
 
   return (
     <div className={s.container}>
-      {/* Заголовок деталей заказа */}
       <h3 className={s.h3_order}>Order Details</h3>
-
-      {/* Отображение общего количества товаров в корзине */}
       <div className={s.total_items}>
         <p className={s.total_items_sum}>{basketCart.length} items</p>
       </div>
-
-      {/* Отображение общей стоимости заказа */}
       <div className={s.total_price}>
         <p className={s.total_p}>Total</p>
         <div>
-          <p className={s.total_sum}>
-            $ {finalTotalSum.toFixed(2)} {/* Отображаем общую стоимость с округлением до двух знаков после запятой */}
-          </p>
+          <p className={s.total_sum}>$ {finalTotalSum.toFixed(2)}</p>
         </div>
       </div>
-
       <CheckoutForm
         handleOrderSubmit={handleOrderSubmit}
         handleDiscountSubmit={handleDiscountSubmit}

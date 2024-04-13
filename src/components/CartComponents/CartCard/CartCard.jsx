@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { addProduct, deleteProduct, decreaseProduct } from '../../../store/slices/cartSlice'
 import { BASE_URL } from '../../../config'
 import { Link } from 'react-router-dom'
 
-import s from './BasketCard.module.css'
+import s from './CartCard.module.css'
 
-export default function BasketCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
+export default function CartCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
   const imgLink = `${BASE_URL}${image}`
   const dispatch = useDispatch()
 
@@ -15,20 +15,19 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
   const [truncatedTitle, setTruncatedTitle] = useState(title)
 
-  useEffect(() => {
-    // функция для укорачивания title в зависимости от размера экрана
-    const handleResize = () => {
-      const newTitle =
-        window.innerWidth <= 480
-          ? title.length > 10
-            ? title.substring(0, 10) + '…'
-            : title
-          : title.length > 30
-          ? title.substring(0, 30) + '…'
+  const handleResize = useCallback(() => {
+    const newTitle =
+      window.innerWidth <= 480
+        ? title.length > 10
+          ? title.substring(0, 10) + '…'
           : title
-      setTruncatedTitle(newTitle)
-    }
+        : title.length > 30
+        ? title.substring(0, 30) + '…'
+        : title
+    setTruncatedTitle(newTitle)
+  }, [title]) // Зависимость от title
 
+  useEffect(() => {
     // Вызов функции при первой загрузке компонента
     handleResize()
 
@@ -37,7 +36,7 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
 
     // Удаление слушателя события при размонтировании компонента
     return () => window.removeEventListener('resize', handleResize)
-  }, [title]) // Зависимость от title гарантирует, что useEffect сработает при изменении title
+  }, [handleResize]) // Зависимость от title гарантирует, что useEffect сработает при изменении title
 
   return (
     <div className={s.card}>
@@ -62,8 +61,11 @@ export default function BasketCard({ id, quantity, title, image, price, discont_
             </button>
           </div>
           <div className={s.prices}>
-          <p className={s.newPrice}>{`$${price}`}</p>
-            <p className={s.oldPrice}>{oldPrice || discont_price ? `$${oldPrice || discont_price}` : ''}</p>
+            {/* Показываем новую цену со скидкой, если она есть, иначе показываем обычную цену */}
+            <p className={s.newPrice}>{discont_price ? `$${discont_price}` : `$${price}`}</p>
+
+            {/* Показываем старую цену только если есть скидочная цена */}
+            {discont_price ? <p className={s.oldPrice}>${price}</p> : ''}
           </div>
         </div>
       </div>
