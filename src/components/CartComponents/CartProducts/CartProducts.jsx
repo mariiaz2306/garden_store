@@ -5,10 +5,14 @@ import s from './CartProducts.module.css'
 import CartCard from '../CartCard/CartCard'
 
 export const CartProducts = () => {
-  const data = useSelector((state) => state.cart.products)
+  const products = useSelector((state) => state.cart.products)
   return (
     <div className={s.cartProductsContainer}>
-      {data.length === 0 ? <p className={s.info}>Empty</p> : data.map((elem) => <CartCard key={elem.id} {...elem} />)}
+      {products.length === 0 ? (
+        <p className={s.info}>Empty</p>
+      ) : (
+        products.map((product) => <CartCard key={product.id} product={product} />)
+      )}
     </div>
   )
 }

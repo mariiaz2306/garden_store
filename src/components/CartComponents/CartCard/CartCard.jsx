@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom'
 
 import s from './CartCard.module.css'
 
-export default function CartCard({ id, quantity, title, image, price, discont_price, oldPrice }) {
+export default function CartCard({ product }) {
+  const { id, quantity, title, image, price, discont_price } = product
+
   const imgLink = `${BASE_URL}${image}`
   const dispatch = useDispatch()
-
-  // Подготовка объекта продукта для передачи в действия Redux
-  const product = { id, title, image, price, quantity, discont_price }
 
   const [truncatedTitle, setTruncatedTitle] = useState(title)
 

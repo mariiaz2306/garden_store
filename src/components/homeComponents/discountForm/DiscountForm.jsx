@@ -20,13 +20,13 @@ export default function DiscountForm() {
   }
 
   return (
-    
     <div className={s.form_wrapper} id="discount">
       <h2 className={s.form_text}>5% off on the first order</h2>
       <div className={s.inform}>
         <img src={img_discount_form} alt="Discount form" className={s.discount_img} />
         <div className={s.check_block}>
           <CheckoutForm
+            handleOrderSubmit={() => {}}
             handleDiscountSubmit={handleDiscountSubmit}
             classInput={s.discount_input}
             classBtn={s.discount_btn}
