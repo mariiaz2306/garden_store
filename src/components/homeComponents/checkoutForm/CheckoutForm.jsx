@@ -4,7 +4,7 @@ import { addSale } from '../../../utils/sale'
 
 import s from '../checkoutForm/CheckoutForm.module.css'
 
-export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit}) {
+export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDiscountSubmit, handleOrderSubmit }) {
   const [resp, setResp] = useState({})
   const [showModal, setShowModal] = useState(false)
 
@@ -19,6 +19,7 @@ export default function CheckoutForm({ classInput, classBtn, txtBtn, handleDisco
     reset()
     addSale(new_product_obj, setResp)
     handleDiscountSubmit()
+    handleOrderSubmit()
     setShowModal(true)
   }
 

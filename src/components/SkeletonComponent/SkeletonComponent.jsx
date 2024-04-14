@@ -53,3 +53,4 @@ const renderSkeletonSquares = (count, className) => {
 };
 
 export default SkeletonLoader;
+
