@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { applyDiscount } from '../../../store/slices/cartSlice'
 
-import ModalWindow from '../ModalWindow/ModalWindow'
+import ModalWindow from "../ModalWindow/ModalWindow"
 import img_discount_form from '../../../media/images/Discount.svg'
 import s from '../discountForm/DiscountForm.module.scss'
 import CheckoutForm from '../checkoutForm/CheckoutForm'
