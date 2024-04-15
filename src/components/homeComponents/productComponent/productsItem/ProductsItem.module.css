@@ -7,7 +7,7 @@
     height: 458px;
     overflow: hidden;
     border-radius: var(--radius-big, 12px);
-    border: 1px solid var(--grey-divider, #DDD);
+    border: 1px solid var(--grey-divider,#DDD);
 }
 
 .products_link {
@@ -24,7 +24,6 @@
     border-bottom: 1px solid var(--grey-divider, #DDD);
 }
 
-/* the rest of items styles to be here */
 
 .add_btn {
     position: absolute;
@@ -105,7 +104,7 @@
     top: 16px;
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1400px) {
     .products_information {
         padding: 0px 20px 20px 20px;
     }
@@ -117,6 +116,10 @@
     .real_price {
         padding-right: 12px;
  
+    }
+    .products_title  {
+        font-size: 18px;
+        width: 150px;
     }
 }
 
