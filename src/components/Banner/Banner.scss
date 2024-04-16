@@ -55,6 +55,9 @@
         font-size: 52px;
       }
     }
+    .banner__content__link {
+      max-width: fit-content;
+    }
     &__checkOutBtn {
       padding: 16px 56px;
       background: $green;
