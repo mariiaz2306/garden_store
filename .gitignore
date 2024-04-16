@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/telran_project_backend
+# /telran_project_backend
 
 # testing
 /coverage
